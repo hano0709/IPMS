@@ -1,0 +1,1 @@
+ALTER TABLE customers ADD column customer_number VARCHAR(50);
