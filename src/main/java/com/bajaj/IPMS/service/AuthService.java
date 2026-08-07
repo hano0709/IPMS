@@ -3,7 +3,7 @@ package com.bajaj.IPMS.service;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.UserRepository;
-import com.bajaj.IPMS.util.JWTUtil;
+import com.bajaj.IPMS.util.JwtUtil;
 import com.bajaj.IPMS.util.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,6 +46,6 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return JWTUtil.generateToken(user.getEmail());
+        return JwtUtil.generateToken(user.getEmail());
     }
 }
