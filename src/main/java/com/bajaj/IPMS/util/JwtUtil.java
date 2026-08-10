@@ -15,8 +15,8 @@ public class JwtUtil {
     private final SecretKey key;
 
     //DEBUG for testing making expiry 1 min
-    private static final long AT_EXPIRATION_TIME = 1000 * 60;
-    private static final long RT_EXPIRATION_TIME = AT_EXPIRATION_TIME;
+    private static final long AT_EXPIRATION_TIME = 1000 * 60 * 60 * 24;
+    private static final long RT_EXPIRATION_TIME = AT_EXPIRATION_TIME * 7 * 4;
 
     public JwtUtil(@Value("${jwt.secret}") String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
@@ -25,6 +25,7 @@ public class JwtUtil {
     public String generateToken(String email){
         return Jwts.builder()
                 .subject(email)
+                .claim("type", "access")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + AT_EXPIRATION_TIME))
                 .signWith(key)
@@ -34,6 +35,7 @@ public class JwtUtil {
     public String generateRefreshToken(String email){
         return Jwts.builder()
                 .subject(email)
+                .claim("type", "refresh")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + RT_EXPIRATION_TIME))
                 .signWith(key)
@@ -50,6 +52,15 @@ public class JwtUtil {
                 .getSubject();
 
         return subject;
+    }
+
+    public String extractTokenType(String token){
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("type", String.class);
     }
 
     public boolean validateToken(String token, UserDetails userDetails){

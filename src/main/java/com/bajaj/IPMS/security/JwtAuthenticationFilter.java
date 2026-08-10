@@ -42,6 +42,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            String tokenType = jwtUtil.extractTokenType(token);
+            if("refresh".equals(tokenType)) {
+                System.out.println("Entered Token is not Access Type");
+                filterChain.doFilter(request, response);
+                return;
+            }
+
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             if(jwtUtil.validateToken(token, userDetails)){
                 UsernamePasswordAuthenticationToken authToken =

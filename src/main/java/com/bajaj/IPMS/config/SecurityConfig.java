@@ -23,7 +23,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login", "/health", "/auth/refresh").permitAll()
+                        .requestMatchers(
+                                "/auth/register",
+                                "/auth/login",
+                                "/health",
+                                "/auth/refresh",
+                                "/api/v1/swagger-ui/**",
+                                "/api/v1/v3/api-docs").permitAll()
                         .anyRequest().authenticated()
                 );
 
