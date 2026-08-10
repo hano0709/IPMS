@@ -75,7 +75,10 @@ public class AuthService {
 
         return ResponseEntity.ok(Map.of(
                 "accessToken" , accessToken,
-                "refreshToken" , refreshTokenValue
+                "refreshToken" , refreshTokenValue,
+                "tokenType", "Bearer",
+                "expiresIn", 86400000,
+                "role", user.getRole()
                 ));
     }
 
