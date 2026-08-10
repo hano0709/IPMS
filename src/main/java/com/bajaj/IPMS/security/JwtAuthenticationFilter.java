@@ -36,7 +36,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = authHeader.substring(7);
             try {
                 email = jwtUtil.extractEmail(token);
-                System.out.println("DEBUG: Extracted email from JWT = " + email);
             } catch (Exception e){
 
             }
@@ -44,8 +43,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-            System.out.println("DEBUG: UserDetails loaded -> " + userDetails.getUsername());
-
             if(jwtUtil.validateToken(token, userDetails)){
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(

@@ -2,6 +2,7 @@ package com.bajaj.IPMS.util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +12,14 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET = "supersecretkeysupersecretkeysupersecretkey";
-    private static final SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes());
+    private final SecretKey key;
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
 
-    public static String generateToken(String email){
+    public JwtUtil(@Value("${jwt.secret}") String secret) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    }
+
+    public String generateToken(String email){
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
@@ -24,8 +28,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public static String extractEmail(String token){
-        System.out.println("DEBUG: Raw token -> " + token);
+    public String extractEmail(String token){
 
         String subject = Jwts.parser()
                 .verifyWith(key)
@@ -34,16 +37,15 @@ public class JwtUtil {
                 .getPayload()
                 .getSubject();
 
-        System.out.println("DEBUG: Extracted subject from JWT -> " + subject);
         return subject;
     }
 
-    public static boolean validateToken(String token, UserDetails userDetails){
+    public boolean validateToken(String token, UserDetails userDetails){
         String email = extractEmail(token);
         return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public static boolean isTokenExpired(String token){
+    public boolean isTokenExpired(String token){
         Date expiration = Jwts.parser()
                 .verifyWith(key)
                 .build()

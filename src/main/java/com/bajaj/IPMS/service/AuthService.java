@@ -18,6 +18,9 @@ public class AuthService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
     PasswordValidator passwordValidator;
 
     public User register(RegisterRequest request) {
@@ -46,6 +49,6 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return JwtUtil.generateToken(user.getEmail());
+        return jwtUtil.generateToken(user.getEmail());
     }
 }
