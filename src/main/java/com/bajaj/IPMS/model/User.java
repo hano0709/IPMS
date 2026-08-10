@@ -2,6 +2,8 @@ package com.bajaj.IPMS.model;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -12,6 +14,8 @@ public class User {
 
     private String email;
     private String passwordHash;
+    private int failedAttempts;
+    private Instant lastLogin;
 
     @Column(nullable = false)
     private String role;
@@ -42,5 +46,17 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getFailedAttempts() {
+        return failedAttempts;
+    }
+
+    public void setFailedAttempts(int failedAttempts) {
+        this.failedAttempts = failedAttempts;
+    }
+
+    public void setLastLogin(Instant lastLogin) {
+        this.lastLogin = lastLogin;
     }
 }
