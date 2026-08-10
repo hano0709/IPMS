@@ -28,8 +28,9 @@ public class SecurityConfig {
                                 "/auth/login",
                                 "/health",
                                 "/auth/refresh",
-                                "/api/v1/swagger-ui/**",
-                                "/api/v1/v3/api-docs").permitAll()
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
