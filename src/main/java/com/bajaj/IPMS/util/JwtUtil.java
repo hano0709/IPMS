@@ -13,7 +13,10 @@ import java.util.Date;
 public class JwtUtil {
 
     private final SecretKey key;
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
+
+    //DEBUG for testing making expiry 1 min
+    private static final long AT_EXPIRATION_TIME = 1000 * 60;
+    private static final long RT_EXPIRATION_TIME = AT_EXPIRATION_TIME;
 
     public JwtUtil(@Value("${jwt.secret}") String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
@@ -23,7 +26,16 @@ public class JwtUtil {
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .expiration(new Date(System.currentTimeMillis() + AT_EXPIRATION_TIME))
+                .signWith(key)
+                .compact();
+    }
+
+    public String generateRefreshToken(String email){
+        return Jwts.builder()
+                .subject(email)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + RT_EXPIRATION_TIME))
                 .signWith(key)
                 .compact();
     }

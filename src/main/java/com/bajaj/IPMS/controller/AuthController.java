@@ -31,12 +31,17 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request){
         try {
-            String token = authService.login(request.get("email"), request.get("password"));
-            return ResponseEntity.ok(Map.of("token", token));
+            ResponseEntity<?> response = authService.login(request.get("email"), request.get("password"));
+            return response;
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
+    }
 
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refreshToken (@RequestBody Map<String, String> request){
+        String refreshToken = request.get("refreshToken");
+        return authService.refreshToken(refreshToken);
     }
 
     //{ "accessToken": "eyJhbGci...", "refreshToken": "d8f3a1...", "tokenType": "Bearer", "expiresIn": 86400,
