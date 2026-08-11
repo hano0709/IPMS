@@ -78,7 +78,7 @@ public class AuthService {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUser(user);
         refreshToken.setToken(refreshTokenValue);
-        refreshToken.setExpiry(Instant.now().plus(30, ChronoUnit.DAYS));
+        refreshToken.setExpiry(Instant.now().plus(28, ChronoUnit.DAYS));
         refreshToken.setRevoked(false);
         refreshToken.setCreatedAt(Instant.now());
         refreshToken.setUpdatedAt(Instant.now());
@@ -121,7 +121,7 @@ public class AuthService {
         RefreshToken newRefreshToken = new RefreshToken();
         newRefreshToken.setUser(user);
         newRefreshToken.setToken(newRefreshTokenValue);
-        newRefreshToken.setExpiry(Instant.now().plus(1, ChronoUnit.MINUTES));
+        newRefreshToken.setExpiry(Instant.now().plus(28, ChronoUnit.DAYS));
         newRefreshToken.setRevoked(false);
         newRefreshToken.setCreatedAt(Instant.now());
         newRefreshToken.setUpdatedAt(Instant.now());
