@@ -15,8 +15,8 @@ public class JwtUtil {
     private final SecretKey key;
 
     //DEBUG for testing making expiry 1 min
-    private static final long AT_EXPIRATION_TIME = 1000 * 60;
-    private static final long RT_EXPIRATION_TIME = AT_EXPIRATION_TIME * 5;
+    private static final long AT_EXPIRATION_TIME = 1000 * 60 * 60 * 24;
+    private static final long RT_EXPIRATION_TIME = AT_EXPIRATION_TIME * 7 * 4;
 
     public JwtUtil(@Value("${jwt.secret}") String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
