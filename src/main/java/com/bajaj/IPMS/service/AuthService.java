@@ -78,7 +78,7 @@ public class AuthService {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUser(user);
         refreshToken.setToken(refreshTokenValue);
-        refreshToken.setExpiry(Instant.now().plus(1, ChronoUnit.MINUTES));
+        refreshToken.setExpiry(Instant.now().plus(5, ChronoUnit.MINUTES));
         refreshToken.setRevoked(false);
         refreshToken.setCreatedAt(Instant.now());
         refreshToken.setUpdatedAt(Instant.now());
@@ -120,7 +120,7 @@ public class AuthService {
         String newRefreshTokenValue = jwtUtil.generateRefreshToken(email);
         RefreshToken newRefreshToken = new RefreshToken();
         newRefreshToken.setUser(user);
-        newRefreshToken.setToken(refreshTokenValue);
+        newRefreshToken.setToken(newRefreshTokenValue);
         newRefreshToken.setExpiry(Instant.now().plus(1, ChronoUnit.MINUTES));
         newRefreshToken.setRevoked(false);
         newRefreshToken.setCreatedAt(Instant.now());
