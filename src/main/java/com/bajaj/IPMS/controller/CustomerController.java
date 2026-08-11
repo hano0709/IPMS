@@ -57,4 +57,10 @@ public class CustomerController {
     public ResponseEntity<?> updateCustomer(@RequestBody Map<String, String> request){
         return customerService.updateCustomers(request);
     }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteCustomer(@PathVariable("id") String customerCode){
+        return customerService.deleteCustomer(customerCode);
+    }
 }

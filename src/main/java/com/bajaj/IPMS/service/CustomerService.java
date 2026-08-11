@@ -1,9 +1,12 @@
 package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.model.Customer;
+import com.bajaj.IPMS.model.RefreshToken;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.CustomerRepository;
+import com.bajaj.IPMS.repository.RefreshTokenRepository;
+import com.bajaj.IPMS.repository.UserRepository;
 import com.bajaj.IPMS.security.CustomerSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +25,12 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
     CustomerSecurity customerSecurity;
@@ -124,5 +133,20 @@ public class CustomerService {
                 "Message", "Customer updated successfully",
                 "CustomerCode", customerCode
         ));
+    }
+
+    public ResponseEntity<?> deleteCustomer(String customerCode){
+        Customer customer = customerRepository.findByCustomerCode(customerCode);
+
+        User user = customer.getUser();
+
+        RefreshToken refreshToken = refreshTokenRepository.findByUser(user);
+        if(refreshToken != null) {
+            refreshTokenRepository.delete(refreshToken);
+        }
+        customerRepository.delete(customer);
+        userRepository.delete(user);
+
+        return ResponseEntity.ok(Map.of("Message", "Customer deleted successfully"));
     }
 }
