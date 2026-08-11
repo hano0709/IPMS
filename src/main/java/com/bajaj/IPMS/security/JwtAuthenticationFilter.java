@@ -65,7 +65,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        System.out.println("Extracted subject: " + email);
+        System.out.println("DEBUG: Extracted subject: " + email);
 
         filterChain.doFilter(request, response);
     }
