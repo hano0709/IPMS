@@ -44,7 +44,10 @@ public class AuthController {
         return authService.refreshToken(refreshToken);
     }
 
-    //{ "accessToken": "eyJhbGci...", "refreshToken": "d8f3a1...", "tokenType": "Bearer", "expiresIn": 86400,
-    //"role": "AGENT" }
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody Map<String, String> request){
+        String refreshToken = request.get("refreshToken");
+        return authService.logout(refreshToken);
+    }
 
 }
