@@ -98,20 +98,40 @@ public class AuthService {
     public ResponseEntity<?> refreshToken(String refreshTokenValue){
         RefreshToken refreshToken =  refreshTokenRepository.findByToken(refreshTokenValue);
 
+        if(refreshToken == null){
+            return ResponseEntity.badRequest().body(Map.of("Error", "Token not Found"));
+        }
+
         Instant refreshTokenExpiry = refreshToken.getExpiry();
-        if(refreshToken == null || refreshToken.isRevoked() || Instant.now().isAfter(refreshTokenExpiry)){
+        if(refreshToken.isRevoked() || Instant.now().isAfter(refreshTokenExpiry)){
             return ResponseEntity.badRequest().body(Map.of("Error", "Invalid or expired refresh token"));
         }
 
         String email = jwtUtil.extractEmail(refreshTokenValue);
-        String newAccessToken = jwtUtil.generateRefreshToken(email);
+        String newAccessToken = jwtUtil.generateToken(email);
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
         refreshToken.setUpdatedAt(Instant.now());
+        refreshToken.setRevoked(true);
         refreshTokenRepository.save(refreshToken);
+
+        String newRefreshTokenValue = jwtUtil.generateRefreshToken(email);
+        RefreshToken newRefreshToken = new RefreshToken();
+        newRefreshToken.setUser(user);
+        newRefreshToken.setToken(refreshTokenValue);
+        newRefreshToken.setExpiry(Instant.now().plus(1, ChronoUnit.MINUTES));
+        newRefreshToken.setRevoked(false);
+        newRefreshToken.setCreatedAt(Instant.now());
+        newRefreshToken.setUpdatedAt(Instant.now());
+        newRefreshToken.setCreatedBy(user.getId());
+
+        refreshTokenRepository.save(newRefreshToken);
 
         return ResponseEntity.ok().body(Map.of(
                 "accessToken", newAccessToken,
-                "refreshToken", refreshTokenValue
+                "refreshToken", newRefreshTokenValue
         ));
     }
 }
