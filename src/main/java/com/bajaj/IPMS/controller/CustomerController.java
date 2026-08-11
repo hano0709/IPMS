@@ -51,4 +51,10 @@ public class CustomerController {
     public ResponseEntity<?> createCustomer(@RequestBody Map<String, String> request){
         return customerService.createCustomer(request);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
+    public ResponseEntity<?> updateCustomer(@RequestBody Map<String, String> request){
+        return customerService.updateCustomers(request);
+    }
 }

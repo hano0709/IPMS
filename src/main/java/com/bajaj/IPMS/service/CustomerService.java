@@ -84,4 +84,45 @@ public class CustomerService {
                 "Customer code", customer.getCustomerCode()
         ));
     }
+
+    public ResponseEntity<?> updateCustomers(@RequestBody Map<String, String> request){
+        String customerCode = request.get("customerCode");
+        Customer customer = customerRepository.findByCustomerCode(customerCode);
+        if(customer == null){
+            return ResponseEntity.badRequest().body(Map.of("Error", "Customer not Found"));
+        }
+
+        for(Map.Entry<String, String> entry: request.entrySet()){
+            String key = entry.getKey();;
+            String value = entry.getValue();
+
+            switch (key){
+                case "fullName":
+                    customer.setFullName(value);
+                    break;
+                case "dateOfBirth":
+                    LocalDate dob = LocalDate.parse(value);
+                    customer.setDateOfBirth(dob);
+                    break;
+                case "gender":
+                    customer.setGender(value);
+                    break;
+                case "phone":
+                    customer.setPhone(value);
+                    break;
+                case "address":
+                    customer.setAddress(value);
+                    break;
+                case "kycStatus":
+                    customer.setKycStatus(value);
+            }
+        }
+
+        customerRepository.save(customer);
+
+        return ResponseEntity.ok(Map.of(
+                "Message", "Customer updated successfully",
+                "CustomerCode", customerCode
+        ));
+    }
 }
