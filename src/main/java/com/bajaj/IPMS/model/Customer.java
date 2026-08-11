@@ -24,4 +24,36 @@ public class Customer {
     private String phone;
     private String address;
     private String kycStatus;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getKycStatus() {
+        return kycStatus;
+    }
 }
