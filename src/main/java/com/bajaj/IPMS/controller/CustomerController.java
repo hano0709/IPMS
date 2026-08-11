@@ -2,16 +2,16 @@ package com.bajaj.IPMS.controller;
 
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.service.CustomerService;
+import org.apache.coyote.Response;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/customers")
@@ -34,4 +34,15 @@ public class CustomerController {
         return customerService.getAll(pageable).getContent();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCustomer(@PathVariable("id") Long customerId){
+        try{
+            Customer customer =  customerService.getCustomer(customerId);
+            return ResponseEntity.ok(customer);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "Error", e.getMessage()
+            ));
+        }
+    }
 }
