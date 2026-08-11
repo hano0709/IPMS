@@ -45,4 +45,10 @@ public class CustomerController {
             ));
         }
     }
+
+    @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
+    public ResponseEntity<?> createCustomer(@RequestBody Map<String, String> request){
+        return customerService.createCustomer(request);
+    }
 }

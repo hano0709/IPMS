@@ -4,6 +4,7 @@ import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.service.AuthService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,6 +20,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    //DEBUG: Later make register only for ADMIN
     public ResponseEntity<?> register(@RequestBody RegisterRequest request){
         try {
             User user = authService.register(request);

@@ -2,6 +2,7 @@ package com.bajaj.IPMS.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,11 +20,16 @@ public class Customer {
     private User user;
 
     private String fullName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String gender;
     private String phone;
     private String address;
     private String kycStatus;
+    private Long createdBy;
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public long getId() {
         return id;
@@ -37,7 +43,7 @@ public class Customer {
         return fullName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -55,5 +61,37 @@ public class Customer {
 
     public String getKycStatus() {
         return kycStatus;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setKycStatus(String kycStatus) {
+        this.kycStatus = kycStatus;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
