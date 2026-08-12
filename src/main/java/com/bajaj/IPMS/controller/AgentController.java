@@ -34,4 +34,9 @@ public class AgentController {
             ));
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAgent(@PathVariable("id") String agentCode){
+        return agentService.deleteAgent(agentCode);
+    }
 }

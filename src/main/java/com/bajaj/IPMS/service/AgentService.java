@@ -4,6 +4,7 @@ import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.AgentRepository;
+import com.bajaj.IPMS.repository.UserRepository;
 import com.bajaj.IPMS.security.AgentSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class AgentService {
     AgentRepository agentRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     AuthService authService;
 
     @Autowired
@@ -27,7 +31,7 @@ public class AgentService {
     @Autowired
     AgentSecurity agentSecurity;
 
-    public ResponseEntity<?> createAgent(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> createAgent(Map<String, String> request){
         Agent agent = new Agent();
         RegisterRequest registerRequest = new RegisterRequest();
 
@@ -66,5 +70,15 @@ public class AgentService {
         } else {
             throw new IllegalArgumentException("User Not Authorised");
         }
+    }
+
+    public ResponseEntity<?> deleteAgent(String agentCode){
+        Agent agent = agentRepository.findByAgentCode(agentCode);
+        Long id = agent.getId();
+
+        agentRepository.delete(agent);
+        userRepository.deleteById(id);
+
+        return ResponseEntity.ok("Agent Deleted " + agentCode);
     }
 }
