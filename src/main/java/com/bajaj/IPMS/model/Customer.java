@@ -98,4 +98,8 @@ public class Customer {
     public User getUser() {
         return user;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
