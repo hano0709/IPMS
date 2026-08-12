@@ -2,7 +2,6 @@ package com.bajaj.IPMS.controller;
 
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.service.CustomerService;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

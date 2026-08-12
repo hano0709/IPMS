@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerSecurity {
 
-    UserRepository userRepository;
     UserService userService;
 
-    public CustomerSecurity(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public CustomerSecurity(UserService userService) {
         this.userService = userService;
     }
 
