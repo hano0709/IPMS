@@ -70,4 +70,8 @@ public class Agent {
     public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
