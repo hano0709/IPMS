@@ -30,4 +30,10 @@ public class PolicyController {
     public ResponseEntity<?> createPolicy(@RequestBody Map<String, String> request){
         return policyService.createPolicy(request);
     }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> updatePolicy(@PathVariable("id") String policyNumber, @RequestBody Map<String, String> request){
+        return policyService.updatePolicy(policyNumber, request);
+    }
 }

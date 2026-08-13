@@ -127,4 +127,81 @@ public class PolicyService {
             return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
         }
     }
+
+    public ResponseEntity<?> updatePolicy(String policyNumber, Map<String, String> request) {
+        Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+
+        for (Map.Entry<String, String> entry: request.entrySet()){
+            String key = entry.getKey();;
+            String value = entry.getValue();
+            boolean calculatePremium = false;
+            switch (key){
+                case "policyType":
+                    policy.setPolicyType(value);
+                    calculatePremium = true;
+                    break;
+                case "sumInsured":
+                    policy.setSumInsured(new BigDecimal(value));
+                    calculatePremium = true;
+                    break;
+                case "startDate":
+                    LocalDate startDate = LocalDate.parse(value);
+                    policy.setStartDate(startDate);
+                    calculatePremium = true;
+                    break;
+                case "endDate":
+                    LocalDate endDate = LocalDate.parse(value);
+                    policy.setEndDate(endDate);
+                    calculatePremium = true;
+                    break;
+                case "description":
+                    policy.setDescription(value);
+                    break;
+            }
+
+            if (calculatePremium) {
+                BigDecimal premiumAmount;
+                String policyType = request.get("policyType");
+                Customer customer = customerRepository.findByCustomerCode(request.get("customerCode"));
+                BigDecimal sumInsured = policy.getSumInsured();
+                LocalDate startDate = policy.getStartDate();
+                LocalDate endDate = policy.getEndDate();
+                if(policyType.equals("LIFE")){
+                    double baseRate = 0.5/100;
+                    LocalDate dob = customer.getDateOfBirth();
+                    int age = Period.between(dob, LocalDate.now()).getYears();
+                    double ageFactor;
+
+                    if(age < 30) ageFactor = 1.0;
+                    else if(age <= 50) ageFactor = 1.2;
+                    else ageFactor = 1.5;
+
+                    premiumAmount = (sumInsured.multiply(BigDecimal.valueOf(baseRate))).multiply(BigDecimal.valueOf(ageFactor));
+                } else if(policyType.equals("HEALTH")){
+                    double baseRate = 1.2/100;
+                    int duration = Period.between(startDate, endDate).getYears();
+                    double durationFactor;
+
+                    if(duration == 1) durationFactor = 1.0;
+                    else if (duration == 2) durationFactor = 0.95;
+                    else durationFactor = 0.90;
+
+                    premiumAmount = sumInsured.multiply(BigDecimal.valueOf(baseRate)).multiply(BigDecimal.valueOf(durationFactor));
+                } else if(policyType.equals("MOTOR")){
+                    double baseRate = 2.0/100;
+                    double ageFactor = 1.0;
+
+                    premiumAmount = (sumInsured.multiply(BigDecimal.valueOf(baseRate))).multiply(BigDecimal.valueOf(ageFactor));
+                } else {
+                    double baseRate = 0.8/100;
+                    double ageFactor = 1.0;
+
+                    premiumAmount = (sumInsured.multiply(BigDecimal.valueOf(baseRate))).multiply(BigDecimal.valueOf(ageFactor));
+                }
+                policy.setPremiumAmount(premiumAmount);
+            }
+        }
+        policyRepository.save(policy);
+        return ResponseEntity.ok(policy);
+    }
 }
