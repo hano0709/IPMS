@@ -80,6 +80,7 @@ public class CustomerService {
         customer.setGender(request.get("gender"));
         customer.setPhone(request.get("phone"));
         customer.setAddress(request.get("address"));
+        customer.setKycStatus("PENDING");
 
         User currUser = userService.getCurrUser();
         customer.setCreatedBy(currUser.getId());

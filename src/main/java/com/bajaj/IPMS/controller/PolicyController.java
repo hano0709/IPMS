@@ -21,6 +21,11 @@ public class PolicyController {
         return policyService.getAllPolicies();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getPolicy(@PathVariable("id") String policyNumber){
+        return policyService.getPolicy(policyNumber);
+    }
+
     @PostMapping
     public ResponseEntity<?> createPolicy(@RequestBody Map<String, String> request){
         return policyService.createPolicy(request);

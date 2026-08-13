@@ -7,6 +7,7 @@ import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.AgentRepository;
 import com.bajaj.IPMS.repository.CustomerRepository;
 import com.bajaj.IPMS.repository.PolicyRepository;
+import com.bajaj.IPMS.security.PolicySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class PolicyService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PolicySecurity policySecurity;
 
     public ResponseEntity<?> getAllPolicies(){
         List<Policy> policies = policyRepository.findAll();
@@ -112,5 +116,15 @@ public class PolicyService {
         policyRepository.save(policy);
 
         return ResponseEntity.ok(Map.of("Policy created Successfully", policy.getPolicyNumber()));
+    }
+
+    public ResponseEntity<?> getPolicy(String policyNumber){
+        if(policySecurity.checkAuth(policyNumber)){
+            Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+            if (policy == null) return ResponseEntity.badRequest().body(Map.of("Error", "PolicyNot Found"));
+            return ResponseEntity.ok(policy);
+        } else {
+            return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
+        }
     }
 }
