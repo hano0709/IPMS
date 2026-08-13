@@ -2,16 +2,17 @@ package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.model.*;
-import com.bajaj.IPMS.repository.AgentRepository;
-import com.bajaj.IPMS.repository.CustomerRepository;
-import com.bajaj.IPMS.repository.PolicyAuditLogRespository;
-import com.bajaj.IPMS.repository.PolicyRepository;
+import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class PolicyService {
     PolicyAuditLogRespository policyAuditLogRespository;
 
     @Autowired
+    PolicyDocumentsRepository policyDocumentsRepository;
+
+    @Autowired
     CustomerRepository customerRepository;
 
     @Autowired
@@ -38,6 +42,8 @@ public class PolicyService {
 
     @Autowired
     PolicySecurity policySecurity;
+
+    private final String uploadPath = "C:/IPMS_Files";
 
     public ResponseEntity<?> getAllPolicies(){
         List<Policy> policies = policyRepository.findAll();
@@ -320,5 +326,28 @@ public class PolicyService {
         }
 
         return ResponseEntity.ok(policyDTOs);
+    }
+
+    public ResponseEntity<?> uploadDocs(Long policyId, MultipartFile file) {
+        try {
+            Path path = Paths.get(uploadPath, file.getOriginalFilename());
+            file.transferTo(path.toFile());
+
+            Policy policy = policyRepository.findById(policyId)
+                    .orElseThrow();
+            User user = userService.getCurrUser();
+
+            PolicyDocuments policyDocuments = new PolicyDocuments();
+            policyDocuments.setFileName(file.getOriginalFilename());
+            policyDocuments.setFilePath(path.toString());
+            policyDocuments.setPolicy(policy);
+            policyDocuments.setUploadedBy(user.getId());
+
+            policyDocumentsRepository.save(policyDocuments);
+
+            return ResponseEntity.ok("Document Uploaded Successfully");
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body("Error while uploading file");
+        }
     }
 }

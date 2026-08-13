@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -71,5 +72,11 @@ public class PolicyController {
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> getExpiring(){
         return policyService.getExpiringSoon();
+    }
+
+    @PostMapping("/{id}/documents")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> uploadDocs(@PathVariable("id") Long policyId, @RequestParam("file")MultipartFile file){
+        return policyService.uploadDocs(policyId, file);
     }
 }
