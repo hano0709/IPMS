@@ -234,4 +234,27 @@ public class PolicyService {
         policyRepository.save(policy);
         return ResponseEntity.ok("Policy Renewed");
     }
+
+    public ResponseEntity<?> suspendPolicy(String policyNumber) {
+        Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+
+        if (policy.getStatus().equals("ACTIVE")){
+            policy.setStatus("SUSPENDED");
+        } else {
+            return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be SUSPENDED from ACTIVE status"));
+        }
+
+        policyRepository.save(policy);
+        return ResponseEntity.ok("Policy Suspended");
+    }
+
+    public ResponseEntity<?> cancelPolicy(String policyNumber) {
+        Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+
+        policy.setStatus("CANCELLED");
+
+        policyRepository.save(policy);
+
+        return ResponseEntity.ok("Policy Cancelled");
+    }
 }
