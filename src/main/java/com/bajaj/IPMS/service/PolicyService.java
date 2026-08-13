@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,9 @@ public class PolicyService {
         String policyNumber = prefix + year + "-" + code;
         policy.setPolicyNumber(policyNumber);
 
-        policy.setPolicyType(request.get("policyType"));
-        policy.setStatus(request.get("status"));
+        String policyType = request.get("policyType");
+        policy.setPolicyType(policyType);
+        policy.setStatus("DRAFT");
 
         Customer customer = customerRepository.findByCustomerCode(request.get("customerCode"));
         policy.setCustomer(customer);
@@ -55,8 +57,8 @@ public class PolicyService {
         Agent agent = agentRepository.findByAgentCode(request.get("agentCode"));
         policy.setAgent(agent);
 
-        policy.setSumInsured(new BigDecimal(request.get("sumInsured")));
-        policy.setPremiumAmount(new BigDecimal(request.get("premiumAmount")));
+        BigDecimal sumInsured = new BigDecimal(request.get("sumInsured"));
+        policy.setSumInsured(sumInsured);
 
         String startDateString = request.get("startDate");
         LocalDate startDate = LocalDate.parse(startDateString);
@@ -65,6 +67,42 @@ public class PolicyService {
         String endDateString = request.get("endDate");
         LocalDate endDate = LocalDate.parse(endDateString);
         policy.setEndDate(endDate);
+
+        BigDecimal premiumAmount;
+        if(policyType.equals("LIFE")){
+            double baseRate = 0.5/100;
+            LocalDate dob = customer.getDateOfBirth();
+            int age = Period.between(dob, LocalDate.now()).getYears();
+            double ageFactor;
+
+            if(age < 30) ageFactor = 1.0;
+            else if(age <= 50) ageFactor = 1.2;
+            else ageFactor = 1.5;
+
+            premiumAmount = (sumInsured.multiply(BigDecimal.valueOf(baseRate))).multiply(BigDecimal.valueOf(ageFactor));
+        } else if(policyType.equals("HEALTH")){
+            double baseRate = 1.2/100;
+            int duration = Period.between(startDate, endDate).getYears();
+            double durationFactor;
+
+            if(duration == 1) durationFactor = 1.0;
+            else if (duration == 2) durationFactor = 0.95;
+            else durationFactor = 0.90;
+
+            premiumAmount = sumInsured.multiply(BigDecimal.valueOf(baseRate)).multiply(BigDecimal.valueOf(durationFactor));
+        } else if(policyType.equals("MOTOR")){
+            double baseRate = 2.0/100;
+            double ageFactor = 1.0;
+
+            premiumAmount = (sumInsured.multiply(BigDecimal.valueOf(baseRate))).multiply(BigDecimal.valueOf(ageFactor));
+        } else {
+            double baseRate = 0.8/100;
+            double ageFactor = 1.0;
+
+            premiumAmount = (sumInsured.multiply(BigDecimal.valueOf(baseRate))).multiply(BigDecimal.valueOf(ageFactor));
+        }
+
+        policy.setPremiumAmount(premiumAmount);
 
         policy.setDescription(request.get("description"));
 
