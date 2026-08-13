@@ -307,4 +307,18 @@ public class PolicyService {
 
         return ResponseEntity.ok(policyAuditLog);
     }
+
+    public ResponseEntity<?> getExpiringSoon() {
+        LocalDate today = LocalDate.now();
+        LocalDate expiry = LocalDate.now().plusDays(30);
+
+        List<Policy> policies = policyRepository.findAllByExpiringSoon(today, expiry);
+
+        List<PolicyDTO> policyDTOs = new ArrayList<>();
+        for (Policy policy:policies){
+            policyDTOs.add(new PolicyDTO(policy));
+        }
+
+        return ResponseEntity.ok(policyDTOs);
+    }
 }

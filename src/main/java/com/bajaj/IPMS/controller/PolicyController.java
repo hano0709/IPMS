@@ -66,4 +66,10 @@ public class PolicyController {
     public ResponseEntity<?> getAudit(@PathVariable("id") String policyNumber){
         return policyService.getAudit(policyNumber);
     }
+
+    @GetMapping("/expiring-soon")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> getExpiring(){
+        return policyService.getExpiringSoon();
+    }
 }
