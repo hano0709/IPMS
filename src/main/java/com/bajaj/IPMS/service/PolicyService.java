@@ -130,6 +130,9 @@ public class PolicyService {
 
     public ResponseEntity<?> updatePolicy(String policyNumber, Map<String, String> request) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        if(!policy.getStatus().equals("DRAFT")){
+            return ResponseEntity.badRequest().body("Policy can only be updated when in DRAFT status");
+        }
 
         for (Map.Entry<String, String> entry: request.entrySet()){
             String key = entry.getKey();;
@@ -205,13 +208,30 @@ public class PolicyService {
         return ResponseEntity.ok(policy);
     }
 
-    public ResponseEntity<?> activatepolicy(String policyNumber) {
+    public ResponseEntity<?> activatePolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
 
-        policy.setStatus("ACTIVE");
+        if (policy.getStatus().equals("DRAFT")) {
+            policy.setStatus("ACTIVE");
+        } else {
+            return ResponseEntity.badRequest().body(Map.of("Error", "Policy can be activated only from DRAFT status"));
+        }
 
         policyRepository.save(policy);
 
         return ResponseEntity.ok("Policy Activated");
+    }
+
+    public ResponseEntity<?> renewPolicy(String policyNumber) {
+        Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+
+        if (policy.getStatus().equals("ACTIVE")){
+            policy.setStatus("RENEWED");
+        } else {
+            return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be renewd from ACTIVE status"));
+        }
+
+        policyRepository.save(policy);
+        return ResponseEntity.ok("Policy Renewed");
     }
 }

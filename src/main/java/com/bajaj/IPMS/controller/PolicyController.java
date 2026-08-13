@@ -40,6 +40,12 @@ public class PolicyController {
     @PatchMapping("/{id}/activate")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> activatePolicy(@PathVariable("id") String policyNumber){
-        return policyService.activatepolicy(policyNumber);
+        return policyService.activatePolicy(policyNumber);
+    }
+
+    @PatchMapping("/{id}/renew")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> renewPolicy(@PathVariable("id") String policyNumber){
+        return policyService.renewPolicy(policyNumber);
     }
 }
