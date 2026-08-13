@@ -79,4 +79,9 @@ public class PolicyController {
     public ResponseEntity<?> uploadDocs(@PathVariable("id") Long policyId, @RequestParam("file")MultipartFile file){
         return policyService.uploadDocs(policyId, file);
     }
+
+    @GetMapping("/{id}/documents")
+    public ResponseEntity<?> listDocs(@PathVariable("id") Long policyId){
+        return policyService.listDocs(policyId);
+    }
 }

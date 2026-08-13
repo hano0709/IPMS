@@ -1,6 +1,7 @@
 package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.DTO.PolicyDTO;
+import com.bajaj.IPMS.DTO.PolicyDocumentsDTO;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
@@ -349,5 +350,22 @@ public class PolicyService {
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("Error while uploading file");
         }
+    }
+
+    public ResponseEntity<?> listDocs(Long policyId) {
+        Policy policy = policyRepository.findById(policyId)
+                .orElseThrow();
+
+        if (policySecurity.checkAuth(policy.getPolicyNumber())){
+            List<PolicyDocuments> policyDocumentsList = policyDocumentsRepository.findAllByPolicyId(policyId);
+            List<PolicyDocumentsDTO> policyDocumentsDTOs = new ArrayList<>();
+            for (PolicyDocuments policyDocuments: policyDocumentsList){
+                policyDocumentsDTOs.add(new PolicyDocumentsDTO(policyDocuments));
+            }
+
+            return ResponseEntity.ok(policyDocumentsDTOs);
+        }
+
+        return ResponseEntity.badRequest().body(Map.of("Error", "User Not Authorised"));
     }
 }
