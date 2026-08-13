@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.AgentRepository;
 import com.bajaj.IPMS.repository.CustomerRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +41,11 @@ public class PolicyService {
 
     public ResponseEntity<?> getAllPolicies(){
         List<Policy> policies = policyRepository.findAll();
-
-        return ResponseEntity.ok(policies);
+        List<PolicyDTO> policyDTOs = new ArrayList<>();
+        for (Policy policy: policies){
+            policyDTOs.add(new PolicyDTO(policy));
+        }
+        return ResponseEntity.ok(policyDTOs);
     }
 
     public ResponseEntity<?> createPolicy(Map<String, String> request){
@@ -131,7 +136,8 @@ public class PolicyService {
         if(policySecurity.checkAuth(policyNumber)){
             Policy policy = policyRepository.findByPolicyNumber(policyNumber);
             if (policy == null) return ResponseEntity.badRequest().body(Map.of("Error", "PolicyNot Found"));
-            return ResponseEntity.ok(policy);
+            PolicyDTO policyDTO = new PolicyDTO(policy);
+            return ResponseEntity.ok(policyDTO);
         } else {
             return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
         }
@@ -221,8 +227,9 @@ public class PolicyService {
 
         policyRepository.save(policy);
         policyAuditLogRespository.save(policyAuditLog);
+        PolicyDTO policyDTO = new PolicyDTO(policy);
 
-        return ResponseEntity.ok(policy);
+        return ResponseEntity.ok(policyDTO);
     }
 
     public ResponseEntity<?> activatePolicy(String policyNumber) {

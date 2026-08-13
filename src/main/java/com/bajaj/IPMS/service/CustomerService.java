@@ -1,10 +1,9 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.model.Customer;
-import com.bajaj.IPMS.model.RefreshToken;
-import com.bajaj.IPMS.model.RegisterRequest;
-import com.bajaj.IPMS.model.User;
+import com.bajaj.IPMS.DTO.PolicyDTO;
+import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.CustomerRepository;
+import com.bajaj.IPMS.repository.PolicyRepository;
 import com.bajaj.IPMS.repository.RefreshTokenRepository;
 import com.bajaj.IPMS.repository.UserRepository;
 import com.bajaj.IPMS.security.CustomerSecurity;
@@ -16,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -26,6 +27,9 @@ public class CustomerService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PolicyRepository policyRepository;
 
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
@@ -147,5 +151,14 @@ public class CustomerService {
         userRepository.delete(user);
 
         return ResponseEntity.ok(Map.of("Message", "Customer deleted successfully"));
+    }
+
+    public ResponseEntity<?> getAllPolicies(Long customerId) {
+        List<Policy> policies = policyRepository.findAllByCustomerId(customerId);
+        List<PolicyDTO> policyDTOs = new ArrayList<>();
+        for (Policy policy: policies) {
+            policyDTOs.add(new PolicyDTO(policy));
+        }
+        return ResponseEntity.ok(policyDTOs);
     }
 }

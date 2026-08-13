@@ -62,4 +62,9 @@ public class CustomerController {
     public ResponseEntity<?> deleteCustomer(@PathVariable("id") String customerCode){
         return customerService.deleteCustomer(customerCode);
     }
+
+    @GetMapping("/{id}/policies")
+    public ResponseEntity<?> getAllPolicies(@PathVariable("id") Long customerId){
+        return customerService.getAllPolicies(customerId);
+    }
 }
