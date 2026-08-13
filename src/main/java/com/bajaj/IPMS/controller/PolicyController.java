@@ -48,4 +48,16 @@ public class PolicyController {
     public ResponseEntity<?> renewPolicy(@PathVariable("id") String policyNumber){
         return policyService.renewPolicy(policyNumber);
     }
+
+    @PatchMapping("/{id}/suspend")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> suspendPolicy(@PathVariable("id") String policyNumber){
+        return policyService.suspendPolicy(policyNumber);
+    }
+
+    @PatchMapping("/{id}/cancel")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> cancelPolicy(@PathVariable("id") String policyNumber){
+        return policyService.cancelPolicy(policyNumber);
+    }
 }
