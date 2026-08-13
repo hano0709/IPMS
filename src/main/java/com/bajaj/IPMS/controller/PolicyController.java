@@ -60,4 +60,10 @@ public class PolicyController {
     public ResponseEntity<?> cancelPolicy(@PathVariable("id") String policyNumber){
         return policyService.cancelPolicy(policyNumber);
     }
+
+    @GetMapping("/{id}/audit")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> getAudit(@PathVariable("id") String policyNumber){
+        return policyService.getAudit(policyNumber);
+    }
 }

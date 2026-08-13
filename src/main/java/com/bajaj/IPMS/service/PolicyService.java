@@ -293,4 +293,11 @@ public class PolicyService {
 
         return ResponseEntity.ok("Policy Cancelled");
     }
+
+    public ResponseEntity<?> getAudit(String policyNumber) {
+        Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+
+        return ResponseEntity.ok(policyAuditLog);
+    }
 }
