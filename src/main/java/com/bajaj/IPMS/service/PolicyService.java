@@ -1,11 +1,9 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.model.Agent;
-import com.bajaj.IPMS.model.Customer;
-import com.bajaj.IPMS.model.Policy;
-import com.bajaj.IPMS.model.User;
+import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.AgentRepository;
 import com.bajaj.IPMS.repository.CustomerRepository;
+import com.bajaj.IPMS.repository.PolicyAuditLogRespository;
 import com.bajaj.IPMS.repository.PolicyRepository;
 import com.bajaj.IPMS.security.PolicySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,9 @@ public class PolicyService {
 
     @Autowired
     PolicyRepository policyRepository;
+
+    @Autowired
+    PolicyAuditLogRespository policyAuditLogRespository;
 
     @Autowired
     CustomerRepository customerRepository;
@@ -113,7 +114,15 @@ public class PolicyService {
         User user = userService.getCurrUser();
         policy.setCreatedBy(user.getId());
 
+        PolicyAuditLog policyAuditLog = new PolicyAuditLog();
+        policyAuditLog.setPolicy(policy);
+        policyAuditLog.setCreatedBy(user.getId());
+        policyAuditLog.setRemarks("Policy Created");
+        policyAuditLog.setNewStatus("DRAFT");
+        policyAuditLog.setPreviousStatus("NUll");
+
         policyRepository.save(policy);
+        policyAuditLogRespository.save(policyAuditLog);
 
         return ResponseEntity.ok(Map.of("Policy created Successfully", policy.getPolicyNumber()));
     }
@@ -204,12 +213,21 @@ public class PolicyService {
                 policy.setPremiumAmount(premiumAmount);
             }
         }
+
+        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        User user = userService.getCurrUser();
+        policyAuditLog.setChangedBy(user.getId());
+        policyAuditLog.setRemarks("Policy Updated");
+
         policyRepository.save(policy);
+        policyAuditLogRespository.save(policyAuditLog);
+
         return ResponseEntity.ok(policy);
     }
 
     public ResponseEntity<?> activatePolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
 
         if (policy.getStatus().equals("DRAFT")) {
             policy.setStatus("ACTIVE");
@@ -217,43 +235,61 @@ public class PolicyService {
             return ResponseEntity.badRequest().body(Map.of("Error", "Policy can be activated only from DRAFT status"));
         }
 
+        policyAuditLog.setPreviousStatus("DRAFT");
+        policyAuditLog.setNewStatus("ACTIVE");
+
         policyRepository.save(policy);
+        policyAuditLogRespository.save(policyAuditLog);
 
         return ResponseEntity.ok("Policy Activated");
     }
 
     public ResponseEntity<?> renewPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
 
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("RENEWED");
+            policyAuditLog.setPreviousStatus("ACTIVE");
+            policyAuditLog.setNewStatus("RENEWED");
         } else {
             return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be renewd from ACTIVE status"));
         }
 
         policyRepository.save(policy);
+        policyAuditLogRespository.save(policyAuditLog);
+
         return ResponseEntity.ok("Policy Renewed");
     }
 
     public ResponseEntity<?> suspendPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
 
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("SUSPENDED");
+            policyAuditLog.setPreviousStatus("ACTIVE");
+            policyAuditLog.setNewStatus("SUSPENDED");
         } else {
             return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be SUSPENDED from ACTIVE status"));
         }
 
         policyRepository.save(policy);
+        policyAuditLogRespository.save(policyAuditLog);
+
         return ResponseEntity.ok("Policy Suspended");
     }
 
     public ResponseEntity<?> cancelPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
 
+        policyAuditLog.setPreviousStatus(policy.getStatus());
         policy.setStatus("CANCELLED");
+        policyAuditLog.setNewStatus(policy.getStatus());
 
         policyRepository.save(policy);
+        policyAuditLogRespository.save(policyAuditLog);
 
         return ResponseEntity.ok("Policy Cancelled");
     }
