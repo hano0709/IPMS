@@ -36,4 +36,10 @@ public class PolicyController {
     public ResponseEntity<?> updatePolicy(@PathVariable("id") String policyNumber, @RequestBody Map<String, String> request){
         return policyService.updatePolicy(policyNumber, request);
     }
+
+    @PatchMapping("/{id}/activate")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> activatePolicy(@PathVariable("id") String policyNumber){
+        return policyService.activatepolicy(policyNumber);
+    }
 }

@@ -204,4 +204,14 @@ public class PolicyService {
         policyRepository.save(policy);
         return ResponseEntity.ok(policy);
     }
+
+    public ResponseEntity<?> activatepolicy(String policyNumber) {
+        Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+
+        policy.setStatus("ACTIVE");
+
+        policyRepository.save(policy);
+
+        return ResponseEntity.ok("Policy Activated");
+    }
 }
