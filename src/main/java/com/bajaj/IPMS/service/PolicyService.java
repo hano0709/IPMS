@@ -42,9 +42,10 @@ public class PolicyService {
     UserService userService;
 
     @Autowired
-    PolicySecurity policySecurity;
+    DocumentService documentService;
 
-    private final String uploadPath = "C:/IPMS_Files";
+    @Autowired
+    PolicySecurity policySecurity;
 
     public ResponseEntity<?> getAllPolicies(){
         List<Policy> policies = policyRepository.findAll();
@@ -330,42 +331,10 @@ public class PolicyService {
     }
 
     public ResponseEntity<?> uploadDocs(Long policyId, MultipartFile file) {
-        try {
-            Path path = Paths.get(uploadPath, file.getOriginalFilename());
-            file.transferTo(path.toFile());
-
-            Policy policy = policyRepository.findById(policyId)
-                    .orElseThrow();
-            User user = userService.getCurrUser();
-
-            PolicyDocuments policyDocuments = new PolicyDocuments();
-            policyDocuments.setFileName(file.getOriginalFilename());
-            policyDocuments.setFilePath(path.toString());
-            policyDocuments.setPolicy(policy);
-            policyDocuments.setUploadedBy(user.getId());
-
-            policyDocumentsRepository.save(policyDocuments);
-
-            return ResponseEntity.ok("Document Uploaded Successfully");
-        } catch (IOException e) {
-            return ResponseEntity.badRequest().body("Error while uploading file");
-        }
+        return documentService.uploadDocs(policyId, file);
     }
 
     public ResponseEntity<?> listDocs(Long policyId) {
-        Policy policy = policyRepository.findById(policyId)
-                .orElseThrow();
-
-        if (policySecurity.checkAuth(policy.getPolicyNumber())){
-            List<PolicyDocuments> policyDocumentsList = policyDocumentsRepository.findAllByPolicyId(policyId);
-            List<PolicyDocumentsDTO> policyDocumentsDTOs = new ArrayList<>();
-            for (PolicyDocuments policyDocuments: policyDocumentsList){
-                policyDocumentsDTOs.add(new PolicyDocumentsDTO(policyDocuments));
-            }
-
-            return ResponseEntity.ok(policyDocumentsDTOs);
-        }
-
-        return ResponseEntity.badRequest().body(Map.of("Error", "User Not Authorised"));
+        return documentService.listDocs(policyId);
     }
 }
