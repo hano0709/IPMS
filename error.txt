@@ -1,36 +1,36 @@
-https-proxy=http://bajajallianz%5Chano.varghese:Aug%402026@bgproxy.bajajallianz.com:8080/
-proxy=http://bajajallianz%5Chano.varghese:Aug%402026@bgproxy.bajajallianz.com:8080/
-registry=https://registry.npmjs.org/
-strict-ssl=false
+Step 2: Installing everything offline into THIS folder (uses package-lock.json
+so npm does not need to contact the registry for version resolution at all)...
 
-C:\Users\hano.varghese>npm install -g @angular/cli --verbose
-npm verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
-npm info using npm@11.6.2
-npm info using node@v25.3.0
-npm verbose title npm install @angular/cli
-npm verbose argv "install" "--global" "@angular/cli" "--loglevel" "verbose"
-npm verbose logfile logs-max:10 dir:C:\Users\hano.varghese\AppData\Local\npm-cache\_logs\2026-08-17T07_35_43_501Z-
-npm verbose logfile C:\Users\hano.varghese\AppData\Local\npm-cache\_logs\2026-08-17T07_35_43_501Z-debug-0.log
-npm http fetch GET 407 https://registry.npmjs.org/@angular%2fcli 434ms (cache skip)
-npm verbose stack HttpErrorGeneral: 407 Proxy Authorization Required - GET https://registry.npmjs.org/@angular%2fcli
-npm verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-fetch\lib\check-response.js:103:15
-npm verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-npm verbose stack     at async RegistryFetcher.packument (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:90:19)
-npm verbose stack     at async RegistryFetcher.manifest (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:128:23)
-npm verbose stack     at async #fetchManifest (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1227:20)
-npm verbose stack     at async #nodeFromEdge (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1065:19)
-npm verbose stack     at async #buildDepStep (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:929:11)
-npm verbose stack     at async Arborist.buildIdealTree (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:182:7)
-npm verbose stack     at async Arborist.reify (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:114:5)
-npm verbose stack     at async Install.exec (C:\Program Files\nodejs\node_modules\npm\lib\commands\install.js:150:5)
-npm verbose statusCode 407
-npm verbose pkgid @angular/cli@*
-npm error code E407
-npm error 407 Proxy Authorization Required - GET https://registry.npmjs.org/@angular%2fcli
-npm verbose cwd C:\Users\hano.varghese
-npm verbose os Windows_NT 10.0.26200
-npm verbose node v25.3.0
-npm verbose npm  v11.6.2
-npm verbose exit 1
-npm verbose code 1
-npm error A complete log of this run can be found in: C:\Users\hano.varghese\AppData\Local\npm-cache\_logs\2026-08-17T07_35_43_501Z-debug-0.log
+added 285 packages, and audited 286 packages in 32s
+
+72 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Step 3: Verifying the CLI works...
+node:internal/modules/cjs/loader:1423
+  throw err;
+  ^
+
+Error: Cannot find module 'C:\Users\hano.varghese\Downloads\tarballs\node_modules\@angular\cli\bin\ng.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1420:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v25.3.0
+
+If Step 3 printed the Angular CLI banner and version table, it worked.
+To use "ng" from anywhere, add this folder's node_modules\.bin to your PATH,
+or run: npm install -g . --offline    (installs it globally from this same folder)
+Press any key to continue . 
+
+also in the code step 3 accesses @angular folder but it is not present in node_modules folder of tarballs folder
