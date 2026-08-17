@@ -1,0 +1,15 @@
+C:\Users\hano.varghese>setx NODE_EXTRA_CA_CERTS "C:\Users\hano.varghese\Downloads\Zscaler Root CA.crt"
+
+SUCCESS: Specified value was saved.
+
+C:\Users\hano.varghese>npm install -g @angular/cli
+npm warn Unknown user config "http-proxy". This will stop working in the next major version of npm.
+npm error code ETIMEDOUT
+npm error errno ETIMEDOUT
+npm error network request to https://registry.npmjs.org/@angular%2fcli failed, reason:
+npm error network This is a problem related to network connectivity.
+npm error network In most cases you are behind a proxy or have bad network settings.
+npm error network
+npm error network If you are behind a proxy, please make sure that the
+npm error network 'proxy' config is set properly.  See: 'npm help config'
+npm error A complete log of this run can be found in: C:\Users\hano.varghese\AppData\Local\npm-cache\_logs\2026-08-17T07_20_19_149Z-debug-0.log
