@@ -335,6 +335,13 @@ public class PolicyService {
     }
 
     public ResponseEntity<?> listDocs(Long policyId) {
-        return documentService.listDocs(policyId);
+        Policy policy = policyRepository.findById(policyId).
+                orElseThrow();
+        String policyNumber = policy.getPolicyNumber();
+        if(policySecurity.checkAuth(policyNumber)){
+            return documentService.listDocs(policyId);
+        } else {
+            return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
+        }
     }
 }

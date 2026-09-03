@@ -154,6 +154,9 @@ public class CustomerService {
     }
 
     public ResponseEntity<?> getAllPolicies(Long customerId) {
+        if(!customerSecurity.checkAuth(customerId)) {
+            throw new IllegalArgumentException("No Authorisation");
+        }
         List<Policy> policies = policyRepository.findAllByCustomerId(customerId);
         List<PolicyDTO> policyDTOs = new ArrayList<>();
         for (Policy policy: policies) {

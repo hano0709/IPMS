@@ -36,6 +36,7 @@ public class AgentController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteAgent(@PathVariable("id") String agentCode){
         return agentService.deleteAgent(agentCode);
     }

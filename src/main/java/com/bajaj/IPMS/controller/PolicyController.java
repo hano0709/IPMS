@@ -28,6 +28,7 @@ public class PolicyController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> createPolicy(@RequestBody Map<String, String> request){
         return policyService.createPolicy(request);
     }
