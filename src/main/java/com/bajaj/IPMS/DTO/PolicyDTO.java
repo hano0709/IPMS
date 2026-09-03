@@ -21,7 +21,7 @@ public class PolicyDTO {
 
     public PolicyDTO(Policy policy){
         this.id = policy.getId();
-        this.agentId = policy.getId();;
+        this.agentId = policy.getId();
         this.policyNumber = policy.getPolicyNumber();
         this.policyType = policy.getPolicyType();
         this.policyStatus = policy.getStatus();
