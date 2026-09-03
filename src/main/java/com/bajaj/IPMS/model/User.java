@@ -63,4 +63,6 @@ public class User {
     public void setLastLogin(Instant lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+    public Instant getLastLogin() { return lastLogin; }
 }
