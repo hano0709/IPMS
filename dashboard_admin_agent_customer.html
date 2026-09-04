@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=ibmPlexSans:wght@100..900&family=jetbrainsMono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#00174b", "tertiary": "#000000", "on-surface-variant": "#45464d", "tertiary-fixed": "#dbe1ff", "background": "#f8f9ff", "on-secondary-fixed": "#00164e", "surface-container": "#e5eeff", "surface-variant": "#d3e4fe", "outline": "#76777d", "tertiary-container": "#00174b", "secondary-fixed": "#dce1ff", "on-primary": "#ffffff", "on-error-container": "#93000a", "on-primary-container": "#7c839b", "on-secondary-container": "#1d3989", "surface-bright": "#f8f9ff", "on-tertiary-container": "#497cff", "surface-container-low": "#eff4ff", "inverse-surface": "#213145", "on-tertiary-fixed-variant": "#003ea8", "on-background": "#0b1c30", "secondary-fixed-dim": "#b6c4ff", "inverse-on-surface": "#eaf1ff", "on-secondary": "#ffffff", "surface-tint": "#565e74", "surface-dim": "#cbdbf5", "primary-fixed": "#dae2fd", "surface": "#f8f9ff", "secondary-container": "#8fa7fe", "on-tertiary": "#ffffff", "primary-fixed-dim": "#bec6e0", "surface-container-high": "#dce9ff", "tertiary-fixed-dim": "#b4c5ff", "on-surface": "#0b1c30", "secondary": "#4059aa", "on-error": "#ffffff", "error": "#ba1a1a", "surface-container-highest": "#d3e4fe", "primary": "#000000", "on-primary-fixed": "#131b2e", "inverse-primary": "#bec6e0", "outline-variant": "#c6c6cd", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "on-secondary-fixed-variant": "#264191", "primary-container": "#131b2e", "on-primary-fixed-variant": "#3f465c" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "0.75rem", "table-cell-px": "0.625rem", "space-sm": "0.5rem", "space-xxs": "0.125rem", "space-lg": "1rem", "space-xl": "1.5rem", "gutter-terminal": "0.5rem", "space-2xl": "2rem", "space-xs": "0.25rem", "table-cell-py": "0.375rem" }, "fontFamily": { "data-mono-num": ["jetbrainsMono"], "display-lg": ["ibmPlexSans"], "label-md": ["jetbrainsMono"], "headline-md": ["ibmPlexSans"], "label-lg": ["jetbrainsMono"], "headline-sm": ["ibmPlexSans"], "body-sm": ["jetbrainsMono"], "label-sm": ["jetbrainsMono"], "display-lg-mobile": ["ibmPlexSans"], "headline-lg": ["ibmPlexSans"], "body-md": ["jetbrainsMono"], "body-lg": ["jetbrainsMono"] }, "fontSize": { "data-mono-num": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" }], "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "headline-sm": ["15px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "display-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["14px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } }</script></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-outline-variant"><img alt="IPMS Shield Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbpbRk2rHB3jQq5gqI5Hfa8VxFFPfOPCE-NINsMNIev7Y2ueMSlX_ovoT7B6F0b82d8gfMTeRdONS-mHlqLY0SIRPP70nE6hvZH00IPBc8WC5OjTze84M5kt9IOtqg_tAF4NBsh6X-B7kFtbJIWAzaHHGONWeSjlbnHfgZtiokh7Wmvz91EK4D-EH_zF0UErsSI_gTJpOtuyDrArfgAOwwRF_gUiHTthAJrfe5bP97mTV3LgBm2rrbvmn-"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface">IPMS CORE</span><span class="font-label-sm text-label-sm text-on-surface-variant">v6.7 ACTUARIAL</span></div></div><div class="px-space-md py-space-sm bg-surface-container-low border-b border-outline-variant flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant">SYS MATRIX</span><span class="flex items-center gap-space-xxs text-secondary"><span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span><span class="font-data-mono-num text-label-sm">NODE_ONLINE</span></span></div><nav class="flex-1 py-space-sm space-y-space-xxs overflow-y-auto px-space-xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm border-l-4 border-secondary"><a aria-current="page" class="flex items-center justify-between px-space-md py-table-cell-py transition-colors bg-primary-container text-on-primary font-headline-sm border-l-4 border-secondary" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></div><span class="font-label-sm text-label-sm text-outline">F1</span></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="policies" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-body-md text-body-md">Policies</span></div><span class="font-label-sm text-label-sm px-space-xxs bg-surface-container-high text-on-surface">2.4k</span></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="customers" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">group</span><span class="font-body-md text-body-md">Customers</span></div></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="agents" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">badge</span><span class="font-body-md text-body-md">Agents</span></div><span class="font-label-sm text-label-sm px-space-xxs bg-surface-container text-secondary font-semibold">RESTRICTED</span></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="notifications" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="font-body-md text-body-md">Notifications</span></div><span class="font-label-sm text-label-sm px-space-xs bg-error text-on-error font-bold">3</span></a></nav><div class="p-space-sm border-t border-outline-variant bg-surface-container-lowest"><a class="flex items-center gap-space-sm px-space-md py-table-cell-py text-error hover:bg-error-container hover:text-on-error-container transition-colors" data-path="logout" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span class="font-body-md text-body-md font-semibold">Logout Session</span></a></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 z-40 bg-surface-container-lowest border-b border-outline-variant"><div class="h-16 px-space-lg flex items-center justify-between gap-space-md"><div class="flex-1 max-w-xl"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">search</span><input class="w-full h-8 pl-9 pr-space-md bg-surface-container-low border border-outline-variant text-on-surface font-body-sm text-body-sm placeholder-outline focus:outline-none focus:border-primary" placeholder="Search Policy #, VIN, SSN, Tax ID, Insured Entity... [CMD+K]" type="text"/></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-sm px-space-sm py-space-xxs border border-outline-variant bg-surface-container-lowest"><span class="w-2 h-2 bg-secondary rounded-full"></span><span class="font-label-sm text-label-sm uppercase text-on-surface-variant">SYNC: REALTIME</span><span class="font-data-mono-num text-label-sm text-outline">0.42ms</span></div><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-0 right-0 w-4 h-4 bg-error text-on-error font-label-sm text-label-sm flex items-center justify-center font-bold">3</span></button><div class="h-8 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJY2jsdiuUaD4I14UBViouRS2Ft8acJa0UDONLO6TEv44kRor2-3DYzGHUGC_swaenH6A08rlTjU0x9hQ3HbjyGXOGLUGfwl6q-nqxyTwMNYFJtpiVQQI7psc1JNCZUmW1d9pk-6KtRqJwRAJwR_Du9-skWEoNchz24Hl9eR8e_Rnv5nLcJrdfgIOkukskjsFmFe23ZuvvIVfW0RNDjyW99eo-Bu4VspG0F-uACITocIQR6HJWme4QdA"/><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Marcus Vance (Admin)</span><span class="font-label-sm text-label-sm text-on-surface-variant font-mono">SEC_ID: 9021-AD</span></div><span class="px-space-xs py-space-xxs bg-primary text-on-primary font-label-sm text-label-sm tracking-wider uppercase font-bold">ADMIN</span></div></div></div><div class="h-10 px-space-lg bg-surface-container-low border-t border-outline-variant flex items-center justify-between"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant uppercase"><a class="hover:text-on-surface transition-colors" href="#">Home</a><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><a class="hover:text-on-surface transition-colors" href="#">Policies</a><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><span class="text-on-surface font-semibold">Details</span></div><div class="flex items-center gap-space-sm"><button class="px-space-sm h-6 bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm uppercase hover:bg-surface-container-high transition-colors flex items-center gap-space-xxs"><span class="material-symbols-outlined text-[14px]">print</span>Print Ledger</button><button class="px-space-sm h-6 bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm uppercase hover:bg-surface-container-high transition-colors flex items-center gap-space-xxs"><span class="material-symbols-outlined text-[14px]">download</span>Export CSV</button><button class="px-space-sm h-6 bg-primary text-on-primary font-label-sm text-label-sm uppercase hover:bg-secondary transition-colors flex items-center gap-space-xxs"><span class="material-symbols-outlined text-[14px]">add</span>New Endorsement</button></div></div></header><main class="relative pt-26 bg-background min-h-screen px-space-lg py-space-md"><div class="w-full"><div class="flex flex-col w-full gap-space-lg">
+<!-- Role Switcher Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md bg-surface-container-lowest p-space-sm shadow-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase px-space-xs">Perspective:</span>
+<div class="inline-flex p-space-xxs bg-surface-container-low" id="role-tab-group">
+<button class="flex items-center gap-space-xs px-space-md py-table-cell-py bg-surface-container-lowest text-on-surface font-headline-sm text-label-lg shadow-sm transition-all" id="tab-admin" onclick="switchRole('admin')" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">admin_panel_settings</span>
+<span>Admin Console</span>
+<span class="px-space-xxs bg-primary text-on-primary font-label-sm text-[9px] uppercase font-bold">PRIMARY</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-table-cell-py text-on-surface-variant hover:text-on-surface font-headline-sm text-label-lg transition-all" id="tab-agent" onclick="switchRole('agent')" type="button">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+<span>Agent Desk Preview</span>
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">PORTFOLIO</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-table-cell-py text-on-surface-variant hover:text-on-surface font-headline-sm text-label-lg transition-all" id="tab-customer" onclick="switchRole('customer')" type="button">
+<span class="material-symbols-outlined text-[16px]">person</span>
+<span>Customer Portal View</span>
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">PORTAL</span>
+</button>
+</div>
+</div>
+<!-- Telemetry & Node Stamp -->
+<div class="flex items-center gap-space-md">
+<div class="hidden sm:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">sync_alt</span>
+<span>AUDIT_EPOCH: 2025-Q1-LIVE</span>
+<span class="px-space-xxs bg-surface-container-high font-data-mono-num text-on-surface font-semibold">BRD-6.2</span>
+</div>
+<button class="px-space-sm h-7 bg-surface-container-low text-on-surface font-label-sm text-label-sm uppercase hover:bg-surface-container-high transition-colors flex items-center gap-space-xxs">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+        Sync State
+      </button>
+</div>
+</div>
+<!-- ADMIN VIEW CONTAINER -->
+<div class="flex flex-col gap-space-lg" id="view-admin">
+<!-- Top 4 KPI Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<!-- KPI 1: Total Policies -->
+<div class="bg-surface-container-lowest p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Metric // FR-POL-01</span>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-space-xxs font-semibold">Total Policies</span>
+</div>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-on-surface font-semibold tracking-tight">1,248</span>
+<div class="flex items-center gap-space-xxs px-space-xs py-space-xxs bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+<span>+8.4% MoM</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs bg-surface-container-low flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-space-xs">
+<span>Target baseline: 1,150</span>
+<span class="font-data-mono-num text-secondary font-semibold">108.5% IND</span>
+</div>
+</div>
+<!-- KPI 2: Active Policies -->
+<div class="bg-surface-container-lowest p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Metric // FR-POL-02</span>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-space-xxs font-semibold">Active Policies</span>
+</div>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-on-surface font-semibold tracking-tight">1,082</span>
+<div class="flex items-center gap-space-xxs px-space-xs py-space-xxs bg-surface-container-high text-on-secondary-container font-label-sm text-label-sm font-bold">
+<span>86.7% Retention</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs bg-surface-container-low flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-space-xs">
+<span>UW In-force Float</span>
+<span class="font-data-mono-num text-on-surface font-semibold">$18.42M AUM</span>
+</div>
+</div>
+<!-- KPI 3: Expiring Soon -->
+<div class="bg-surface-container-lowest p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-error uppercase tracking-wider font-bold flex items-center gap-space-xxs">
+<span class="w-2 h-2 bg-error rounded-full animate-ping"></span> Alert // FR-POL-07
+            </span>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-space-xxs font-semibold">Expiring Soon (30d)</span>
+</div>
+<div class="w-8 h-8 bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-error font-semibold tracking-tight">47</span>
+<span class="px-space-xs py-space-xxs bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">CRITICAL Q</span>
+</div>
+<div class="mt-space-sm pt-space-xs bg-surface-container-low flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-space-xs">
+<span>Action SLA: < 72 hrs</span>
+<span class="font-data-mono-num text-error font-semibold">14 Unassigned</span>
+</div>
+</div>
+<!-- KPI 4: Total Customers -->
+<div class="bg-surface-container-lowest p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Metric // FR-CUST-01</span>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-space-xxs font-semibold">Total Customers</span>
+</div>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">group</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-on-surface font-semibold tracking-tight">892</span>
+<span class="px-space-xs py-space-xxs bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">+34 This Month</span>
+</div>
+<div class="mt-space-sm pt-space-xs bg-surface-container-low flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-space-xs">
+<span>Individual / Corp</span>
+<span class="font-data-mono-num text-on-surface font-semibold">748 / 144</span>
+</div>
+</div>
+</div>
+<!-- Quick Actions Banner -->
+<div class="bg-surface-container-lowest p-space-sm shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface">Actuarial Quick Dispatch</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Perform instantaneous policy life-cycle mutations and registry operations</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="h-8 px-space-md bg-primary text-on-primary font-label-lg text-label-lg uppercase hover:bg-secondary transition-colors flex items-center gap-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span>Create Policy</span>
+</button>
+<button class="h-8 px-space-md bg-surface-container-low text-on-surface font-label-lg text-label-lg uppercase hover:bg-surface-container-high transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">person_add</span>
+<span>Add Customer</span>
+</button>
+<button class="h-8 px-space-md bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-colors font-label-lg text-label-lg uppercase flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+<span>Add Agent</span>
+</button>
+<div class="h-6 w-px bg-surface-container-high hidden md:block"></div>
+<button class="h-8 px-space-md bg-surface-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-colors font-label-lg text-label-lg uppercase flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">summarize</span>
+<span>Export Quarterly Audit Report</span>
+</button>
+</div>
+</div>
+<!-- Main Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Left Column: 7 Cols Recent Activity Data Table -->
+<div class="lg:col-span-7 flex flex-col bg-surface-container-lowest shadow-sm overflow-hidden">
+<!-- Table Header Toolbar -->
+<div class="h-10 px-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">history</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Recent Activity — Policy State Audit (Last 10)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-data-mono-num text-label-sm text-on-surface-variant">AUTO_REFRESH_5S</span>
+<button class="p-space-xxs hover:bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Scrollable High Density Data Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-table-cell-py px-space-sm font-semibold">Timestamp</th>
+<th class="py-table-cell-py px-space-sm font-semibold">Policy No.</th>
+<th class="py-table-cell-py px-space-sm font-semibold">Insured Party</th>
+<th class="py-table-cell-py px-space-sm font-semibold">State Mutation</th>
+<th class="py-table-cell-py px-space-sm font-semibold">Auditor / Agent</th>
+<th class="py-table-cell-py px-space-sm font-semibold text-right">Remarks</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-lowest">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">14:32:09 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008921</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">AeroDynamics LLC</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">DRAFT</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase font-bold">ACTIVE</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">M. Vance (ADMIN)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Bound after binding wire receipt</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">13:58:44 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008919</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Elena Rostova</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-primary text-on-primary font-label-sm text-[9px] uppercase font-bold">RENEWED</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">S. Kolar (AGT-08)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Auto-renewal rider signed</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-lowest">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">12:11:15 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2024-007812</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Apex Freight Corp</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-error text-on-error font-label-sm text-[9px] uppercase font-bold">SUSPENDED</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">M. Vance (ADMIN)</td>
+<td class="py-table-cell-py px-space-sm text-right text-error text-[10px] truncate max-w-[120px]">Default on premium instalment</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">11:45:00 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008915</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Marcus Zhao</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">PENDING</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">D. Patel (UW-02)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Health tele-exam cleared</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-lowest">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">10:20:19 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008910</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Vanguard Biopharma</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">DRAFT</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-surface-container text-on-surface font-label-sm text-[9px] uppercase">QUOTE_ISSUED</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">A. Chen (AGT-14)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Actuarial endorsement loaded</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">09:15:33 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2024-006540</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">David K. Miller</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-surface-container-highest text-on-surface font-label-sm text-[9px] uppercase">EXPIRED</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">SYSTEM_DAEMON</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Term ended without renewal</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-lowest">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">08:50:11 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008904</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Hyperion Logistics</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">REVIEW</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">D. Patel (UW-02)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Fleet schedule confirmed</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">07:44:22 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008901</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Sarah Jenkins</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">DRAFT</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">M. Vance (ADMIN)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">First premium EFT verified</td>
+</tr>
+<!-- Row 9 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-lowest">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">06:30:18 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2023-005118</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Boreal Mining SA</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-error text-on-error font-label-sm text-[9px] uppercase">CANCELLED</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">M. Vance (ADMIN)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Customer written revocation</td>
+</tr>
+<!-- Row 10 -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm text-on-surface-variant whitespace-nowrap">05:12:49 UTC</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-label-sm font-semibold text-secondary whitespace-nowrap">IPMS-2025-008892</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-medium">Solaria CleanTech</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap">
+<div class="flex items-center gap-space-xxs">
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] uppercase">PENDING</span>
+<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] uppercase">ACTIVE</span>
+</div>
+</td>
+<td class="py-table-cell-py px-space-sm whitespace-nowrap font-data-mono-num text-label-sm">S. Kolar (AGT-08)</td>
+<td class="py-table-cell-py px-space-sm text-right text-on-surface-variant text-[10px] truncate max-w-[120px]">Engineering survey accepted</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer -->
+<div class="h-8 px-space-md bg-surface-container-low flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Showing 10 of 1,248 transactions</span>
+<div class="flex items-center gap-space-sm font-data-mono-num">
+<span>AUDIT_LOG_STABLE</span>
+<a class="text-secondary hover:underline font-semibold flex items-center gap-space-xxs" href="#">
+              Open Master Ledger <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Right Column: 5 Cols Expiring Queue & Portfolio Mix -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Policies Expiring in 30 Days (FR-POL-07) -->
+<div class="bg-surface-container-lowest shadow-sm flex flex-col">
+<div class="h-10 px-space-md bg-error-container text-on-error-container flex items-center justify-between">
+<div class="flex items-center gap-space-xs font-semibold">
+<span class="material-symbols-outlined text-[16px]">alarm_on</span>
+<span class="font-headline-sm text-headline-sm uppercase">Expiring in 30 Days (FR-POL-07)</span>
+</div>
+<span class="px-space-xs bg-error text-on-error font-data-mono-num text-label-sm font-bold">47 DUE</span>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs">
+<!-- Alert Item 1 -->
+<div class="p-space-xs bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col min-w-0 pr-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-mono-num text-label-sm font-bold text-on-surface">IPMS-2024-004112</span>
+<span class="px-space-xxs bg-error text-on-error font-label-sm text-[9px] font-semibold">IN 4 DAYS</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface truncate font-medium">OmniCorp Logistics</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Motor Fleet • $48,200/yr</span>
+</div>
+<div class="flex items-center gap-space-xxs shrink-0">
+<button class="w-7 h-7 bg-surface-container-lowest hover:bg-primary hover:text-on-primary flex items-center justify-center text-on-surface transition-colors" title="Direct Call">
+<span class="material-symbols-outlined text-[14px]">phone</span>
+</button>
+<button class="w-7 h-7 bg-surface-container-lowest hover:bg-primary hover:text-on-primary flex items-center justify-center text-on-surface transition-colors" title="Dispatch Renewal Notice">
+<span class="material-symbols-outlined text-[14px]">mail</span>
+</button>
+<button class="h-7 px-space-xs bg-primary text-on-primary font-label-sm text-[10px] uppercase hover:bg-secondary">
+                  Renew
+                </button>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="p-space-xs bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col min-w-0 pr-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-mono-num text-label-sm font-bold text-on-surface">IPMS-2024-004998</span>
+<span class="px-space-xxs bg-secondary text-on-secondary font-label-sm text-[9px] font-semibold">IN 11 DAYS</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface truncate font-medium">Helena St. Clair</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Life Assured • $12,400/yr</span>
+</div>
+<div class="flex items-center gap-space-xxs shrink-0">
+<button class="w-7 h-7 bg-surface-container-lowest hover:bg-primary hover:text-on-primary flex items-center justify-center text-on-surface transition-colors" title="Direct Call">
+<span class="material-symbols-outlined text-[14px]">phone</span>
+</button>
+<button class="w-7 h-7 bg-surface-container-lowest hover:bg-primary hover:text-on-primary flex items-center justify-center text-on-surface transition-colors" title="Dispatch Renewal Notice">
+<span class="material-symbols-outlined text-[14px]">mail</span>
+</button>
+<button class="h-7 px-space-xs bg-primary text-on-primary font-label-sm text-[10px] uppercase hover:bg-secondary">
+                  Renew
+                </button>
+</div>
+</div>
+<!-- Alert Item 3 -->
+<div class="p-space-xs bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col min-w-0 pr-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-mono-num text-label-sm font-bold text-on-surface">IPMS-2024-005230</span>
+<span class="px-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[9px] font-semibold">IN 18 DAYS</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface truncate font-medium">Vertex Silicon Labs</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Property / Asset • $92,000/yr</span>
+</div>
+<div class="flex items-center gap-space-xxs shrink-0">
+<button class="w-7 h-7 bg-surface-container-lowest hover:bg-primary hover:text-on-primary flex items-center justify-center text-on-surface transition-colors" title="Direct Call">
+<span class="material-symbols-outlined text-[14px]">phone</span>
+</button>
+<button class="w-7 h-7 bg-surface-container-lowest hover:bg-primary hover:text-on-primary flex items-center justify-center text-on-surface transition-colors" title="Dispatch Renewal Notice">
+<span class="material-symbols-outlined text-[14px]">mail</span>
+</button>
+<button class="h-7 px-space-xs bg-primary text-on-primary font-label-sm text-[10px] uppercase hover:bg-secondary">
+                  Renew
+                </button>
+</div>
+</div>
+</div>
+<div class="p-space-xs bg-surface-container-lowest flex justify-end">
+<a class="text-secondary font-label-sm text-label-sm uppercase hover:underline font-semibold" href="#">View All 47 Pending Expirations →</a>
+</div>
+</div>
+<!-- Mini Breakdown of Policies by Type -->
+<div class="bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">pie_chart</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Underwritten Portfolio Mix</span>
+</div>
+<span class="font-data-mono-num text-label-sm text-on-surface-variant">TOTAL: 1,248</span>
+</div>
+<!-- Type Distribution Bars -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<!-- Property -->
+<div class="flex flex-col gap-space-xxs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="font-semibold text-on-surface flex items-center gap-space-xxs">
+<span class="material-symbols-outlined text-[14px] text-secondary">apartment</span> Property & Casualty
+                </span>
+<span class="font-data-mono-num text-on-surface font-semibold">474 policies (38%)</span>
+</div>
+<div class="w-full h-2 bg-surface-container">
+<div class="h-2 bg-primary" style="width: 38%"></div>
+</div>
+</div>
+<!-- Health -->
+<div class="flex flex-col gap-space-xxs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="font-semibold text-on-surface flex items-center gap-space-xxs">
+<span class="material-symbols-outlined text-[14px] text-secondary">cardiology</span> Health & Medical
+                </span>
+<span class="font-data-mono-num text-on-surface font-semibold">362 policies (29%)</span>
+</div>
+<div class="w-full h-2 bg-surface-container">
+<div class="h-2 bg-secondary" style="width: 29%"></div>
+</div>
+</div>
+<!-- Motor -->
+<div class="flex flex-col gap-space-xxs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="font-semibold text-on-surface flex items-center gap-space-xxs">
+<span class="material-symbols-outlined text-[14px] text-secondary">directions_car</span> Motor Commercial
+                </span>
+<span class="font-data-mono-num text-on-surface font-semibold">237 policies (19%)</span>
+</div>
+<div class="w-full h-2 bg-surface-container">
+<div class="h-2 bg-secondary-container" style="width: 19%"></div>
+</div>
+</div>
+<!-- Life -->
+<div class="flex flex-col gap-space-xxs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="font-semibold text-on-surface flex items-center gap-space-xxs">
+<span class="material-symbols-outlined text-[14px] text-secondary">health_and_safety</span> Life & Annuity
+                </span>
+<span class="font-data-mono-num text-on-surface font-semibold">175 policies (14%)</span>
+</div>
+<div class="w-full h-2 bg-surface-container">
+<div class="h-2 bg-outline-variant" style="width: 14%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AGENT DASHBOARD PREVIEW PANEL -->
+<div class="flex flex-col gap-space-md hidden" id="view-agent">
+<!-- Header Notice -->
+<div class="p-space-sm bg-secondary-fixed text-on-secondary-fixed flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold">Agent Perspective: Sarah Kolar (ID: AGT-08-NORTHEAST)</span>
+<span class="font-label-sm text-label-sm">Displaying individual allocated book of business and direct commission flow</span>
+</div>
+</div>
+<span class="px-space-xs py-space-xxs bg-secondary text-on-secondary font-label-sm text-label-sm uppercase font-bold">FIELD MODE</span>
+</div>
+<!-- Agent Specific KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Assigned Book</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">folder_special</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-on-surface font-semibold">142</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">My Policies</span>
+</div>
+<div class="mt-space-xs text-on-surface-variant font-label-sm text-label-sm">
+          Gross Written Premium: <span class="font-data-mono-num text-on-surface font-semibold">$2.14M</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Retention Status</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">task_alt</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-on-surface font-semibold">128</span>
+<span class="px-space-xs bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">90.1% Active</span>
+</div>
+<div class="mt-space-xs text-on-surface-variant font-label-sm text-label-sm">
+          My Active Policies • In Good Standing
+        </div>
+</div>
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-error uppercase font-bold">Renewal Target</span>
+<span class="material-symbols-outlined text-[18px] text-error">notification_important</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-mono-num text-display-lg text-error font-semibold">14</span>
+<span class="px-space-xs bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">Action Needed</span>
+</div>
+<div class="mt-space-xs text-error font-label-sm text-label-sm">
+          Renewal Due < 30 Days (Direct Outreach Required)
+        </div>
+</div>
+</div>
+<!-- Agent Quick Actions & Assigned Roster -->
+<div class="bg-surface-container-lowest shadow-sm p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Immediate Follow-ups for Sarah Kolar</span>
+<button class="h-7 px-space-sm bg-primary text-on-primary font-label-sm text-label-sm uppercase hover:bg-secondary">
+          Initiate Batch Renewal Reminders
+        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase">
+<th class="py-space-xs px-space-sm">Policy ID</th>
+<th class="py-space-xs px-space-sm">Client Name</th>
+<th class="py-space-xs px-space-sm">Coverage</th>
+<th class="py-space-xs px-space-sm">Premium</th>
+<th class="py-space-xs px-space-sm">Expires</th>
+<th class="py-space-xs px-space-sm text-right">Direct Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<tr class="hover:bg-surface-container-low bg-surface-container-lowest">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-secondary font-semibold">IPMS-2024-009110</td>
+<td class="py-table-cell-py px-space-sm font-medium">BioLogic Health Lab</td>
+<td class="py-table-cell-py px-space-sm">Commercial Property</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num">$32,000/yr</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-error font-semibold">In 6 Days</td>
+<td class="py-table-cell-py px-space-sm text-right">
+<button class="px-space-xs py-space-xxs bg-primary text-on-primary font-label-sm text-[10px] uppercase">Contact Client</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low bg-surface-container-low">
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-secondary font-semibold">IPMS-2024-008241</td>
+<td class="py-table-cell-py px-space-sm font-medium">Liam O'Connor</td>
+<td class="py-table-cell-py px-space-sm">Comprehensive Auto</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num">$2,450/yr</td>
+<td class="py-table-cell-py px-space-sm font-data-mono-num text-on-surface-variant">In 19 Days</td>
+<td class="py-table-cell-py px-space-sm text-right">
+<button class="px-space-xs py-space-xxs bg-surface-container-high text-on-surface font-label-sm text-[10px] uppercase hover:bg-primary hover:text-on-primary">Send Form</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- CUSTOMER DASHBOARD PREVIEW PANEL -->
+<div class="flex flex-col gap-space-md hidden" id="view-customer">
+<!-- Header Notice -->
+<div class="p-space-sm bg-surface-container-highest text-on-surface flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary">verified_user</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold">Customer Perspective: Elena Rostova (Insured ID: CUST-8021)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Client self-service portal: Active insurance policies, cards, certificates & declarations</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm h-7 bg-primary text-on-primary font-label-sm text-label-sm uppercase hover:bg-secondary transition-colors">
+          File a Claim
+        </button>
+</div>
+</div>
+<!-- Customer Active Policy Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Customer Card 1: Motor -->
+<div class="bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-all">
+<div>
+<div class="flex items-start justify-between">
+<div class="w-10 h-10 bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">directions_car</span>
+</div>
+<span class="px-space-xs py-space-xxs bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold uppercase">
+              ACTIVE
+            </span>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">POLICY # IPMS-2025-008919</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold mt-space-xxs">Comprehensive Motor Plan</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-xxs">2023 Audi e-tron GT • VIN: ...7892</span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-xs flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Coverage Term Expiry:</span>
+<span class="font-data-mono-num font-semibold text-on-surface">2026-03-31</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Annual Premium:</span>
+<span class="font-data-mono-num font-semibold text-secondary">$3,840.00 / paid</span>
+</div>
+<button class="mt-space-xs w-full h-8 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface font-label-sm text-label-sm uppercase font-semibold flex items-center justify-center gap-space-xxs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span>View Documents & Binder</span>
+</button>
+</div>
+</div>
+<!-- Customer Card 2: Health -->
+<div class="bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-all">
+<div>
+<div class="flex items-start justify-between">
+<div class="w-10 h-10 bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">cardiology</span>
+</div>
+<span class="px-space-xs py-space-xxs bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold uppercase">
+              ACTIVE
+            </span>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">POLICY # IPMS-2024-001209</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold mt-space-xxs">Family Premier Health Rider</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-xxs">Elena Rostova + 2 Dependents Included</span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-xs flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Coverage Term Expiry:</span>
+<span class="font-data-mono-num font-semibold text-on-surface">2025-11-30</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Annual Premium:</span>
+<span class="font-data-mono-num font-semibold text-secondary">$8,120.00 / paid</span>
+</div>
+<button class="mt-space-xs w-full h-8 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface font-label-sm text-label-sm uppercase font-semibold flex items-center justify-center gap-space-xxs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span>View Documents & Binder</span>
+</button>
+</div>
+</div>
+<!-- Customer Card 3: Property -->
+<div class="bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-all">
+<div>
+<div class="flex items-start justify-between">
+<div class="w-10 h-10 bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">home</span>
+</div>
+<span class="px-space-xs py-space-xxs bg-error-container text-on-error-container font-label-sm text-label-sm font-bold uppercase">
+              RENEWAL PENDING
+            </span>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">POLICY # IPMS-2024-003341</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold mt-space-xxs">Residential Real Estate</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-xxs">844 Belmont Ave, Seattle WA 98102</span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-xs flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Coverage Term Expiry:</span>
+<span class="font-data-mono-num font-semibold text-error">2025-04-15 (14d left)</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Renewal Quote:</span>
+<span class="font-data-mono-num font-semibold text-on-surface">$4,150.00 / est.</span>
+</div>
+<button class="mt-space-xs w-full h-8 bg-primary text-on-primary font-label-sm text-label-sm uppercase font-semibold flex items-center justify-center gap-space-xxs hover:bg-secondary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[14px]">credit_card</span>
+<span>Review & Authorize Renewal</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchRole(role) {
+    // Hide all view panels
+    document.getElementById('view-admin').classList.add('hidden');
+    document.getElementById('view-agent').classList.add('hidden');
+    document.getElementById('view-customer').classList.add('hidden');
+
+    // Reset all tabs styles
+    const tabs = ['tab-admin', 'tab-agent', 'tab-customer'];
+    tabs.forEach(tabId => {
+      const el = document.getElementById(tabId);
+      el.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+      el.classList.add('text-on-surface-variant');
+    });
+
+    // Activate selected view and tab
+    const targetTab = document.getElementById('tab-' + role);
+    targetTab.classList.remove('text-on-surface-variant');
+    targetTab.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+
+    const targetView = document.getElementById('view-' + role);
+    targetView.classList.remove('hidden');
+  }
+</script></div></main></div></body></html>
