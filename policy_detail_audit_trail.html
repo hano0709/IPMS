@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=ibmPlexSans:wght@100..900&family=jetbrainsMono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#00174b", "tertiary": "#000000", "on-surface-variant": "#45464d", "tertiary-fixed": "#dbe1ff", "background": "#f8f9ff", "on-secondary-fixed": "#00164e", "surface-container": "#e5eeff", "surface-variant": "#d3e4fe", "outline": "#76777d", "tertiary-container": "#00174b", "secondary-fixed": "#dce1ff", "on-primary": "#ffffff", "on-error-container": "#93000a", "on-primary-container": "#7c839b", "on-secondary-container": "#1d3989", "surface-bright": "#f8f9ff", "on-tertiary-container": "#497cff", "surface-container-low": "#eff4ff", "inverse-surface": "#213145", "on-tertiary-fixed-variant": "#003ea8", "on-background": "#0b1c30", "secondary-fixed-dim": "#b6c4ff", "inverse-on-surface": "#eaf1ff", "on-secondary": "#ffffff", "surface-tint": "#565e74", "surface-dim": "#cbdbf5", "primary-fixed": "#dae2fd", "surface": "#f8f9ff", "secondary-container": "#8fa7fe", "on-tertiary": "#ffffff", "primary-fixed-dim": "#bec6e0", "surface-container-high": "#dce9ff", "tertiary-fixed-dim": "#b4c5ff", "on-surface": "#0b1c30", "secondary": "#4059aa", "on-error": "#ffffff", "error": "#ba1a1a", "surface-container-highest": "#d3e4fe", "primary": "#000000", "on-primary-fixed": "#131b2e", "inverse-primary": "#bec6e0", "outline-variant": "#c6c6cd", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "on-secondary-fixed-variant": "#264191", "primary-container": "#131b2e", "on-primary-fixed-variant": "#3f465c" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "0.75rem", "table-cell-px": "0.625rem", "space-sm": "0.5rem", "space-xxs": "0.125rem", "space-lg": "1rem", "space-xl": "1.5rem", "gutter-terminal": "0.5rem", "space-2xl": "2rem", "space-xs": "0.25rem", "table-cell-py": "0.375rem" }, "fontFamily": { "data-mono-num": ["jetbrainsMono"], "display-lg": ["ibmPlexSans"], "label-md": ["jetbrainsMono"], "headline-md": ["ibmPlexSans"], "label-lg": ["jetbrainsMono"], "headline-sm": ["ibmPlexSans"], "body-sm": ["jetbrainsMono"], "label-sm": ["jetbrainsMono"], "display-lg-mobile": ["ibmPlexSans"], "headline-lg": ["ibmPlexSans"], "body-md": ["jetbrainsMono"], "body-lg": ["jetbrainsMono"] }, "fontSize": { "data-mono-num": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" }], "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "headline-sm": ["15px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "display-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["14px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } }</script></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-outline-variant"><img alt="IPMS Shield Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbpbRk2rHB3jQq5gqI5Hfa8VxFFPfOPCE-NINsMNIev7Y2ueMSlX_ovoT7B6F0b82d8gfMTeRdONS-mHlqLY0SIRPP70nE6hvZH00IPBc8WC5OjTze84M5kt9IOtqg_tAF4NBsh6X-B7kFtbJIWAzaHHGONWeSjlbnHfgZtiokh7Wmvz91EK4D-EH_zF0UErsSI_gTJpOtuyDrArfgAOwwRF_gUiHTthAJrfe5bP97mTV3LgBm2rrbvmn-"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface">IPMS CORE</span><span class="font-label-sm text-label-sm text-on-surface-variant">v6.7 ACTUARIAL</span></div></div><div class="px-space-md py-space-sm bg-surface-container-low border-b border-outline-variant flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant">SYS MATRIX</span><span class="flex items-center gap-space-xxs text-secondary"><span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span><span class="font-data-mono-num text-label-sm">NODE_ONLINE</span></span></div><nav class="flex-1 py-space-sm space-y-space-xxs overflow-y-auto px-space-xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm border-l-4 border-secondary"><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></div><span class="font-label-sm text-label-sm text-outline">F1</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-table-cell-py transition-colors bg-primary-container text-on-primary font-headline-sm border-l-4 border-secondary" data-path="policies" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-body-md text-body-md">Policies</span></div><span class="font-label-sm text-label-sm px-space-xxs bg-surface-container-high text-on-surface">2.4k</span></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="customers" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">group</span><span class="font-body-md text-body-md">Customers</span></div></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="agents" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">badge</span><span class="font-body-md text-body-md">Agents</span></div><span class="font-label-sm text-label-sm px-space-xxs bg-surface-container text-secondary font-semibold">RESTRICTED</span></a><a class="flex items-center justify-between px-space-md py-table-cell-py text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="notifications" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="font-body-md text-body-md">Notifications</span></div><span class="font-label-sm text-label-sm px-space-xs bg-error text-on-error font-bold">3</span></a></nav><div class="p-space-sm border-t border-outline-variant bg-surface-container-lowest"><a class="flex items-center gap-space-sm px-space-md py-table-cell-py text-error hover:bg-error-container hover:text-on-error-container transition-colors" data-path="logout" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span class="font-body-md text-body-md font-semibold">Logout Session</span></a></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 z-40 bg-surface-container-lowest border-b border-outline-variant"><div class="h-16 px-space-lg flex items-center justify-between gap-space-md"><div class="flex-1 max-w-xl"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">search</span><input class="w-full h-8 pl-9 pr-space-md bg-surface-container-low border border-outline-variant text-on-surface font-body-sm text-body-sm placeholder-outline focus:outline-none focus:border-primary" placeholder="Search Policy #, VIN, SSN, Tax ID, Insured Entity... [CMD+K]" type="text"/></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-sm px-space-sm py-space-xxs border border-outline-variant bg-surface-container-lowest"><span class="w-2 h-2 bg-secondary rounded-full"></span><span class="font-label-sm text-label-sm uppercase text-on-surface-variant">SYNC: REALTIME</span><span class="font-data-mono-num text-label-sm text-outline">0.42ms</span></div><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-0 right-0 w-4 h-4 bg-error text-on-error font-label-sm text-label-sm flex items-center justify-center font-bold">3</span></button><div class="h-8 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJY2jsdiuUaD4I14UBViouRS2Ft8acJa0UDONLO6TEv44kRor2-3DYzGHUGC_swaenH6A08rlTjU0x9hQ3HbjyGXOGLUGfwl6q-nqxyTwMNYFJtpiVQQI7psc1JNCZUmW1d9pk-6KtRqJwRAJwR_Du9-skWEoNchz24Hl9eR8e_Rnv5nLcJrdfgIOkukskjsFmFe23ZuvvIVfW0RNDjyW99eo-Bu4VspG0F-uACITocIQR6HJWme4QdA"/><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Marcus Vance (Admin)</span><span class="font-label-sm text-label-sm text-on-surface-variant font-mono">SEC_ID: 9021-AD</span></div><span class="px-space-xs py-space-xxs bg-primary text-on-primary font-label-sm text-label-sm tracking-wider uppercase font-bold">ADMIN</span></div></div></div><div class="h-10 px-space-lg bg-surface-container-low border-t border-outline-variant flex items-center justify-between"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant uppercase"><a class="hover:text-on-surface transition-colors" href="#">Home</a><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><a class="hover:text-on-surface transition-colors" href="#">Policies</a><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><span class="text-on-surface font-semibold">Details</span></div><div class="flex items-center gap-space-sm"><button class="px-space-sm h-6 bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm uppercase hover:bg-surface-container-high transition-colors flex items-center gap-space-xxs"><span class="material-symbols-outlined text-[14px]">print</span>Print Ledger</button><button class="px-space-sm h-6 bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm uppercase hover:bg-surface-container-high transition-colors flex items-center gap-space-xxs"><span class="material-symbols-outlined text-[14px]">download</span>Export CSV</button><button class="px-space-sm h-6 bg-primary text-on-primary font-label-sm text-label-sm uppercase hover:bg-secondary transition-colors flex items-center gap-space-xxs"><span class="material-symbols-outlined text-[14px]">add</span>New Endorsement</button></div></div></header><main class="relative pt-26 bg-background min-h-screen px-space-lg py-space-md"><div class="w-full"><div class="flex flex-col w-full space-y-space-md">
+<!-- Policy Detail Primary Header Strip -->
+<div class="bg-surface-container-lowest p-space-lg shadow-sm">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Metadata Hierarchy -->
+<div class="space-y-space-xxs">
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
+<a class="hover:text-secondary transition-colors" href="#">Policies</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold font-data-mono-num">IPMS-2025-004819</span>
+<span class="mx-space-xs text-outline">•</span>
+<span class="font-data-mono-num text-outline">ACTUARIAL_ID: #ACT-8841-MTR</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xxs">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Comprehensive Motor Shield — IPMS-2025-004819</h1>
+<!-- Active Status Chip (Conforming to Token Variants) -->
+<span class="inline-flex items-center gap-1.5 px-space-xs py-0.5 bg-[#dcfce7] text-[#16a34a] font-label-sm text-label-sm uppercase tracking-widest font-semibold">
+<span class="w-1.5 h-1.5 bg-[#16a34a] inline-block"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md pt-space-xxs text-on-surface-variant font-label-sm text-label-sm font-data-mono-num">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+            CREATED: 2024-05-28 15:45:10 UTC
+          </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">update</span>
+            LAST MODIFIED: 2024-06-01 10:14:02 UTC (AGT-00412)
+          </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+            LEDGER_SIGNED_SHA256
+          </span>
+</div>
+</div>
+<!-- Contextual Action Bar (FR-POL-02 / BRD 2.3.2) -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs xl:pt-0">
+<button class="h-8 px-space-sm bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors font-label-lg text-label-lg uppercase tracking-wider flex items-center gap-1.5 active:translate-y-0.5" id="btn-renew" onclick="openActionModal('RENEW', 'Renew Policy', 'Initiate underwriting renewal extension for tenure 2025-2026.', 'bg-secondary', 'Renew Policy Contract')">
+<span class="material-symbols-outlined text-[16px]">autorenew</span>
+          Renew Policy
+        </button>
+<button class="h-8 px-space-sm bg-[#fef3c7] text-[#92400e] hover:bg-[#fde68a] transition-colors font-label-lg text-label-lg uppercase tracking-wider flex items-center gap-1.5 active:translate-y-0.5" id="btn-suspend" onclick="openActionModal('SUSPEND', 'Suspend Policy', 'Mark policy as SUSPENDED pending fraud review or non-payment default.', 'bg-[#d97706]', 'Confirm Suspension')">
+<span class="material-symbols-outlined text-[16px]">pause_circle</span>
+          Suspend Policy
+        </button>
+<button class="h-8 px-space-sm bg-[#fee2e2] text-error hover:bg-[#fecaca] transition-colors font-label-lg text-label-lg uppercase tracking-wider flex items-center gap-1.5 active:translate-y-0.5" id="btn-cancel" onclick="openActionModal('CANCEL', 'Cancel Policy', 'Execute terminal policy cancellation and calculate unearned pro-rata refund.', 'bg-error', 'Revoke & Cancel Policy')">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+          Cancel Policy
+        </button>
+<button class="h-8 px-space-sm bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors font-label-lg text-label-lg uppercase tracking-wider flex items-center gap-1.5 active:translate-y-0.5" onclick="triggerDownloadPDF()">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+          Summary PDF
+        </button>
+</div>
+</div>
+</div>
+<!-- Operational Data Strip (Actuarial Quick Metrics) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">Sum Insured</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+</div>
+<div class="font-data-mono-num text-[20px] leading-tight font-bold text-on-surface mt-1">$45,000.00</div>
+<span class="font-label-sm text-label-sm text-outline font-mono">100% REPLACEMENT CAP</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">Annual Premium</span>
+<span class="material-symbols-outlined text-on-secondary-container text-[16px]">payments</span>
+</div>
+<div class="font-data-mono-num text-[20px] leading-tight font-bold text-secondary mt-1">$1,280.00</div>
+<span class="font-label-sm text-label-sm text-secondary font-mono">CALC_ENGINE: FR-POL-03</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">Effective Period</span>
+<span class="material-symbols-outlined text-outline text-[16px]">date_range</span>
+</div>
+<div class="font-data-mono-num text-body-md text-on-surface font-semibold mt-1">2024-06-01 / 2025-05-31</div>
+<span class="font-label-sm text-label-sm text-[#16a34a] font-mono">312 DAYS REMAINING</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">Underwriting Risk Score</span>
+<span class="material-symbols-outlined text-[#16a34a] text-[16px]">speed</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-data-mono-num text-[20px] leading-tight font-bold text-[#16a34a]">94.2</span>
+<span class="font-label-sm text-label-sm text-outline font-mono">/ 100 [PRIME]</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">CLASS A MOTOR RISK</span>
+</div>
+</div>
+<!-- Main Split Ledger (7 cols vs 5 cols) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- LEFT COLUMN: Policy Core Specifications (7 Columns) -->
+<div class="lg:col-span-7 space-y-space-md">
+<!-- Primary Core Info Card -->
+<div class="bg-surface-container-lowest shadow-sm">
+<!-- Angular Material Inset Card Header -->
+<div class="bg-surface-container-low px-space-md py-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">feed</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Policy Contract Data Record</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline font-data-mono-num">SYS_RECORD #004819-A</span>
+</div>
+<div class="p-space-lg">
+<!-- Structured Form Ledger Layout (Read-Only) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-space-lg gap-y-space-md">
+<!-- Policy Number -->
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface-variant font-mono">Policy Identifier Number</label>
+<div class="h-8 px-space-sm bg-surface-container-low flex items-center justify-between">
+<span class="font-data-mono-num text-data-mono-num font-semibold text-on-surface">IPMS-2025-004819</span>
+<span class="material-symbols-outlined text-[14px] text-outline cursor-pointer hover:text-on-surface" onclick="navigator.clipboard.writeText('IPMS-2025-004819')" title="Copy to clipboard">content_copy</span>
+</div>
+</div>
+<!-- Policy Type -->
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface-variant font-mono">Product Classification</label>
+<div class="h-8 px-space-sm bg-surface-container-low flex items-center">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Motor Insurance (Vehicle Comprehensive)</span>
+</div>
+</div>
+<!-- Sum Insured -->
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface-variant font-mono">Total Sum Insured (USD)</label>
+<div class="h-8 px-space-sm bg-surface-container-low flex items-center justify-between">
+<span class="font-data-mono-num text-data-mono-num font-bold text-on-surface">$45,000.00</span>
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono">Guaranteed</span>
+</div>
+</div>
+<!-- Annual Premium -->
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface-variant font-mono">Calculated Annual Premium</label>
+<div class="h-8 px-space-sm bg-surface-container-low flex items-center justify-between">
+<span class="font-data-mono-num text-data-mono-num font-bold text-secondary">$1,280.00</span>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-variant px-1 font-mono">ENGINE FR-POL-03</span>
+</div>
+</div>
+<!-- Lifecycle Status & Validity -->
+<div class="space-y-space-xxs md:col-span-2">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface-variant font-mono">Lifecycle Term & Operational Window</label>
+<div class="p-space-sm bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 bg-[#dcfce7] text-[#16a34a] font-label-sm text-label-sm uppercase font-semibold font-mono">ACTIVE LIFECYCLE</span>
+<span class="font-data-mono-num text-body-sm text-on-surface">Term: 12 Calendar Months</span>
+</div>
+<div class="flex items-center gap-space-xs font-data-mono-num text-body-sm text-on-surface-variant">
+<span class="text-on-surface font-semibold">2024-06-01</span>
+<span>to</span>
+<span class="text-on-surface font-semibold">2025-05-31 23:59:59</span>
+</div>
+</div>
+</div>
+<!-- Insured Customer Entity Card -->
+<div class="p-space-sm bg-surface-container-low space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-mono font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">account_circle</span>
+                  Customer Account Record
+                </span>
+<span class="px-space-xs py-0.5 bg-[#dcfce7] text-[#16a34a] font-label-sm text-label-sm uppercase font-mono font-bold">KYC: VERIFIED</span>
+</div>
+<div class="space-y-1 text-on-surface">
+<div class="font-headline-sm text-headline-sm font-bold">Alexander Wright</div>
+<div class="font-data-mono-num text-body-sm text-on-surface-variant">CUST_ID: <span class="text-on-surface font-semibold">CUST-009124</span></div>
+<div class="flex items-center gap-1 font-data-mono-num text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">mail</span>
+                  alex.wright@email.com
+                </div>
+<div class="flex items-center gap-1 font-data-mono-num text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">call</span>
+                  +1 (555) 234-8910
+                </div>
+</div>
+</div>
+<!-- Underwriting Agent Assignment -->
+<div class="p-space-sm bg-surface-container-low space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase text-on-surface font-mono font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+                  Assigned Underwriting Agent
+                </span>
+<span class="px-space-xs py-0.5 bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase font-mono">AUTHORIZED</span>
+</div>
+<div class="space-y-1 text-on-surface">
+<div class="font-headline-sm text-headline-sm font-bold">Sarah Jenkins</div>
+<div class="font-data-mono-num text-body-sm text-on-surface-variant">AGENT_CODE: <span class="text-on-surface font-semibold">AGT-00412</span></div>
+<div class="font-data-mono-num text-body-sm text-on-surface-variant">STATE_LIC: <span class="text-on-surface font-semibold">LIC-NY-882910</span></div>
+<div class="flex items-center gap-1 font-data-mono-num text-body-sm text-secondary">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+                  High-Capacity Actuarial Delegated Authority
+                </div>
+</div>
+</div>
+<!-- Coverage Description Clause -->
+<div class="md:col-span-2 space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface-variant font-mono">Coverage Scope & Underwritten Clauses</label>
+<div class="p-space-md bg-surface-container-low font-body-sm text-body-sm text-on-surface space-y-space-xs leading-relaxed">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">policy</span>
+<span>"Full comprehensive vehicle collision, third-party liability, personal accident cover, and 24/7 roadside assistance."</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs pt-space-xs text-center font-data-mono-num text-label-sm">
+<span class="bg-surface-container-lowest p-1">COLLISION: $500 DED</span>
+<span class="bg-surface-container-lowest p-1">LIABILITY: $1M BI/PD</span>
+<span class="bg-surface-container-lowest p-1">ACCIDENT: $100K PIP</span>
+<span class="bg-surface-container-lowest p-1">ROADSIDE: UNLIMITED</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Insured Asset Profile Box (Photo & Actuarial Specs) -->
+<div class="bg-surface-container-lowest shadow-sm p-space-md">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm bg-surface-container-low px-space-sm py-1">
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Insured Asset Profile (Vehicle Record)</span>
+<span class="font-data-mono-num text-label-sm text-secondary">VIN_HASH_VALID</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center">
+<div class="md:col-span-4">
+<img class="w-full h-32 object-cover" data-alt="High-end modern executive sedan parked inside a brightly lit clean automotive showroom with deep slate blue reflections and sharp industrial studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeBuev1RbzlBGMxzIvZselmNqOGUEAQh7x1KvegZglMkuvHWsWb0WT9ECWdTx5xQW79-M9hxHEmJH6ajJxUWblsJ1t02P5HerfFTgeLzolldLZ-0OTEcAQnhlX4x3IGbpexuiTvCnIvbuVFj9weUiWYd0lcrjHhVVUjbe0RbpT807zdTHlAuV3hLSI5dbJfn11xg5s-pslpxBfjxVF_TZPQNwPBuHjYuahsXREYwjiI93ImOKc2iaoig"/>
+</div>
+<div class="md:col-span-8 grid grid-cols-2 gap-space-xs font-data-mono-num text-body-sm">
+<div class="bg-surface-container-low p-space-xs">
+<span class="text-outline text-label-sm uppercase block font-mono">Asset Make & Model</span>
+<span class="font-semibold text-on-surface">2023 Bavarian Apex-V Sport</span>
+</div>
+<div class="bg-surface-container-low p-space-xs">
+<span class="text-outline text-label-sm uppercase block font-mono">VIN Registry</span>
+<span class="font-semibold text-on-surface">1HGCR2F83HA029141</span>
+</div>
+<div class="bg-surface-container-low p-space-xs">
+<span class="text-outline text-label-sm uppercase block font-mono">Plate Tag / Jurisdiction</span>
+<span class="font-semibold text-on-surface">NY • KRL-8821</span>
+</div>
+<div class="bg-surface-container-low p-space-xs">
+<span class="text-outline text-label-sm uppercase block font-mono">Anti-Theft Telemetry</span>
+<span class="font-semibold text-[#16a34a]">GPS_GEO_TRACK_ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Documents (FR-POL-04/05) & Audit Trail (FR-POL-08) (5 Columns) -->
+<div class="lg:col-span-5 space-y-space-md">
+<!-- Documents Card -->
+<div class="bg-surface-container-lowest shadow-sm">
+<div class="bg-surface-container-low px-space-md py-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">folder_shared</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Policy Documents (3)</span>
+</div>
+<button class="h-6 px-space-xs bg-primary text-on-primary font-label-sm text-label-sm uppercase hover:bg-secondary transition-colors flex items-center gap-1" onclick="document.getElementById('upload-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[14px]">cloud_upload</span>
+            + Upload Document
+          </button>
+</div>
+<div class="p-space-md space-y-space-sm">
+<!-- Document Item 1 -->
+<div class="p-space-sm bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-8 h-8 bg-[#fee2e2] text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<div class="min-w-0">
+<div class="font-body-sm text-body-sm font-semibold text-on-surface truncate" title="Signed_Policy_Contract_IPMS-2025-004819.pdf">Signed_Policy_Contract_IPMS-2025-004819.pdf</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant font-data-mono-num flex items-center gap-1.5 flex-wrap">
+<span class="font-semibold text-on-surface">2.4 MB</span>
+<span class="text-outline">•</span>
+<span>Agent Sarah Jenkins</span>
+<span class="text-outline">•</span>
+<span>2024-06-01</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 bg-surface-container-lowest hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shrink-0" onclick="simulateDownload('Signed_Policy_Contract_IPMS-2025-004819.pdf')" title="Download Document">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+<!-- Document Item 2 -->
+<div class="p-space-sm bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-8 h-8 bg-[#fee2e2] text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<div class="min-w-0">
+<div class="font-body-sm text-body-sm font-semibold text-on-surface truncate" title="Vehicle_Registration_Certificate.pdf">Vehicle_Registration_Certificate.pdf</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant font-data-mono-num flex items-center gap-1.5 flex-wrap">
+<span class="font-semibold text-on-surface">1.1 MB</span>
+<span class="text-outline">•</span>
+<span>Customer (A. Wright)</span>
+<span class="text-outline">•</span>
+<span>2024-05-28</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 bg-surface-container-lowest hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shrink-0" onclick="simulateDownload('Vehicle_Registration_Certificate.pdf')" title="Download Document">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+<!-- Document Item 3 -->
+<div class="p-space-sm bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-8 h-8 bg-[#fee2e2] text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<div class="min-w-0">
+<div class="font-body-sm text-body-sm font-semibold text-on-surface truncate" title="KYC_Identification_Document.pdf">KYC_Identification_Document.pdf</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant font-data-mono-num flex items-center gap-1.5 flex-wrap">
+<span class="font-semibold text-on-surface">850 KB</span>
+<span class="text-outline">•</span>
+<span>Verified by Admin</span>
+<span class="text-outline">•</span>
+<span>2024-05-28</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 bg-surface-container-lowest hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shrink-0" onclick="simulateDownload('KYC_Identification_Document.pdf')" title="Download Document">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono">RETENTION POLICY: 7 YRS ACTUARIAL ARCHIVE</span>
+<span class="text-secondary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+            ENCRYPTED AES-256
+          </span>
+</div>
+</div>
+<!-- Audit Trail & Lifecycle History (FR-POL-08 & BRD 4.5) -->
+<div class="bg-surface-container-lowest shadow-sm">
+<div class="bg-surface-container-low px-space-md py-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">history_edu</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Audit Trail & Lifecycle History</span>
+</div>
+<span class="px-space-xs py-0.5 bg-surface-container-high text-on-surface font-label-sm text-label-sm font-mono font-semibold">IMMUTABLE_LOG</span>
+</div>
+<div class="p-space-lg">
+<!-- Timeline Ledger Component -->
+<div class="relative pl-6 space-y-space-lg before:content-[''] before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-highest">
+<!-- Timeline Node 1 (ACTIVE) -->
+<div class="relative group">
+<!-- Pin State Icon -->
+<div class="absolute -left-6 top-0.5 w-5 h-5 bg-[#dcfce7] text-[#16a34a] flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center justify-between gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.5 bg-[#dcfce7] text-[#16a34a] font-label-sm text-label-sm uppercase font-mono font-bold">ACTIVE</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Underwritten & Activated</span>
+</div>
+<span class="font-data-mono-num text-label-sm text-outline">2024-06-01 10:14 AM</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant font-mono">
+                  Actor: <span class="text-on-surface font-semibold">Agent Sarah Jenkins (AGT-00412)</span>
+</div>
+<div class="p-space-sm bg-surface-container-low font-body-sm text-body-sm text-on-surface">
+<span class="font-semibold text-secondary font-mono">REMARKS:</span> "Premium payment confirmation received via bank transfer ref #TRX-99214. Policy activated."
+                </div>
+</div>
+</div>
+<!-- Timeline Node 2 (DRAFT) -->
+<div class="relative group">
+<!-- Pin State Icon -->
+<div class="absolute -left-6 top-0.5 w-5 h-5 bg-[#fef3c7] text-[#d97706] flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">edit_note</span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center justify-between gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.5 bg-[#fef3c7] text-[#d97706] font-label-sm text-label-sm uppercase font-mono font-bold">DRAFT</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Initial Submission</span>
+</div>
+<span class="font-data-mono-num text-label-sm text-outline">2024-05-28 03:45 PM</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant font-mono">
+                  Actor: <span class="text-on-surface font-semibold">Customer Alexander Wright (CUST-009124)</span>
+</div>
+<div class="p-space-sm bg-surface-container-low font-body-sm text-body-sm text-on-surface">
+<span class="font-semibold text-secondary font-mono">REMARKS:</span> "Initial proposal submitted online with vehicle details."
+                </div>
+</div>
+</div>
+<!-- Timeline Node 3 (ORIGIN) -->
+<div class="relative group">
+<div class="absolute -left-6 top-0.5 w-5 h-5 bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+</div>
+<div class="space-y-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono">QUOTE_INITIALIZED</span>
+<span class="font-data-mono-num text-label-sm text-outline">2024-05-28 03:12 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-mono">Automated quote calculation engine FR-POL-03 yielded preliminary rating of $1,280.00/annum.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">BLOCK_HASH: 0x9f88...ca41e2</span>
+<button class="font-label-sm text-label-sm text-secondary uppercase hover:underline font-mono">Verify Hash Chain →</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Upload Modal (FR-POL-05 Trigger) -->
+<div class="fixed inset-0 z-50 bg-[#000000]/60 flex items-center justify-center hidden p-space-md" id="upload-modal">
+<div class="bg-surface-container-lowest max-w-lg w-full p-space-lg shadow-xl space-y-space-md">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-md py-space-xs -mx-space-lg -mt-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">upload_file</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">Upload Policy Document</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('upload-modal').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-space-sm">
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface font-mono">Document Classification</label>
+<select class="w-full h-8 px-space-sm bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option>Signed Endorsement Contract</option>
+<option>Police Incident Report</option>
+<option>Vehicle Inspection Telemetry</option>
+<option>Additional Driver Proof of Identity</option>
+<option>Other Actuarial Schedule</option>
+</select>
+</div>
+<div class="p-space-lg bg-surface-container-low text-center space-y-space-xs cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[36px] text-secondary">cloud_upload</span>
+<div class="font-headline-sm text-headline-sm text-on-surface">Drag and drop file here, or click to browse</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant font-mono">PDF, PNG, JPG, or DOCX (Max 25 MB)</div>
+</div>
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface font-mono">Auditor Remarks / Notes</label>
+<textarea class="w-full p-space-sm bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none" placeholder="Enter reason for document upload or reference to ticket..." rows="3"></textarea>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-sm">
+<button class="h-8 px-space-md bg-surface-container-high text-on-surface font-label-lg text-label-lg uppercase" onclick="document.getElementById('upload-modal').classList.add('hidden')">
+          Cancel
+        </button>
+<button class="h-8 px-space-md bg-primary text-on-primary font-label-lg text-label-lg uppercase hover:bg-secondary transition-colors" onclick="confirmUpload()">
+          Commit & Upload
+        </button>
+</div>
+</div>
+</div>
+<!-- Dynamic Lifecycle State Action Confirmation Modal (FR-POL-02) -->
+<div class="fixed inset-0 z-50 bg-[#000000]/60 flex items-center justify-center hidden p-space-md" id="action-modal">
+<div class="bg-surface-container-lowest max-w-md w-full p-space-lg shadow-xl space-y-space-md">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-md py-space-xs -mx-space-lg -mt-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px]" id="modal-icon">warning</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface" id="modal-title">Confirm Action</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="closeActionModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-normal" id="modal-desc"></p>
+<div class="space-y-space-xxs">
+<label class="block font-label-sm text-label-sm uppercase text-on-surface font-mono">Mandatory Underwriting Ledger Note</label>
+<textarea class="w-full p-space-sm bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none" id="modal-remarks" placeholder="Enter formal audit reason required by FR-POL-08 compliance..." rows="3"></textarea>
+</div>
+<div class="p-space-xs bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant font-mono">
+        EXECUTION_KEY: <span class="font-bold text-on-surface">SEC-9021-AD-AUTH</span>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="h-8 px-space-md bg-surface-container-high text-on-surface font-label-lg text-label-lg uppercase" onclick="closeActionModal()">
+          Abort
+        </button>
+<button class="h-8 px-space-md text-on-primary font-label-lg text-label-lg uppercase transition-colors" id="modal-confirm-btn" onclick="executeStateTransition()">
+          Confirm
+        </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Feedback Banner -->
+<div class="fixed bottom-6 right-6 z-50 bg-primary-container text-on-primary px-space-lg py-space-sm shadow-xl flex items-center gap-space-sm hidden transition-all duration-300" id="toast-banner">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm leading-tight" id="toast-title">Ledger Synchronized</span>
+<span class="font-body-sm text-body-sm font-data-mono-num text-surface-container-high" id="toast-msg">Action executed successfully.</span>
+</div>
+</div>
+<script>
+    let currentAction = null;
+
+    function openActionModal(action, title, desc, btnColorClass, btnText) {
+      currentAction = action;
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-desc').innerText = desc;
+      
+      const confirmBtn = document.getElementById('modal-confirm-btn');
+      confirmBtn.className = 'h-8 px-space-md text-on-primary font-label-lg text-label-lg uppercase transition-colors ' + btnColorClass;
+      confirmBtn.innerText = btnText;
+      
+      const icon = document.getElementById('modal-icon');
+      if (action === 'RENEW') {
+        icon.innerText = 'autorenew';
+        icon.className = 'material-symbols-outlined text-[20px] text-secondary';
+      } else if (action === 'SUSPEND') {
+        icon.innerText = 'pause_circle';
+        icon.className = 'material-symbols-outlined text-[20px] text-[#d97706]';
+      } else {
+        icon.innerText = 'cancel';
+        icon.className = 'material-symbols-outlined text-[20px] text-error';
+      }
+
+      document.getElementById('modal-remarks').value = '';
+      document.getElementById('action-modal').classList.remove('hidden');
+    }
+
+    function closeActionModal() {
+      document.getElementById('action-modal').classList.add('hidden');
+    }
+
+    function executeStateTransition() {
+      const remarks = document.getElementById('modal-remarks').value.trim();
+      if (!remarks) {
+        alert('FR-POL-08 Compliance Requirement: You must enter an audit ledger note before committing this state transition.');
+        return;
+      }
+
+      closeActionModal();
+      showToast('State Transition Dispatched: ' + currentAction, 'Policy IPMS-2025-004819 status ledger updated.');
+    }
+
+    function triggerDownloadPDF() {
+      showToast('Compiling Policy Summary PDF', 'Actuarial statement generated. Download initiated.');
+    }
+
+    function simulateDownload(filename) {
+      showToast('Document Retrieval Stream', 'Downloading ' + filename + ' (SHA-256 verified)');
+    }
+
+    function confirmUpload() {
+      document.getElementById('upload-modal').classList.add('hidden');
+      showToast('Document Ingested & Encrypted', 'Asset registered under FR-POL-05 compliance repository.');
+    }
+
+    function showToast(title, msg) {
+      const toast = document.getElementById('toast-banner');
+      document.getElementById('toast-title').innerText = title;
+      document.getElementById('toast-msg').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4500);
+    }
+  </script>
+</div></div></main></div></body></html>
