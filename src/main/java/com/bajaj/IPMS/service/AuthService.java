@@ -52,6 +52,7 @@ public class AuthService {
     }
 
     public ResponseEntity<?> login(String email, String password){
+        System.out.println(email);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
@@ -72,7 +73,7 @@ public class AuthService {
         user.setLastLogin(Instant.now());
         userRepository.save(user);
 
-        String accessToken = jwtUtil.generateToken(user.getEmail());
+        String accessToken = jwtUtil.generateToken(user.getEmail(), user.getRole());
         String refreshTokenValue = jwtUtil.generateRefreshToken(user.getEmail());
 
         RefreshToken refreshToken = new RefreshToken();
@@ -108,10 +109,9 @@ public class AuthService {
         }
 
         String email = jwtUtil.extractEmail(refreshTokenValue);
-        String newAccessToken = jwtUtil.generateToken(email);
-
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+                .orElseThrow(() -> new IllegalArgumentException("User Not Found"));
+        String newAccessToken = jwtUtil.generateToken(email, user.getRole());
 
         refreshToken.setUpdatedAt(Instant.now());
         refreshToken.setRevoked(true);

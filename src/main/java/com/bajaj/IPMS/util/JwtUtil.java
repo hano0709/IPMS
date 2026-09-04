@@ -1,7 +1,10 @@
 package com.bajaj.IPMS.util;
 
+import com.bajaj.IPMS.model.User;
+import com.bajaj.IPMS.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -14,6 +17,9 @@ public class JwtUtil {
 
     private final SecretKey key;
 
+    @Autowired
+    UserService userService;
+
     //DEBUG for testing making expiry 1 min
     private static final long AT_EXPIRATION_TIME = 1000 * 60 * 60 * 24;
     private static final long RT_EXPIRATION_TIME = AT_EXPIRATION_TIME * 7 * 4;
@@ -22,10 +28,12 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generateToken(String email){
+    public String generateToken(String email, String role){
+
         return Jwts.builder()
                 .subject(email)
                 .claim("type", "access")
+                .claim("role", role)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + AT_EXPIRATION_TIME))
                 .signWith(key)

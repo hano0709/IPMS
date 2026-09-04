@@ -61,7 +61,7 @@ public class AuthServiceTests {
         when(userRepository.findByEmail(any())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(any(), any())).thenReturn(true);
         when(userRepository.save(any())).thenReturn(user);
-        when(jwtUtil.generateToken(any())).thenReturn("dfsdkjhfksdf");
+        when(jwtUtil.generateToken(any(), user.getRole())).thenReturn("dfsdkjhfksdf");
         when(jwtUtil.generateRefreshToken(any())).thenReturn("sjdfjsdkfjs");
         when(refreshTokenRepository.save(any())).thenReturn(new RefreshToken());
 
@@ -83,7 +83,7 @@ public class AuthServiceTests {
                 .thenReturn(refreshToken2);
 
         when(jwtUtil.extractEmail(any())).thenReturn("test@example.com");
-        when(jwtUtil.generateToken(any())).thenReturn("dfkjsdfdsfdsfsf");
+        when(jwtUtil.generateToken(any(), any())).thenReturn("dfkjsdfdsfdsfsf");
         when(userRepository.findByEmail(any())).thenReturn(Optional.of(new User()));
         when(refreshTokenRepository.save(any())).thenReturn(new RefreshToken());
         when(jwtUtil.generateRefreshToken(any())).thenReturn("sdfsjdfdsjfsfd");
