@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.PolicyAuditLogDTO;
 import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.DTO.PolicyDocumentsDTO;
 import com.bajaj.IPMS.model.*;
@@ -250,6 +251,9 @@ public class PolicyService {
             return ResponseEntity.badRequest().body(Map.of("Error", "Policy can be activated only from DRAFT status"));
         }
 
+        User user = userService.getCurrUser();
+
+        policyAuditLog.setChangedBy(user.getId());
         policyAuditLog.setPreviousStatus("DRAFT");
         policyAuditLog.setNewStatus("ACTIVE");
 
@@ -271,6 +275,9 @@ public class PolicyService {
             return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be renewd from ACTIVE status"));
         }
 
+        User user = userService.getCurrUser();
+        policyAuditLog.setChangedBy(user.getId());
+
         policyRepository.save(policy);
         policyAuditLogRespository.save(policyAuditLog);
 
@@ -289,6 +296,9 @@ public class PolicyService {
             return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be SUSPENDED from ACTIVE status"));
         }
 
+        User user = userService.getCurrUser();
+        policyAuditLog.setChangedBy(user.getId());
+
         policyRepository.save(policy);
         policyAuditLogRespository.save(policyAuditLog);
 
@@ -303,6 +313,9 @@ public class PolicyService {
         policy.setStatus("CANCELLED");
         policyAuditLog.setNewStatus(policy.getStatus());
 
+        User user = userService.getCurrUser();
+        policyAuditLog.setChangedBy(user.getId());
+
         policyRepository.save(policy);
         policyAuditLogRespository.save(policyAuditLog);
 
@@ -313,7 +326,9 @@ public class PolicyService {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
         PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
 
-        return ResponseEntity.ok(policyAuditLog);
+        PolicyAuditLogDTO policyAuditLogDTO = new PolicyAuditLogDTO(policyAuditLog);
+
+        return ResponseEntity.ok(policyAuditLogDTO);
     }
 
     public ResponseEntity<?> getExpiringSoon() {
