@@ -31,6 +31,10 @@ public class Customer {
         this.createdBy = createdBy;
     }
 
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
     public long getId() {
         return id;
     }

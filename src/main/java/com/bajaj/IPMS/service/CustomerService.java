@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.CustomerDTO;
 import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.CustomerRepository;
@@ -43,15 +44,19 @@ public class CustomerService {
     @Autowired
     AuthService authService;
 
-    public Page<Customer> getAll(Pageable pageable){
+    public Page<CustomerDTO> getAll(Pageable pageable){
 
-        return customerRepository.findAll(pageable);
+        Page<Customer> customers = customerRepository.findAll(pageable);
+
+        return customers.map(CustomerDTO::new);
     }
 
-    public Customer getCustomer(Long customerId){
+    public CustomerDTO getCustomer(Long customerId){
         if(customerSecurity.checkAuth(customerId)) {
-            return customerRepository.findById(customerId)
+            Customer customer =  customerRepository.findById(customerId)
                     .orElseThrow(() -> new IllegalArgumentException("Customer Not Found"));
+
+            return new CustomerDTO(customer);
         } else {
             throw new IllegalArgumentException("No Authorisation");
         }

@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.CustomerDTO;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.RefreshToken;
 import com.bajaj.IPMS.model.RegisterRequest;
@@ -60,7 +61,7 @@ public class CustomerServiceTests {
 
         when(customerRepository.findAll(pageable)).thenReturn(mockPage);
 
-        Page<Customer> result = customerService.getAll(pageable);
+        Page<CustomerDTO> result = customerService.getAll(pageable);
 
         assertEquals(1, result.getTotalElements());
         assertEquals("test123", result.getContent().get(0).getFullName());

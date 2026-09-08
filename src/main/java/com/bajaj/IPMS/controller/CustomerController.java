@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.controller;
 
+import com.bajaj.IPMS.DTO.CustomerDTO;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.service.CustomerService;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +26,7 @@ public class CustomerController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
-    public List<Customer> getAllCustomer(
+    public List<CustomerDTO> getAllCustomer(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ){
@@ -36,8 +37,8 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomer(@PathVariable("id") Long customerId){
         try{
-            Customer customer =  customerService.getCustomer(customerId);
-            return ResponseEntity.ok(customer);
+            CustomerDTO customerDTO =  customerService.getCustomer(customerId);
+            return ResponseEntity.ok(customerDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(Map.of(
                     "Error", e.getMessage()
