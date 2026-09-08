@@ -2,6 +2,8 @@ package com.bajaj.IPMS.model;
 
 import jakarta.persistence.*;
 
+import java.time.OffsetDateTime;
+
 @Entity
 @Table(name = "policy_audit_logs")
 public class PolicyAuditLog {
@@ -19,6 +21,7 @@ public class PolicyAuditLog {
     private Long changedBy;
     private String remarks;
     private Long createdBy;
+    private OffsetDateTime changedAt;
 
     public Long getId() {
         return id;
@@ -70,5 +73,9 @@ public class PolicyAuditLog {
 
     public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public OffsetDateTime getChangedAt() {
+        return changedAt;
     }
 }

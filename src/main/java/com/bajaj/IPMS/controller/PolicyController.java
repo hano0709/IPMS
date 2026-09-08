@@ -69,6 +69,12 @@ public class PolicyController {
         return policyService.getAudit(policyNumber);
     }
 
+    @GetMapping("/state-changes")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
+    public ResponseEntity<?> stateChanges() {
+        return policyService.getStateChanges();
+    }
+
     @GetMapping("/expiring-soon")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> getExpiring(){

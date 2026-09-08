@@ -7,14 +7,12 @@ import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ public class PolicyService {
     PolicyRepository policyRepository;
 
     @Autowired
-    PolicyAuditLogRespository policyAuditLogRespository;
+    PolicyAuditLogRepository policyAuditLogRepository;
 
     @Autowired
     PolicyDocumentsRepository policyDocumentsRepository;
@@ -131,12 +129,13 @@ public class PolicyService {
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
         policyAuditLog.setPolicy(policy);
         policyAuditLog.setCreatedBy(user.getId());
+        policyAuditLog.setChangedBy(null);
         policyAuditLog.setRemarks("Policy Created");
         policyAuditLog.setNewStatus("DRAFT");
-        policyAuditLog.setPreviousStatus("NUll");
+        policyAuditLog.setPreviousStatus("NULL");
 
         policyRepository.save(policy);
-        policyAuditLogRespository.save(policyAuditLog);
+        policyAuditLogRepository.save(policyAuditLog);
 
         return ResponseEntity.ok(Map.of("Policy created Successfully", policy.getPolicyNumber()));
     }
@@ -229,13 +228,13 @@ public class PolicyService {
             }
         }
 
-        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        PolicyAuditLog policyAuditLog = policyAuditLogRepository.findByPolicyId(policy.getId());
         User user = userService.getCurrUser();
         policyAuditLog.setChangedBy(user.getId());
         policyAuditLog.setRemarks("Policy Updated");
 
         policyRepository.save(policy);
-        policyAuditLogRespository.save(policyAuditLog);
+        policyAuditLogRepository.save(policyAuditLog);
         PolicyDTO policyDTO = new PolicyDTO(policy);
 
         return ResponseEntity.ok(policyDTO);
@@ -243,7 +242,7 @@ public class PolicyService {
 
     public ResponseEntity<?> activatePolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
-        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        PolicyAuditLog policyAuditLog = policyAuditLogRepository.findByPolicyId(policy.getId());
 
         if (policy.getStatus().equals("DRAFT")) {
             policy.setStatus("ACTIVE");
@@ -258,14 +257,14 @@ public class PolicyService {
         policyAuditLog.setNewStatus("ACTIVE");
 
         policyRepository.save(policy);
-        policyAuditLogRespository.save(policyAuditLog);
+        policyAuditLogRepository.save(policyAuditLog);
 
         return ResponseEntity.ok("Policy Activated");
     }
 
     public ResponseEntity<?> renewPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
-        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        PolicyAuditLog policyAuditLog = policyAuditLogRepository.findByPolicyId(policy.getId());
 
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("RENEWED");
@@ -279,14 +278,14 @@ public class PolicyService {
         policyAuditLog.setChangedBy(user.getId());
 
         policyRepository.save(policy);
-        policyAuditLogRespository.save(policyAuditLog);
+        policyAuditLogRepository.save(policyAuditLog);
 
         return ResponseEntity.ok("Policy Renewed");
     }
 
     public ResponseEntity<?> suspendPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
-        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        PolicyAuditLog policyAuditLog = policyAuditLogRepository.findByPolicyId(policy.getId());
 
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("SUSPENDED");
@@ -300,14 +299,14 @@ public class PolicyService {
         policyAuditLog.setChangedBy(user.getId());
 
         policyRepository.save(policy);
-        policyAuditLogRespository.save(policyAuditLog);
+        policyAuditLogRepository.save(policyAuditLog);
 
         return ResponseEntity.ok("Policy Suspended");
     }
 
     public ResponseEntity<?> cancelPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
-        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        PolicyAuditLog policyAuditLog = policyAuditLogRepository.findByPolicyId(policy.getId());
 
         policyAuditLog.setPreviousStatus(policy.getStatus());
         policy.setStatus("CANCELLED");
@@ -317,14 +316,14 @@ public class PolicyService {
         policyAuditLog.setChangedBy(user.getId());
 
         policyRepository.save(policy);
-        policyAuditLogRespository.save(policyAuditLog);
+        policyAuditLogRepository.save(policyAuditLog);
 
         return ResponseEntity.ok("Policy Cancelled");
     }
 
     public ResponseEntity<?> getAudit(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
-        PolicyAuditLog policyAuditLog = policyAuditLogRespository.findByPolicyId(policy.getId());
+        PolicyAuditLog policyAuditLog = policyAuditLogRepository.findByPolicyId(policy.getId());
 
         PolicyAuditLogDTO policyAuditLogDTO = new PolicyAuditLogDTO(policyAuditLog);
 
@@ -358,5 +357,16 @@ public class PolicyService {
         } else {
             return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
         }
+    }
+
+    public ResponseEntity<?> getStateChanges() {
+        List<PolicyAuditLog> last10 = policyAuditLogRepository.findLast10Changes(PageRequest.of(0, 10));
+        List<PolicyAuditLogDTO> last10DTO = new ArrayList<>();
+
+        for(PolicyAuditLog policyAuditLog: last10){
+            last10DTO.add(new PolicyAuditLogDTO(policyAuditLog));
+        }
+
+        return ResponseEntity.ok(last10DTO);
     }
 }
