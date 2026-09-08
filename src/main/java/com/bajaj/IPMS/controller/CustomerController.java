@@ -3,6 +3,7 @@ package com.bajaj.IPMS.controller;
 import com.bajaj.IPMS.DTO.CustomerDTO;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.service.CustomerService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +29,12 @@ public class CustomerController {
     @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
     public List<CustomerDTO> getAllCustomer(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String kycStatus
     ){
         Pageable pageable = PageRequest.of(page, size);
-        return customerService.getAll(pageable).getContent();
+
+        return customerService.getAll(pageable, kycStatus).getContent();
     }
 
     @GetMapping("/{id}")

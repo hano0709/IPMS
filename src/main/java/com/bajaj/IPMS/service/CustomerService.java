@@ -44,9 +44,14 @@ public class CustomerService {
     @Autowired
     AuthService authService;
 
-    public Page<CustomerDTO> getAll(Pageable pageable){
+    public Page<CustomerDTO> getAll(Pageable pageable, String kycStatus){
+        Page<Customer> customers;
 
-        Page<Customer> customers = customerRepository.findAll(pageable);
+        if (kycStatus != null && !kycStatus.isEmpty()){
+            customers = customerRepository.findByKycStatus(kycStatus, pageable);
+        } else {
+            customers = customerRepository.findAll(pageable);
+        }
 
         return customers.map(CustomerDTO::new);
     }
