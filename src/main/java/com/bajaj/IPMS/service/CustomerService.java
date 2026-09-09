@@ -44,11 +44,15 @@ public class CustomerService {
     @Autowired
     AuthService authService;
 
-    public Page<CustomerDTO> getAll(Pageable pageable, String kycStatus){
+    public Page<CustomerDTO> getAll(Pageable pageable, String kycStatus, String searchName){
         Page<Customer> customers;
 
-        if (kycStatus != null && !kycStatus.isEmpty()){
+        if (kycStatus != null && !kycStatus.isEmpty() && searchName != null && !searchName.isEmpty()){
+            customers = customerRepository.findByKycStatusAndFullNameContainingIgnoreCase(kycStatus, searchName, pageable);
+        } else if (kycStatus != null && !kycStatus.isEmpty()){
             customers = customerRepository.findByKycStatus(kycStatus, pageable);
+        } else if (searchName != null && !searchName.isEmpty()){
+            customers = customerRepository.findByFullNameContainingIgnoreCase(searchName, pageable);
         } else {
             customers = customerRepository.findAll(pageable);
         }
@@ -173,5 +177,13 @@ public class CustomerService {
             policyDTOs.add(new PolicyDTO(policy));
         }
         return ResponseEntity.ok(policyDTOs);
+    }
+
+    public ResponseEntity<?> getCustomerCount() {
+        Long count = customerRepository.count();
+
+        return ResponseEntity.ok(Map.of(
+                "Count", count
+        ));
     }
 }

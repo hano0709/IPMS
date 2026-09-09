@@ -17,4 +17,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Customer findByUserId(Long id);
 
     Page<Customer> findByKycStatus(String kycStatus, Pageable pageable);
+
+    Page<Customer> findByFullNameContainingIgnoreCase(String fullName, Pageable pageable);
+
+    Page<Customer> findByKycStatusAndFullNameContainingIgnoreCase(String kycStatus, String searchName, Pageable pageable);
 }
