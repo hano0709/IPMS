@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -232,6 +233,7 @@ public class PolicyService {
         User user = userService.getCurrUser();
         policyAuditLog.setChangedBy(user.getId());
         policyAuditLog.setRemarks("Policy Updated");
+        policyAuditLog.setChangedAt(OffsetDateTime.now());
 
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
@@ -255,6 +257,7 @@ public class PolicyService {
         policyAuditLog.setChangedBy(user.getId());
         policyAuditLog.setPreviousStatus("DRAFT");
         policyAuditLog.setNewStatus("ACTIVE");
+        policyAuditLog.setChangedAt(OffsetDateTime.now());
 
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
@@ -276,6 +279,7 @@ public class PolicyService {
 
         User user = userService.getCurrUser();
         policyAuditLog.setChangedBy(user.getId());
+        policyAuditLog.setChangedAt(OffsetDateTime.now());
 
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
@@ -297,6 +301,7 @@ public class PolicyService {
 
         User user = userService.getCurrUser();
         policyAuditLog.setChangedBy(user.getId());
+        policyAuditLog.setChangedAt(OffsetDateTime.now());
 
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
@@ -314,6 +319,7 @@ public class PolicyService {
 
         User user = userService.getCurrUser();
         policyAuditLog.setChangedBy(user.getId());
+        policyAuditLog.setChangedAt(OffsetDateTime.now());
 
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
