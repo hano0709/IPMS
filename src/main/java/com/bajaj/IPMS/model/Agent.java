@@ -74,4 +74,8 @@ public class Agent {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }

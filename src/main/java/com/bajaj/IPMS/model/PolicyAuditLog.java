@@ -78,4 +78,8 @@ public class PolicyAuditLog {
     public OffsetDateTime getChangedAt() {
         return changedAt;
     }
+
+    public void setChangedAt(OffsetDateTime changedAt) {
+        this.changedAt = changedAt;
+    }
 }

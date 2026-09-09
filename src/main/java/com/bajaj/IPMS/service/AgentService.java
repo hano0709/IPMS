@@ -54,6 +54,8 @@ public class AgentService {
         User adminUser = userService.getCurrUser();
         agent.setCreatedBy(adminUser.getId());
 
+        agent.setActive(true);
+
         agentRepository.save(agent);
 
         return ResponseEntity.ok(Map.of(

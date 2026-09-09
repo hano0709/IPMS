@@ -10,8 +10,8 @@ public class PolicyDTO {
     private String policyNumber;
     private String policyType;
     private String policyStatus;
-    private Long customerId;
-    private Long agentId;
+    private String customerId;
+    private String agentId;
     private BigDecimal sumInsured;
     private BigDecimal premiumAmount;
     private LocalDate startDate;
@@ -21,12 +21,11 @@ public class PolicyDTO {
 
     public PolicyDTO(Policy policy){
         this.id = policy.getId();
-        this.agentId = policy.getId();
         this.policyNumber = policy.getPolicyNumber();
         this.policyType = policy.getPolicyType();
         this.policyStatus = policy.getStatus();
-        this.customerId = policy.getCustomer().getId();
-        this.agentId = policy.getAgent().getId();
+        this.customerId = policy.getCustomer().getCustomerCode();
+        this.agentId = policy.getAgent().getAgentCode();
         this.sumInsured = policy.getSumInsured();
         this.premiumAmount = policy.getPremiumAmount();
         this.startDate = policy.getStartDate();
@@ -67,19 +66,19 @@ public class PolicyDTO {
         this.policyStatus = policyStatus;
     }
 
-    public Long getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public Long getAgentId() {
+    public String getAgentId() {
         return agentId;
     }
 
-    public void setAgentId(Long agentId) {
+    public void setAgentId(String agentId) {
         this.agentId = agentId;
     }
 
