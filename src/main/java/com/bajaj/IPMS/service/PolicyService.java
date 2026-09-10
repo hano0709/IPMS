@@ -333,17 +333,18 @@ public class PolicyService {
     public ResponseEntity<?> cancelPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
 
+        PolicyAuditLog policyAuditLog = new PolicyAuditLog();
+        policyAuditLog.setPreviousStatus(policy.getStatus());
+
         policy.setStatus("CANCELLED");
 
         User user = userService.getCurrUser();
 
-        PolicyAuditLog policyAuditLog = new PolicyAuditLog();
         policyAuditLog.setPolicy(policy);
         policyAuditLog.setCreatedBy(null);
         policyAuditLog.setChangedBy(user.getId());
         policyAuditLog.setRemarks("Policy Cancelled");
         policyAuditLog.setNewStatus("CANCELLED");
-        policyAuditLog.setPreviousStatus(policy.getStatus());
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
         policyRepository.save(policy);
