@@ -4,6 +4,8 @@ import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.PolicyAuditLog;
 import jakarta.persistence.*;
 
+import java.time.OffsetDateTime;
+
 public class PolicyAuditLogDTO {
 
     private Long id;
@@ -13,6 +15,8 @@ public class PolicyAuditLogDTO {
     private Long changedBy;
     private String remarks;
     private Long createdBy;
+    private OffsetDateTime changedAt;
+    private OffsetDateTime createdAt;
 
     public PolicyAuditLogDTO(PolicyAuditLog policyAuditLog){
         this.id = policyAuditLog.getId();
@@ -22,6 +26,8 @@ public class PolicyAuditLogDTO {
         this.changedBy = policyAuditLog.getChangedBy();
         this.remarks = policyAuditLog.getRemarks();
         this.createdBy = policyAuditLog.getCreatedBy();
+        this.changedAt = policyAuditLog.getChangedAt();
+        this.createdAt = policyAuditLog.getCreatedAt();
     }
 
     public Long getId() {
@@ -78,5 +84,21 @@ public class PolicyAuditLogDTO {
 
     public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public OffsetDateTime getChangedAt() {
+        return changedAt;
+    }
+
+    public void setChangedAt(OffsetDateTime changedAt) {
+        this.changedAt = changedAt;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

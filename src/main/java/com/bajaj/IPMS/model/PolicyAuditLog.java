@@ -22,6 +22,7 @@ public class PolicyAuditLog {
     private String remarks;
     private Long createdBy;
     private OffsetDateTime changedAt;
+    private OffsetDateTime createdAt;
 
     public Long getId() {
         return id;
@@ -81,5 +82,13 @@ public class PolicyAuditLog {
 
     public void setChangedAt(OffsetDateTime changedAt) {
         this.changedAt = changedAt;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
