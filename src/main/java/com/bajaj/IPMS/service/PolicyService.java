@@ -235,7 +235,7 @@ public class PolicyService {
         policyAuditLog.setCreatedBy(null);
         policyAuditLog.setChangedBy(user.getId());
         policyAuditLog.setRemarks("Policy Updated");
-        policyAuditLog.setNewStatus("NULL");
+        policyAuditLog.setNewStatus("DRAFT");
         policyAuditLog.setPreviousStatus("NULL");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
