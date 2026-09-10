@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PolicyAuditLogRepository extends JpaRepository<PolicyAuditLog, Long> {
-    PolicyAuditLog findByPolicyId(Long id);
+    List<PolicyAuditLog> findAllByPolicyId(Long id);
 
     @Query("SELECT p FROM PolicyAuditLog p ORDER BY p.changedAt DESC")
     List<PolicyAuditLog> findLast10Changes(Pageable pageble);
