@@ -10,8 +10,8 @@ public class PolicyDTO {
     private String policyNumber;
     private String policyType;
     private String policyStatus;
-    private String customerId;
-    private String agentId;
+    private String customerCode;
+    private String agentCode;
     private BigDecimal sumInsured;
     private BigDecimal premiumAmount;
     private LocalDate startDate;
@@ -24,8 +24,8 @@ public class PolicyDTO {
         this.policyNumber = policy.getPolicyNumber();
         this.policyType = policy.getPolicyType();
         this.policyStatus = policy.getStatus();
-        this.customerId = policy.getCustomer().getCustomerCode();
-        this.agentId = policy.getAgent().getAgentCode();
+        this.customerCode = policy.getCustomer().getCustomerCode();
+        this.agentCode = policy.getAgent().getAgentCode();
         this.sumInsured = policy.getSumInsured();
         this.premiumAmount = policy.getPremiumAmount();
         this.startDate = policy.getStartDate();
@@ -34,12 +34,28 @@ public class PolicyDTO {
         this.createdBy = policy.getCreatedBy();
     }
 
-    public Long getid() {
+    public Long getId() {
         return id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
+    }
+
+    public String getAgentCode() {
+        return agentCode;
+    }
+
+    public void setAgentCode(String agentCode) {
+        this.agentCode = agentCode;
     }
 
     public String getPolicyNumber() {
@@ -64,22 +80,6 @@ public class PolicyDTO {
 
     public void setPolicyStatus(String policyStatus) {
         this.policyStatus = policyStatus;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getAgentId() {
-        return agentId;
-    }
-
-    public void setAgentId(String agentId) {
-        this.agentId = agentId;
     }
 
     public BigDecimal getSumInsured() {
