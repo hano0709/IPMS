@@ -1,0 +1,25 @@
+name: Java CI with Maven and Checkstyle
+
+on:
+  push:
+    branches: [ master, main, feat/** ]
+  pull_request:
+    branches: [ master, main, feat/** ]
+
+jobs:
+  checkstyle-validation:
+    runs-on: ubuntu
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run Code Style Check
+        run: mvn clean validate
