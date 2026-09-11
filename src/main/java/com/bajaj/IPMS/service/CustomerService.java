@@ -186,4 +186,12 @@ public class CustomerService {
                 "Count", count
         ));
     }
+
+    public List<CustomerDTO> searchByCode(String customerCode) {
+        return customerRepository.findByCustomerCodeContainingIgnoreCase(customerCode)
+                .stream()
+                .map(CustomerDTO::new)
+                .limit(10)
+                .toList();
+    }
 }
