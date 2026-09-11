@@ -78,4 +78,5 @@ public class Agent {
     public void setActive(boolean active) {
         isActive = active;
     }
+
 }
