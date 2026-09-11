@@ -1,5 +1,7 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.AgentDTO;
+import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -81,5 +84,13 @@ public class AgentService {
         userRepository.deleteById(id);
 
         return ResponseEntity.ok("Agent Deleted " + agentCode);
+    }
+
+    public List<AgentDTO> searchByCode(String agentCode) {
+        return agentRepository.findByAgentCodeContainingIgnoreCase(agentCode)
+                .stream()
+                .map(AgentDTO::new)
+                .limit(10)
+                .toList();
     }
 }

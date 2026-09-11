@@ -42,7 +42,6 @@ public class CustomerController {
         return customerService.searchByCode(customerCode);
     }
 
-
     @GetMapping("/count")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> getCustomerCount(){
