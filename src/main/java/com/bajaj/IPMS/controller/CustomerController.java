@@ -36,6 +36,13 @@ public class CustomerController {
         return customerService.getAll(pageable, kycStatus, searchName).getContent();
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
+    public List<CustomerDTO> searchCustomersByCode(@RequestParam String customerCode) {
+        return customerService.searchByCode(customerCode);
+    }
+
+
     @GetMapping("/count")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> getCustomerCount(){
