@@ -41,6 +41,7 @@ public class AgentService {
         String password = request.get("password");
         registerRequest.setEmail(email);
         registerRequest.setPassword(password);
+        registerRequest.setRole("AGENT");
 
         User user = authService.register(registerRequest);
 
