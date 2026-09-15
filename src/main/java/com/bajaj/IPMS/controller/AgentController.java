@@ -25,6 +25,7 @@ public class AgentController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> getAgent(@PathVariable("id") Long id){
         try {
             Agent agent = agentService.getAgent(id);
@@ -52,5 +53,11 @@ public class AgentController {
     @PreAuthorize("hasRole('AGENT')")
     public ResponseEntity<?> getPolicies(){
         return agentService.getPolicies();
+    }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('AGENT')")
+    public ResponseEntity<?> getCurrAgent(){
+        return agentService.getCurrAgent();
     }
 }
