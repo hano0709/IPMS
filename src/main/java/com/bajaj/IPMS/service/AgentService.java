@@ -114,4 +114,12 @@ public class AgentService {
 
         return ResponseEntity.ok(policyDTOList);
     }
+
+    public ResponseEntity<?> getCurrAgent() {
+        User user = userService.getCurrUser();
+        Agent agent = agentRepository.findByUserId(user.getId());
+        AgentDTO agentDTO = new AgentDTO(agent);
+
+        return ResponseEntity.ok(agentDTO);
+    }
 }
