@@ -2,9 +2,9 @@ name: Java CI with Maven and Checkstyle
 
 on:
   push:
-    branches: [ master, main, feat/** ]
+    branches: [ master, feat/** ]
   pull_request:
-    branches: [ master, main, feat/** ]
+    branches: [ master, feat/** ]
 
 jobs:
   checkstyle-validation:
@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'temurin'
