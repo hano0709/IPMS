@@ -3,15 +3,18 @@ package com.bajaj.IPMS.service;
 import com.bajaj.IPMS.DTO.AgentDTO;
 import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.model.Agent;
+import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.AgentRepository;
+import com.bajaj.IPMS.repository.PolicyRepository;
 import com.bajaj.IPMS.repository.UserRepository;
 import com.bajaj.IPMS.security.AgentSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +26,9 @@ public class AgentService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PolicyRepository policyRepository;
 
     @Autowired
     AuthService authService;
@@ -93,5 +99,19 @@ public class AgentService {
                 .map(AgentDTO::new)
                 .limit(10)
                 .toList();
+    }
+
+    public ResponseEntity<?> getPolicies() {
+        Long userId = userService.getCurrUser().getId();
+        Long agentId = agentRepository.findByUserId(userId).getId();
+
+        List<Policy> policyList =  policyRepository.findAllByAgentId(agentId);
+        List<PolicyDTO> policyDTOList = new ArrayList<>();
+
+        for (Policy policy: policyList){
+            policyDTOList.add(new PolicyDTO(policy));
+        }
+
+        return ResponseEntity.ok(policyDTOList);
     }
 }

@@ -1,7 +1,6 @@
 package com.bajaj.IPMS.controller;
 
 import com.bajaj.IPMS.DTO.AgentDTO;
-import com.bajaj.IPMS.DTO.PolicyDTO;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class AgentController {
 
     @GetMapping("/search")
     @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
-    public List<AgentDTO> searchCustomersByCode(@RequestParam String agentCode) {
+    public List<AgentDTO> searchAgentsByCode(@RequestParam String agentCode) {
         return agentService.searchByCode(agentCode);
     }
 
@@ -47,5 +46,11 @@ public class AgentController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteAgent(@PathVariable("id") String agentCode){
         return agentService.deleteAgent(agentCode);
+    }
+
+    @GetMapping("/policies")
+    @PreAuthorize("hasRole('AGENT')")
+    public ResponseEntity<?> getPolicies(){
+        return agentService.getPolicies();
     }
 }

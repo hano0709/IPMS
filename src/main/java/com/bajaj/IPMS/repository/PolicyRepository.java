@@ -16,4 +16,6 @@ public interface PolicyRepository extends JpaRepository<Policy, Long> {
     @Query("SELECT p from Policy p WHERE p.endDate BETWEEN :today AND :expiry")
     List<Policy> findAllByExpiringSoon(@Param("today") LocalDate today,
                                        @Param("expiry") LocalDate expiry);
+
+    List<Policy> findAllByAgentId(Long agentId);
 }

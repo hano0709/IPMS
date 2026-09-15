@@ -10,4 +10,6 @@ public interface AgentRepository extends JpaRepository<Agent, Long> {
     List<Agent> findByAgentCodeContainingIgnoreCase(String agentCode);
 
     Agent findByAgentCode(String agentCode);
+
+    Agent findByUserId(Long userId);
 }
