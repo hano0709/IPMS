@@ -194,4 +194,12 @@ public class CustomerService {
                 .limit(10)
                 .toList();
     }
+
+    public ResponseEntity<?> getCurrCustomer() {
+        User user = userService.getCurrUser();
+        Customer customer = customerRepository.findByUserId(user.getId());
+        CustomerDTO customerDTO = new CustomerDTO(customer);
+
+        return ResponseEntity.ok(customerDTO);
+    }
 }
