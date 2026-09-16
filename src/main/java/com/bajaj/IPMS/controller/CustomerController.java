@@ -82,4 +82,9 @@ public class CustomerController {
     public ResponseEntity<?> getAllPolicies(@PathVariable("id") Long customerId){
         return customerService.getAllPolicies(customerId);
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrCustomer(){
+        return customerService.getCurrCustomer();
+    }
 }
