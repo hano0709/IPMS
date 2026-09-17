@@ -29,7 +29,7 @@ public class PolicyService {
     PolicyAuditLogRepository policyAuditLogRepository;
 
     @Autowired
-    PolicyDocumentsRepository policyDocumentsRepository;
+    NotificationRepository notificationRepository;
 
     @Autowired
     CustomerRepository customerRepository;
@@ -120,7 +120,6 @@ public class PolicyService {
         }
 
         policy.setPremiumAmount(premiumAmount);
-
         policy.setDescription(request.get("description"));
 
         User user = userService.getCurrUser();
@@ -134,6 +133,14 @@ public class PolicyService {
         policyAuditLog.setNewStatus("DRAFT");
         policyAuditLog.setPreviousStatus("NULL");
 
+        Notification notification = new Notification();
+        notification.setCreatedAt(OffsetDateTime.now());
+        notification.setMessage("Policy in DRAFT state");
+        notification.setUser(user);
+        notification.setTitle("Policy State Change");
+        notification.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -239,6 +246,14 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("NULL");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
+        Notification notification = new Notification();
+        notification.setCreatedAt(OffsetDateTime.now());
+        notification.setMessage("Policy Updated Successfully");
+        notification.setUser(user);
+        notification.setTitle("Policy Updated");
+        notification.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
         PolicyDTO policyDTO = new PolicyDTO(policy);
@@ -266,6 +281,14 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("DRAFT");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
+        Notification notification = new Notification();
+        notification.setCreatedAt(OffsetDateTime.now());
+        notification.setMessage("Policy Activated");
+        notification.setUser(user);
+        notification.setTitle("Policy State Change");
+        notification.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -294,6 +317,14 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("ACTIVE");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
+        Notification notification = new Notification();
+        notification.setCreatedAt(OffsetDateTime.now());
+        notification.setMessage("Policy Renewed");
+        notification.setUser(user);
+        notification.setTitle("Policy State Change");
+        notification.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -322,6 +353,14 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("ACTIVE");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
+        Notification notification = new Notification();
+        notification.setCreatedAt(OffsetDateTime.now());
+        notification.setMessage("Policy Suspended");
+        notification.setUser(user);
+        notification.setTitle("Policy State Change");
+        notification.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -347,6 +386,14 @@ public class PolicyService {
         policyAuditLog.setNewStatus("CANCELLED");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
+        Notification notification = new Notification();
+        notification.setCreatedAt(OffsetDateTime.now());
+        notification.setMessage("Policy Cancelled");
+        notification.setUser(user);
+        notification.setTitle("Policy State Change");
+        notification.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
