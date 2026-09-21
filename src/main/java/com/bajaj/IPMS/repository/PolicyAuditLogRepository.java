@@ -12,6 +12,6 @@ import java.util.List;
 public interface PolicyAuditLogRepository extends JpaRepository<PolicyAuditLog, Long> {
     List<PolicyAuditLog> findAllByPolicyId(Long id);
 
-    @Query("SELECT p FROM PolicyAuditLog p ORDER BY p.changedAt DESC")
+    @Query("SELECT p FROM PolicyAuditLog p ORDER BY p.createdAt DESC")
     List<PolicyAuditLog> findLast10Changes(Pageable pageble);
 }
