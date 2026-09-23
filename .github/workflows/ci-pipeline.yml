@@ -40,7 +40,7 @@ jobs:
           cache: 'maven'
 
       - name: Run Code Style Check
-        run: mvn clean validate
+        run: mvn checkstyle:check
 
   security-check:
     runs-on: ubuntu-latest
