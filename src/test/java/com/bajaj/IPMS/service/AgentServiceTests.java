@@ -1,8 +1,12 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.AgentDTO;
 import com.bajaj.IPMS.model.Agent;
+import com.bajaj.IPMS.model.Customer;
+import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.AgentRepository;
+import com.bajaj.IPMS.repository.PolicyRepository;
 import com.bajaj.IPMS.repository.UserRepository;
 import com.bajaj.IPMS.security.AgentSecurity;
 import org.junit.jupiter.api.Test;
@@ -10,12 +14,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -41,6 +44,9 @@ public class AgentServiceTests {
 
     @Mock
     UserRepository userRepository;
+
+    @Mock
+    PolicyRepository policyRepository;
 
     @Mock
     UserService userService;
@@ -93,5 +99,70 @@ public class AgentServiceTests {
         doNothing().when(userRepository).deleteById(1L);
 
         assertNotNull(agentService.deleteAgent("sdfdsfsdf"));
+    }
+
+    @Test
+    public void testSearchByCode(){
+        User user = new User();
+        user.setId(1L);
+
+        Agent agent = new Agent();
+        agent.setAgentCode("AG123");
+        agent.setUser(user);
+
+        List<Agent> agentList = new ArrayList<>();
+        agentList.add(agent);
+
+        when(agentRepository.findByAgentCodeContainingIgnoreCase(any())).thenReturn(agentList);
+
+        List<AgentDTO> result = agentService.searchByCode("AG123");
+
+        assertEquals(1, result.size());
+        assertEquals("AG123", result.get(0).getAgentCode());
+    }
+
+    @Test
+    public void testGetPolicies(){
+        User user = new User();
+        user.setId(1L);
+
+        Agent agent = new Agent();
+        agent.setId(1L);
+        agent.setUser(user);
+
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setUser(user);
+
+        Policy policy = new Policy();
+        policy.setAgent(agent);
+        policy.setCustomer(customer);
+        List<Policy> policies = new ArrayList<>();
+        policies.add(policy);
+
+        when(userService.getCurrUser()).thenReturn(user);
+        when(agentRepository.findByUserId(any())).thenReturn(agent);
+        when(policyRepository.findAllByAgentId(any())).thenReturn(policies);
+
+        ResponseEntity<?> response = agentService.getPolicies();
+
+        assertNotNull(response);
+    }
+
+    @Test
+    public void testGetCurrAgent(){
+        User user = new User();
+        user.setId(1L);
+
+        Agent agent = new Agent();
+        agent.setId(1L);
+        agent.setUser(user);
+
+        when(userService.getCurrUser()).thenReturn(user);
+        when(agentRepository.findByUserId(any())).thenReturn(agent);
+
+        ResponseEntity<?> response = agentService.getCurrAgent();
+
+        assertNotNull(response);
     }
 }

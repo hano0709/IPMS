@@ -1,10 +1,7 @@
 package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.model.*;
-import com.bajaj.IPMS.repository.AgentRepository;
-import com.bajaj.IPMS.repository.CustomerRepository;
-import com.bajaj.IPMS.repository.PolicyAuditLogRepository;
-import com.bajaj.IPMS.repository.PolicyRepository;
+import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,6 +46,9 @@ public class PolicyServiceTests {
 
     @Mock
     AgentRepository agentRepository;
+
+    @Mock
+    NotificationRepository notificationRepository;
 
     @Test
     public void testGetAllPolicies(){
@@ -157,7 +154,6 @@ public class PolicyServiceTests {
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
         when(customerRepository.findByCustomerCode(any())).thenReturn(customer);
-        when(policyAuditLogRepository.findByPolicyId(any())).thenReturn(policyAuditLog);
         when(userService.getCurrUser()).thenReturn(user);
         when(policyRepository.save(any())).thenReturn(policy);
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
@@ -178,13 +174,15 @@ public class PolicyServiceTests {
     public void testActivatePolicy(){
         Policy policy = new Policy();
         policy.setStatus("DRAFT");
+        User user = new User();
+        user.setId(1L);
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
-        when(policyAuditLogRepository.findByPolicyId(any())).thenReturn(policyAuditLog);
         when(policyRepository.save(any())).thenReturn(policy);
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
+        when(userService.getCurrUser()).thenReturn(user);
 
         assertNotNull(policyService.activatePolicy(any()));
 
@@ -196,13 +194,15 @@ public class PolicyServiceTests {
     public void testRenewPolicy(){
         Policy policy = new Policy();
         policy.setStatus("ACTIVE");
+        User user = new User();
+        user.setId(1L);
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
-        when(policyAuditLogRepository.findByPolicyId(any())).thenReturn(policyAuditLog);
         when(policyRepository.save(any())).thenReturn(policy);
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
+        when(userService.getCurrUser()).thenReturn(user);
 
         assertNotNull(policyService.renewPolicy(any()));
 
@@ -214,13 +214,15 @@ public class PolicyServiceTests {
     public void testSuspendPolicy(){
         Policy policy = new Policy();
         policy.setStatus("ACTIVE");
+        User user = new User();
+        user.setId(1L);
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
-        when(policyAuditLogRepository.findByPolicyId(any())).thenReturn(policyAuditLog);
         when(policyRepository.save(any())).thenReturn(policy);
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
+        when(userService.getCurrUser()).thenReturn(user);
 
         assertNotNull(policyService.suspendPolicy(any()));
 
@@ -231,13 +233,15 @@ public class PolicyServiceTests {
     @Test
     public void testCancelPolicy(){
         Policy policy = new Policy();
+        User user = new User();
+        user.setId(1L);
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
-        when(policyAuditLogRepository.findByPolicyId(any())).thenReturn(policyAuditLog);
         when(policyRepository.save(any())).thenReturn(policy);
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
+        when(userService.getCurrUser()).thenReturn(user);
 
         assertNotNull(policyService.cancelPolicy(any()));
     }
@@ -249,7 +253,6 @@ public class PolicyServiceTests {
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
-        when(policyAuditLogRepository.findByPolicyId(any())).thenReturn(policyAuditLog);
 
         assertNotNull(policyService.getAudit(any()));
     }
@@ -287,6 +290,10 @@ public class PolicyServiceTests {
     @Test
     public void testListDocs(){
         ResponseEntity<?> response = ResponseEntity.ok("Document Uploaded Successfully");
+        Policy policy = new Policy();
+
+        when(policyRepository.findById(any())).thenReturn(Optional.of(policy));
+        when(policySecurity.checkAuth(any())).thenReturn(true);
         when(documentService.listDocs(anyLong()))
                 .thenAnswer(invocationOnMock ->  response);
 

@@ -53,15 +53,19 @@ public class CustomerServiceTests {
     @Test
     public void testGetAll(){
         Pageable pageable = PageRequest.of(0,5);
+        User user = new User();
+        user.setId(1L);
+
         Customer customer = new Customer();
         customer.setId(1L);
         customer.setFullName("test123");
+        customer.setUser(user);
 
         Page<Customer> mockPage = new PageImpl<>(List.of(customer));
 
         when(customerRepository.findAll(pageable)).thenReturn(mockPage);
 
-        Page<CustomerDTO> result = customerService.getAll(pageable);
+        Page<CustomerDTO> result = customerService.getAll(pageable, null, null);
 
         assertEquals(1, result.getTotalElements());
         assertEquals("test123", result.getContent().get(0).getFullName());
@@ -69,10 +73,15 @@ public class CustomerServiceTests {
 
     @Test
     public void testGetCustomer(){
+        User user = new User();
+        user.setId(1L);
+        Customer customer = new Customer();
+        customer.setUser(user);
+
         when(customerSecurity.checkAuth(1L))
                 .thenReturn(false)
                 .thenReturn(true);
-        when(customerRepository.findById(1L)).thenReturn(Optional.of(new Customer()));
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
 
         assertThrows(IllegalArgumentException.class,() -> customerService.getCustomer(1L));
         assertNotNull(customerService.getCustomer(1L));

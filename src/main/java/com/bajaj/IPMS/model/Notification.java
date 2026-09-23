@@ -23,6 +23,10 @@ public class Notification {
     private OffsetDateTime updatedAt;
     private Long createdBy;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

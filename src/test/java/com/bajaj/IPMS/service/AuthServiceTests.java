@@ -61,7 +61,7 @@ public class AuthServiceTests {
         when(userRepository.findByEmail(any())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(any(), any())).thenReturn(true);
         when(userRepository.save(any())).thenReturn(user);
-        when(jwtUtil.generateToken(any(), user.getRole())).thenReturn("dfsdkjhfksdf");
+        when(jwtUtil.generateToken(any(), eq(user.getRole()))).thenReturn("dfsdkjhfksdf");
         when(jwtUtil.generateRefreshToken(any())).thenReturn("sjdfjsdkfjs");
         when(refreshTokenRepository.save(any())).thenReturn(new RefreshToken());
 
