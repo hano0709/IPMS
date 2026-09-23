@@ -56,6 +56,9 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      - name: Resolve Maven dependencies
+        run: mvn dependency:resolve
+
       - name: Trivy Installation
         run: |
           sudo apt-get install wget gnupg
