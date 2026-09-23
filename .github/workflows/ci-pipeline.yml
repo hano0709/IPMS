@@ -3,8 +3,6 @@ name: Java CI with Maven and Checkstyle
 on:
   push:
     branches: [ master, feat/** ]
-  pull_request:
-    branches: [ master, feat/** ]
 
 jobs:
   checkstyle-validation:
