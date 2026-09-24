@@ -1,5 +1,8 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
+import com.bajaj.IPMS.exception.UnauthorizedException;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -18,20 +21,20 @@ public class UserService {
     public User getCurrUser (){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth == null) {
-            throw new RuntimeException("User Not Authenticated");
+            throw new UnauthorizedException("User Not Authenticated");
         }
 
         String email = auth.getName();
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
 
         return user;
     }
 
     public User getUser(String email){
         User user = userRepository.findByEmail(email).
-                orElseThrow(() -> new RuntimeException("User Not Found"));
+                orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
 
         return user;
     }

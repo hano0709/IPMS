@@ -3,6 +3,8 @@ package com.bajaj.IPMS.service;
 import com.bajaj.IPMS.DTO.Request.CreateAgentRequest;
 import com.bajaj.IPMS.DTO.Response.AgentDTO;
 import com.bajaj.IPMS.DTO.Response.PolicyDTO;
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.RegisterRequest;
@@ -78,14 +80,17 @@ public class AgentService {
     public Agent getAgent(Long id){
         if(agentSecurity.checkAuth(id)){
             return agentRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Agent Not Found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Agent Not Found"));
         } else {
-            throw new IllegalArgumentException("User Not Authorised");
+            throw new ForbiddenException("User Not Authorised");
         }
     }
 
     public ResponseEntity<?> deleteAgent(String agentCode){
         Agent agent = agentRepository.findByAgentCode(agentCode);
+        if (agent == null){
+            throw new ResourceNotFoundException("Agent Not Found");
+        }
         Long id = agent.getId();
 
         agentRepository.delete(agent);

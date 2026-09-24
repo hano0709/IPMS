@@ -24,22 +24,14 @@ public class AuthController {
     @PostMapping("/register")
     //DEBUG: Later make register only for ADMIN
     public ResponseEntity<?> register(@RequestBody RegisterRequest request){
-        try {
-            User user = authService.register(request);
-            return ResponseEntity.ok(user);
-        } catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(Map.of("Error", e.getMessage()));
-        }
+        User user = authService.register(request);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request){
-        try {
-            ResponseEntity<?> response = authService.login(request.getEmail(), request.getPassword());
-            return response;
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
-        }
+        ResponseEntity<?> response = authService.login(request.getEmail(), request.getPassword());
+        return response;
     }
 
     @PostMapping("/refresh")

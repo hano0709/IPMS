@@ -52,14 +52,8 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomer(@PathVariable("id") Long customerId){
-        try{
-            CustomerDTO customerDTO =  customerService.getCustomer(customerId);
-            return ResponseEntity.ok(customerDTO);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of(
-                    "Error", e.getMessage()
-            ));
-        }
+        CustomerDTO customerDTO =  customerService.getCustomer(customerId);
+        return ResponseEntity.ok(customerDTO);
     }
 
     @PostMapping

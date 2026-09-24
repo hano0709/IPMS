@@ -1,6 +1,9 @@
 package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.DTO.Response.PolicyDocumentsDTO;
+import com.bajaj.IPMS.exception.FileStorageException;
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.PolicyDocuments;
 import com.bajaj.IPMS.model.User;
@@ -46,7 +49,7 @@ public class DocumentService {
             file.transferTo(path.toFile());
 
             Policy policy = policyRepository.findById(policyId)
-                    .orElseThrow();
+                    .orElseThrow(() -> new ResourceNotFoundException("Policy Not Found"));
             User user = userService.getCurrUser();
 
             PolicyDocuments policyDocuments = new PolicyDocuments();
@@ -59,13 +62,13 @@ public class DocumentService {
 
             return ResponseEntity.ok("Document Uploaded Successfully");
         } catch (IOException e) {
-            return ResponseEntity.badRequest().body("Error while uploading file");
+            throw new FileStorageException("Error while uploading file");
         }
     }
 
     public ResponseEntity<?> listDocs(Long policyId) {
         Policy policy = policyRepository.findById(policyId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Policy Not Found"));
 
         if (policySecurity.checkAuth(policy.getPolicyNumber())){
             List<PolicyDocuments> policyDocumentsList = policyDocumentsRepository.findAllByPolicyId(policyId);
@@ -77,17 +80,13 @@ public class DocumentService {
             return ResponseEntity.ok(policyDocumentsDTOs);
         }
 
-        return ResponseEntity.badRequest().body(Map.of("Error", "User Not Authorised"));
+        throw new ForbiddenException("User Not Authorised");
     }
 
 
     public ResponseEntity<?> downloadFile(Long id) {
         PolicyDocuments policyDocuments = policyDocumentsRepository.findById(id)
-                .orElse(null);
-
-        if (policyDocuments == null){
-            return ResponseEntity.badRequest().body(Map.of("Error", "Document not Found"));
-        }
+                .orElseThrow(() -> new ResourceNotFoundException("Document Not Found"));
 
         String fileName = policyDocuments.getFileName();
 

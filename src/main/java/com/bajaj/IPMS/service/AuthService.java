@@ -1,5 +1,9 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.exception.DuplicateResourceException;
+import com.bajaj.IPMS.exception.InvalidRequestException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
+import com.bajaj.IPMS.exception.UnauthorizedException;
 import com.bajaj.IPMS.model.RefreshToken;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
@@ -35,11 +39,11 @@ public class AuthService {
 
     public User register(RegisterRequest request) {
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
-            throw new IllegalArgumentException("Email already in use");
+            throw new DuplicateResourceException("Email already in use");
         }
 
         if(!PasswordValidator.isValid(request.getPassword())){
-            throw new IllegalArgumentException("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character");
+            throw new InvalidRequestException("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character");
         }
 
         User user = new User();
@@ -58,18 +62,18 @@ public class AuthService {
     public ResponseEntity<?> login(String email, String password){
         System.out.println(email);
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+                .orElseThrow(() -> new UnauthorizedException("Invalid email or password"));
 
         int loginAttempts = user.getFailedAttempts();
 
         if(loginAttempts >= 5){
-            throw new IllegalArgumentException("Account is locked Out");
+            throw new UnauthorizedException("Account is locked Out");
         }
 
         if(!passwordEncoder.matches(password, user.getPasswordHash())){
             user.setFailedAttempts(loginAttempts + 1);
             userRepository.save(user);
-            throw new IllegalArgumentException("Invalid email or password");
+            throw new UnauthorizedException("Invalid email or password");
         }
 
         loginAttempts = 0;
@@ -104,17 +108,17 @@ public class AuthService {
         RefreshToken refreshToken =  refreshTokenRepository.findByToken(refreshTokenValue);
 
         if(refreshToken == null){
-            return ResponseEntity.badRequest().body(Map.of("Error", "Token not Found"));
+            throw new ResourceNotFoundException("Token not Found");
         }
 
         Instant refreshTokenExpiry = refreshToken.getExpiry();
         if(refreshToken.isRevoked() || Instant.now().isAfter(refreshTokenExpiry)){
-            return ResponseEntity.badRequest().body(Map.of("Error", "Invalid or expired refresh token"));
+            throw new  UnauthorizedException("Invalid or expired refresh token");
         }
 
         String email = jwtUtil.extractEmail(refreshTokenValue);
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
         String newAccessToken = jwtUtil.generateToken(email, user.getRole());
 
         refreshToken.setUpdatedAt(Instant.now());
@@ -141,7 +145,9 @@ public class AuthService {
 
     public ResponseEntity<?> logout (String refreshTokenValue){
         RefreshToken refreshToken = refreshTokenRepository.findByToken(refreshTokenValue);
-
+        if (refreshToken ==null){
+            throw new ResourceNotFoundException("Token not Found");
+        }
         refreshToken.setRevoked(true);
         refreshTokenRepository.save(refreshToken);
 
