@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.Request.CreatePolicyRequest;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
@@ -68,29 +69,29 @@ public class PolicyServiceTests {
 
     @Test
     public void testCreatePolicy(){
-        Map<String, String> request = new HashMap<>();
-        request.put("policyType", "LIFE");
-        request.put("customerCode", "CUST-12323123");
-        request.put("agentCode", "AGT-1232331");
-        request.put("sumInsured", "5000000");
-        request.put("startDate", "2026-08-14");
-        request.put("endDate", "2027-08-13");
+        CreatePolicyRequest request = new CreatePolicyRequest();
+        request.setPolicyType("LIFE");
+        request.setCustomerCode("CUST-12323123");
+        request.setAgentCode("AGT-1232331");
+        request.setSumInsured("5000000");
+        request.setStartDate("2026-08-14");
+        request.setEndDate("2027-08-13");
 
         when(policyRepository.count()).thenReturn(0L);
 
         Customer customer = new Customer();
         customer.setDateOfBirth(LocalDate.now());
-        when(customerRepository.findByCustomerCode(request.get("customerCode"))).thenReturn(customer);
+        when(customerRepository.findByCustomerCode(request.getCustomerCode())).thenReturn(customer);
 
         Agent agent = new Agent();
-        when(agentRepository.findByAgentCode(request.get("agentCode"))).thenReturn(agent);
+        when(agentRepository.findByAgentCode(request.getAgentCode())).thenReturn(agent);
 
         User user = new User();
         when(userService.getCurrUser()).thenReturn(user);
 
         Policy policy = new Policy();
-        policy.setStartDate(LocalDate.parse(request.get("startDate")));
-        policy.setEndDate(LocalDate.parse(request.get("endDate")));
+        policy.setStartDate(LocalDate.parse(request.getStartDate()));
+        policy.setEndDate(LocalDate.parse(request.getEndDate()));
         when(policyRepository.save(any())).thenReturn(policy);
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
@@ -98,13 +99,13 @@ public class PolicyServiceTests {
 
         assertNotNull(policyService.createPolicy(request));
 
-        request.put("policyType", "HEALTH");
+        request.setPolicyType("HEALTH");
         assertNotNull(policyService.createPolicy(request));
 
-        request.put("policyType", "MOTOR");
+        request.setPolicyType("MOTOR");
         assertNotNull(policyService.createPolicy(request));
 
-        request.put("policyType", "PROPERTY");
+        request.setPolicyType("PROPERTY");
         assertNotNull(policyService.createPolicy(request));
     }
 

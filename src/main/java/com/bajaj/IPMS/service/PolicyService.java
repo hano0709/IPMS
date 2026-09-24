@@ -1,7 +1,8 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.PolicyAuditLogDTO;
-import com.bajaj.IPMS.DTO.PolicyDTO;
+import com.bajaj.IPMS.DTO.Request.CreatePolicyRequest;
+import com.bajaj.IPMS.DTO.Response.PolicyAuditLogDTO;
+import com.bajaj.IPMS.DTO.Response.PolicyDTO;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
@@ -55,7 +56,7 @@ public class PolicyService {
         return ResponseEntity.ok(policyDTOs);
     }
 
-    public ResponseEntity<?> createPolicy(Map<String, String> request){
+    public ResponseEntity<?> createPolicy(CreatePolicyRequest request){
         Policy policy = new Policy();
 
         String prefix = "IMPS-";
@@ -64,24 +65,24 @@ public class PolicyService {
         String policyNumber = prefix + year + "-" + code;
         policy.setPolicyNumber(policyNumber);
 
-        String policyType = request.get("policyType");
+        String policyType = request.getPolicyType();
         policy.setPolicyType(policyType);
         policy.setStatus("DRAFT");
 
-        Customer customer = customerRepository.findByCustomerCode(request.get("customerCode"));
+        Customer customer = customerRepository.findByCustomerCode(request.getCustomerCode());
         policy.setCustomer(customer);
 
-        Agent agent = agentRepository.findByAgentCode(request.get("agentCode"));
+        Agent agent = agentRepository.findByAgentCode(request.getAgentCode());
         policy.setAgent(agent);
 
-        BigDecimal sumInsured = new BigDecimal(request.get("sumInsured"));
+        BigDecimal sumInsured = new BigDecimal(request.getSumInsured());
         policy.setSumInsured(sumInsured);
 
-        String startDateString = request.get("startDate");
+        String startDateString = request.getStartDate();
         LocalDate startDate = LocalDate.parse(startDateString);
         policy.setStartDate(startDate);
 
-        String endDateString = request.get("endDate");
+        String endDateString = request.getEndDate();
         LocalDate endDate = LocalDate.parse(endDateString);
         policy.setEndDate(endDate);
 
@@ -120,7 +121,7 @@ public class PolicyService {
         }
 
         policy.setPremiumAmount(premiumAmount);
-        policy.setDescription(request.get("description"));
+        policy.setDescription(request.getDescription());
 
         User user = userService.getCurrUser();
         policy.setCreatedBy(user.getId());

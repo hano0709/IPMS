@@ -1,10 +1,6 @@
-package com.bajaj.IPMS.DTO;
+package com.bajaj.IPMS.DTO.Response;
 
 import com.bajaj.IPMS.model.Agent;
-import com.bajaj.IPMS.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 public class AgentDTO {
 

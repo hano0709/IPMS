@@ -1,8 +1,6 @@
-package com.bajaj.IPMS.DTO;
+package com.bajaj.IPMS.DTO.Response;
 
-import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.PolicyAuditLog;
-import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
 

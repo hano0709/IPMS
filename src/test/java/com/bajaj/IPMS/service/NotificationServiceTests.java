@@ -1,6 +1,5 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.NotificationDTO;
 import com.bajaj.IPMS.model.Notification;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.NotificationRepository;

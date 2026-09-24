@@ -1,8 +1,10 @@
 package com.bajaj.IPMS.controller;
 
-import com.bajaj.IPMS.DTO.AgentDTO;
+import com.bajaj.IPMS.DTO.Request.CreateAgentRequest;
+import com.bajaj.IPMS.DTO.Response.AgentDTO;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.service.AgentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +22,7 @@ public class AgentController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> createAgent(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> createAgent( @Valid @RequestBody CreateAgentRequest request){
         return agentService.createAgent(request);
     }
 

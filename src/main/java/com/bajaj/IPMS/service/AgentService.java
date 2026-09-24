@@ -1,7 +1,8 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.AgentDTO;
-import com.bajaj.IPMS.DTO.PolicyDTO;
+import com.bajaj.IPMS.DTO.Request.CreateAgentRequest;
+import com.bajaj.IPMS.DTO.Response.AgentDTO;
+import com.bajaj.IPMS.DTO.Response.PolicyDTO;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.RegisterRequest;
@@ -39,12 +40,12 @@ public class AgentService {
     @Autowired
     AgentSecurity agentSecurity;
 
-    public ResponseEntity<?> createAgent(Map<String, String> request){
+    public ResponseEntity<?> createAgent(CreateAgentRequest request){
         Agent agent = new Agent();
         RegisterRequest registerRequest = new RegisterRequest();
 
-        String email = request.get("email");
-        String password = request.get("password");
+        String email = request.getEmail();
+        String password = request.getPassword();
         registerRequest.setEmail(email);
         registerRequest.setPassword(password);
         registerRequest.setRole("AGENT");
@@ -58,8 +59,8 @@ public class AgentService {
         String agentCode = prefix + code;
         agent.setAgentCode(agentCode);
 
-        agent.setFullName(request.get("fullName"));
-        agent.setLicenseNumber(request.get("licenseNumber"));
+        agent.setFullName(request.getFullName());
+        agent.setLicenseNumber(request.getLicenseNumber());
 
         User adminUser = userService.getCurrUser();
         agent.setCreatedBy(adminUser.getId());
