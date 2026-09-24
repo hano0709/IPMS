@@ -1,6 +1,8 @@
 package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.DTO.Request.CreatePolicyRequest;
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.InvalidRequestException;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
@@ -126,7 +128,7 @@ public class PolicyServiceTests {
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
 
         assertNotNull(policyService.getPolicy(any()));
-        assertNotNull(policyService.getPolicy(any()));
+        assertThrows(ForbiddenException.class, () -> policyService.getPolicy(any()));
     }
 
     @Test
@@ -188,7 +190,7 @@ public class PolicyServiceTests {
         assertNotNull(policyService.activatePolicy(any()));
 
         policy.setStatus("ACTIVE");
-        assertNotNull(policyService.activatePolicy(any()));
+        assertThrows(InvalidRequestException.class, () -> policyService.activatePolicy(any()));
     }
 
     @Test
@@ -208,7 +210,7 @@ public class PolicyServiceTests {
         assertNotNull(policyService.renewPolicy(any()));
 
         policy.setStatus("DRAFT");
-        assertNotNull(policyService.renewPolicy(any()));
+        assertThrows(InvalidRequestException.class, () -> policyService.renewPolicy(any()));
     }
 
     @Test
@@ -228,7 +230,7 @@ public class PolicyServiceTests {
         assertNotNull(policyService.suspendPolicy(any()));
 
         policy.setStatus("DRAFT");
-        assertNotNull(policyService.suspendPolicy(any()));
+        assertThrows(InvalidRequestException.class, () -> policyService.suspendPolicy(any()));
     }
 
     @Test

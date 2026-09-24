@@ -2,6 +2,8 @@ package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.DTO.Request.CreateCustomerRequest;
 import com.bajaj.IPMS.DTO.Response.CustomerDTO;
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.RefreshToken;
 import com.bajaj.IPMS.model.RegisterRequest;
@@ -84,7 +86,7 @@ public class CustomerServiceTests {
                 .thenReturn(true);
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
 
-        assertThrows(IllegalArgumentException.class,() -> customerService.getCustomer(1L));
+        assertThrows(ForbiddenException.class,() -> customerService.getCustomer(1L));
         assertNotNull(customerService.getCustomer(1L));
     }
 
@@ -131,8 +133,7 @@ public class CustomerServiceTests {
 
         when(customerRepository.save(any())).thenReturn(new Customer());
 
-        ResponseEntity<?> response1 = customerService.updateCustomers(request);
-        assertEquals(HttpStatus.BAD_REQUEST, response1.getStatusCode());
+        assertThrows(ResourceNotFoundException.class, () -> customerService.updateCustomers(request));
 
         ResponseEntity<?> response2 = customerService.updateCustomers(request);
         assertEquals(HttpStatus.OK, response2.getStatusCode());

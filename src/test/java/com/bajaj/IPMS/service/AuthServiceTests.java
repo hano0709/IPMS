@@ -1,5 +1,7 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
+import com.bajaj.IPMS.exception.UnauthorizedException;
 import com.bajaj.IPMS.model.RefreshToken;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
@@ -88,11 +90,9 @@ public class AuthServiceTests {
         when(refreshTokenRepository.save(any())).thenReturn(new RefreshToken());
         when(jwtUtil.generateRefreshToken(any())).thenReturn("sdfsjdfdsjfsfd");
 
-        ResponseEntity<?> response1 = authService.refreshToken("sdsdsdsddsd");
-        assertEquals(HttpStatus.BAD_REQUEST, response1.getStatusCode());
+        assertThrows(ResourceNotFoundException.class,() -> authService.refreshToken("sdsdsdsddsd"));
 
-        ResponseEntity<?> response2 = authService.refreshToken("dsdsdsdsdsdsd");
-        assertEquals(HttpStatus.BAD_REQUEST, response2.getStatusCode());
+        assertThrows(UnauthorizedException.class, () -> authService.refreshToken("dsdsdsdsdsdsd"));
 
         ResponseEntity<?> response3 = authService.refreshToken("sdsdsddsdsds");
         assertEquals(HttpStatus.OK, response3.getStatusCode());
