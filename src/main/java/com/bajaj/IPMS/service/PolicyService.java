@@ -3,6 +3,9 @@ package com.bajaj.IPMS.service;
 import com.bajaj.IPMS.DTO.Request.CreatePolicyRequest;
 import com.bajaj.IPMS.DTO.Response.PolicyAuditLogDTO;
 import com.bajaj.IPMS.DTO.Response.PolicyDTO;
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.InvalidRequestException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
@@ -70,9 +73,15 @@ public class PolicyService {
         policy.setStatus("DRAFT");
 
         Customer customer = customerRepository.findByCustomerCode(request.getCustomerCode());
+        if (customer == null){
+            throw new ResourceNotFoundException("Customer Not Found");
+        }
         policy.setCustomer(customer);
 
         Agent agent = agentRepository.findByAgentCode(request.getAgentCode());
+        if (agent == null){
+            throw new ResourceNotFoundException("Agent Not Found");
+        }
         policy.setAgent(agent);
 
         BigDecimal sumInsured = new BigDecimal(request.getSumInsured());
@@ -155,14 +164,17 @@ public class PolicyService {
             PolicyDTO policyDTO = new PolicyDTO(policy);
             return ResponseEntity.ok(policyDTO);
         } else {
-            return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
+            throw new ForbiddenException("Not Authorised");
         }
     }
 
     public ResponseEntity<?> updatePolicy(String policyNumber, Map<String, String> request) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        if (policy == null){
+            throw new ResourceNotFoundException("Policy Not Found");
+        }
         if(!policy.getStatus().equals("DRAFT")){
-            return ResponseEntity.badRequest().body("Policy can only be updated when in DRAFT status");
+            throw new InvalidRequestException("Policy can only be updated when in DRAFT status");
         }
 
         for (Map.Entry<String, String> entry: request.entrySet()){
@@ -197,6 +209,9 @@ public class PolicyService {
                 BigDecimal premiumAmount;
                 String policyType = request.get("policyType");
                 Customer customer = customerRepository.findByCustomerCode(request.get("customerCode"));
+                if (customer == null){
+                    throw new ResourceNotFoundException("Customer Not Found");
+                }
                 BigDecimal sumInsured = policy.getSumInsured();
                 LocalDate startDate = policy.getStartDate();
                 LocalDate endDate = policy.getEndDate();
@@ -264,11 +279,14 @@ public class PolicyService {
 
     public ResponseEntity<?> activatePolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        if (policy == null){
+            throw new ResourceNotFoundException("Policy Not Found");
+        }
 
         if (policy.getStatus().equals("DRAFT")) {
             policy.setStatus("ACTIVE");
         } else {
-            return ResponseEntity.badRequest().body(Map.of("Error", "Policy can be activated only from DRAFT status"));
+            throw new  InvalidRequestException("Policy can be activated only from DRAFT status");
         }
 
         User user = userService.getCurrUser();
@@ -300,11 +318,13 @@ public class PolicyService {
 
     public ResponseEntity<?> renewPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
-
+        if (policy == null){
+            throw new ResourceNotFoundException("Policy Not Found");
+        }
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("RENEWED");
         } else {
-            return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be renewd from ACTIVE status"));
+            throw new InvalidRequestException("Policy can only be renewed from ACTIVE status");
         }
 
         User user = userService.getCurrUser();
@@ -336,11 +356,14 @@ public class PolicyService {
 
     public ResponseEntity<?> suspendPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        if (policy == null){
+            throw new ResourceNotFoundException("Policy Not Found");
+        }
 
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("SUSPENDED");
         } else {
-            return ResponseEntity.badRequest().body(Map.of("Error", "Policy can only be SUSPENDED from ACTIVE status"));
+            throw new InvalidRequestException("Policy can only be SUSPENDED from ACTIVE status");
         }
 
         User user = userService.getCurrUser();
@@ -372,6 +395,9 @@ public class PolicyService {
 
     public ResponseEntity<?> cancelPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        if (policy == null){
+            throw new ResourceNotFoundException("Policy Not Found");
+        }
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
         policyAuditLog.setPreviousStatus(policy.getStatus());
@@ -405,6 +431,10 @@ public class PolicyService {
 
     public ResponseEntity<?> getAudit(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
+        if (policy == null){
+            throw new ResourceNotFoundException("Policy Not Found");
+        }
+
         List<PolicyAuditLog> policyAuditLogs = policyAuditLogRepository.findAllByPolicyId(policy.getId());
         List<PolicyAuditLogDTO> policyAuditLogDTOs = new ArrayList<>();
 
@@ -435,12 +465,12 @@ public class PolicyService {
 
     public ResponseEntity<?> listDocs(Long policyId) {
         Policy policy = policyRepository.findById(policyId).
-                orElseThrow();
+                orElseThrow(() -> new ResourceNotFoundException("Policy Not Found"));
         String policyNumber = policy.getPolicyNumber();
         if(policySecurity.checkAuth(policyNumber)){
             return documentService.listDocs(policyId);
         } else {
-            return ResponseEntity.badRequest().body(Map.of("Error", "Not Authorised"));
+            throw new ForbiddenException("Not Authorised");
         }
     }
 

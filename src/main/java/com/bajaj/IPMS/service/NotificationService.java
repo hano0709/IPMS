@@ -1,6 +1,7 @@
 package com.bajaj.IPMS.service;
 
 import com.bajaj.IPMS.DTO.Response.NotificationDTO;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.Notification;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.NotificationRepository;
@@ -36,7 +37,7 @@ public class NotificationService {
 
     public ResponseEntity<?> readNotification(Long notifId) {
         Notification notification = notificationRepository.findById(notifId)
-                .orElseThrow(() -> new IllegalArgumentException("Notification Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Notification Not Found"));
 
         notification.setRead(true);
 

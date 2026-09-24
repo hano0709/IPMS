@@ -29,14 +29,8 @@ public class AgentController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
     public ResponseEntity<?> getAgent(@PathVariable("id") Long id){
-        try {
-            Agent agent = agentService.getAgent(id);
-            return ResponseEntity.ok(agent);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of(
-                    "Error", e.getMessage()
-            ));
-        }
+        Agent agent = agentService.getAgent(id);
+        return ResponseEntity.ok(agent);
     }
 
     @GetMapping("/search")

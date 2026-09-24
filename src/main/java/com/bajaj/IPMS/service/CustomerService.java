@@ -3,6 +3,8 @@ package com.bajaj.IPMS.service;
 import com.bajaj.IPMS.DTO.Request.CreateCustomerRequest;
 import com.bajaj.IPMS.DTO.Response.CustomerDTO;
 import com.bajaj.IPMS.DTO.Response.PolicyDTO;
+import com.bajaj.IPMS.exception.ForbiddenException;
+import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.CustomerRepository;
 import com.bajaj.IPMS.repository.PolicyRepository;
@@ -64,11 +66,11 @@ public class CustomerService {
     public CustomerDTO getCustomer(Long customerId){
         if(customerSecurity.checkAuth(customerId)) {
             Customer customer =  customerRepository.findById(customerId)
-                    .orElseThrow(() -> new IllegalArgumentException("Customer Not Found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Customer Not Found"));
 
             return new CustomerDTO(customer);
         } else {
-            throw new IllegalArgumentException("No Authorisation");
+            throw new ForbiddenException("No Authorisation");
         }
     }
 
@@ -116,7 +118,7 @@ public class CustomerService {
         String customerCode = request.get("customerCode");
         Customer customer = customerRepository.findByCustomerCode(customerCode);
         if(customer == null){
-            return ResponseEntity.badRequest().body(Map.of("Error", "Customer not Found"));
+            throw new ResourceNotFoundException("Customer not Found");
         }
 
         for(Map.Entry<String, String> entry: request.entrySet()){
@@ -155,7 +157,9 @@ public class CustomerService {
 
     public ResponseEntity<?> deleteCustomer(String customerCode){
         Customer customer = customerRepository.findByCustomerCode(customerCode);
-
+        if (customer == null){
+            throw new ResourceNotFoundException("Customer Not Found");
+        }
         User user = customer.getUser();
 
         RefreshToken refreshToken = refreshTokenRepository.findByUser(user);
@@ -170,7 +174,7 @@ public class CustomerService {
 
     public ResponseEntity<?> getAllPolicies(Long customerId) {
         if(!customerSecurity.checkAuth(customerId)) {
-            throw new IllegalArgumentException("No Authorisation");
+            throw new ForbiddenException("No Authorisation");
         }
         List<Policy> policies = policyRepository.findAllByCustomerId(customerId);
         List<PolicyDTO> policyDTOs = new ArrayList<>();
@@ -199,6 +203,9 @@ public class CustomerService {
     public ResponseEntity<?> getCurrCustomer() {
         User user = userService.getCurrUser();
         Customer customer = customerRepository.findByUserId(user.getId());
+        if (customer == null){
+            throw new ResourceNotFoundException("Customer Not Found");
+        }
         CustomerDTO customerDTO = new CustomerDTO(customer);
 
         return ResponseEntity.ok(customerDTO);
