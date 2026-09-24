@@ -1,5 +1,6 @@
 package com.bajaj.IPMS.service;
 
+import com.bajaj.IPMS.DTO.Request.CreateCustomerRequest;
 import com.bajaj.IPMS.DTO.Response.CustomerDTO;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.RefreshToken;
@@ -89,14 +90,14 @@ public class CustomerServiceTests {
 
     @Test
     public void testCreateCustomer(){
-        Map<String, String> request = new HashMap<>();
-        request.put("email", "test@example.com");
-        request.put("password", "Strongpass1!");
-        request.put("dateOfBirth", "2005-09-07");
+        CreateCustomerRequest request = new CreateCustomerRequest();
+        request.setEmail("test@example.com");
+        request.setPassword("Strongpass1!");
+        request.setDateOfBirth("2005-09-07");
 
         RegisterRequest registerRequest = new RegisterRequest();
-        registerRequest.setEmail(request.get("email"));
-        registerRequest.setPassword(request.get("password"));
+        registerRequest.setEmail(request.getEmail());
+        registerRequest.setPassword(request.getPassword());
 
         User user = new User();
         user.setId(1L);
