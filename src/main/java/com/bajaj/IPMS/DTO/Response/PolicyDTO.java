@@ -1,4 +1,4 @@
-package com.bajaj.IPMS.DTO;
+package com.bajaj.IPMS.DTO.Response;
 
 import com.bajaj.IPMS.model.Policy;
 

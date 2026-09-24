@@ -1,6 +1,6 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.CustomerDTO;
+import com.bajaj.IPMS.DTO.Response.CustomerDTO;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.RefreshToken;
 import com.bajaj.IPMS.model.RegisterRequest;

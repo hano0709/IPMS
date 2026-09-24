@@ -1,6 +1,8 @@
 package com.bajaj.IPMS.controller;
 
+import com.bajaj.IPMS.DTO.Request.CreatePolicyRequest;
 import com.bajaj.IPMS.service.PolicyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,7 +31,7 @@ public class PolicyController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT')")
-    public ResponseEntity<?> createPolicy(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> createPolicy(@Valid @RequestBody CreatePolicyRequest request){
         return policyService.createPolicy(request);
     }
 

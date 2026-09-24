@@ -1,7 +1,9 @@
 package com.bajaj.IPMS.controller;
 
-import com.bajaj.IPMS.DTO.CustomerDTO;
+import com.bajaj.IPMS.DTO.Request.CreateCustomerRequest;
+import com.bajaj.IPMS.DTO.Response.CustomerDTO;
 import com.bajaj.IPMS.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +64,7 @@ public class CustomerController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','AGENT')")
-    public ResponseEntity<?> createCustomer(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> createCustomer(@Valid @RequestBody CreateCustomerRequest request){
         return customerService.createCustomer(request);
     }
 

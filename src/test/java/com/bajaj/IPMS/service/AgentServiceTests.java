@@ -1,6 +1,7 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.AgentDTO;
+import com.bajaj.IPMS.DTO.Request.CreateAgentRequest;
+import com.bajaj.IPMS.DTO.Response.AgentDTO;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.Policy;
@@ -67,11 +68,11 @@ public class AgentServiceTests {
 
         when(agentRepository.save(any())).thenReturn(new Agent());
 
-        Map<String, String> request = new HashMap<>();
-        request.put("email", "agent1@example.com");
-        request.put("password", "Strongpass1!");
-        request.put("fullName", "Agent1");
-        request.put("licenseNumber", "LIC-987654");
+        CreateAgentRequest request = new CreateAgentRequest();
+        request.setEmail("agent1@example.com");
+        request.setPassword("Strongpass1!");
+        request.setFullName("Agent1");
+        request.setLicenseNumber("LIC-987654");
 
         assertNotNull(agentService.createAgent(request));
     }

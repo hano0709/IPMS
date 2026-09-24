@@ -1,7 +1,8 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.CustomerDTO;
-import com.bajaj.IPMS.DTO.PolicyDTO;
+import com.bajaj.IPMS.DTO.Request.CreateCustomerRequest;
+import com.bajaj.IPMS.DTO.Response.CustomerDTO;
+import com.bajaj.IPMS.DTO.Response.PolicyDTO;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.CustomerRepository;
 import com.bajaj.IPMS.repository.PolicyRepository;
@@ -71,12 +72,12 @@ public class CustomerService {
         }
     }
 
-    public ResponseEntity<?> createCustomer(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> createCustomer(CreateCustomerRequest request){
         Customer customer = new Customer();
         RegisterRequest registerRequest = new RegisterRequest();
 
-        String email = request.get("email");
-        String password = request.get("password");
+        String email = request.getEmail();
+        String password = request.getPassword();
         registerRequest.setEmail(email);
         registerRequest.setPassword(password);
 
@@ -89,15 +90,15 @@ public class CustomerService {
         String customerCode = prefix + code;
         customer.setCustomerCode(customerCode);
 
-        customer.setFullName(request.get("fullName"));
+        customer.setFullName(request.getFullName());
 
-        String dobString = request.get("dateOfBirth");
+        String dobString = request.getDateOfBirth();
         LocalDate dob = LocalDate.parse(dobString); // expects yyyy-MM-dd
         customer.setDateOfBirth(dob);
 
-        customer.setGender(request.get("gender"));
-        customer.setPhone(request.get("phone"));
-        customer.setAddress(request.get("address"));
+        customer.setGender(request.getGender());
+        customer.setPhone(request.getPhone());
+        customer.setAddress(request.getAddress());
         customer.setKycStatus("PENDING");
 
         User currUser = userService.getCurrUser();

@@ -1,8 +1,10 @@
 package com.bajaj.IPMS.controller;
 
+import com.bajaj.IPMS.DTO.Request.LoginRequest;
 import com.bajaj.IPMS.model.RegisterRequest;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +33,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request){
         try {
-            ResponseEntity<?> response = authService.login(request.get("email"), request.get("password"));
+            ResponseEntity<?> response = authService.login(request.getEmail(), request.getPassword());
             return response;
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));

@@ -1,6 +1,6 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.DTO.PolicyDocumentsDTO;
+import com.bajaj.IPMS.DTO.Response.PolicyDocumentsDTO;
 import com.bajaj.IPMS.model.Policy;
 import com.bajaj.IPMS.model.PolicyDocuments;
 import com.bajaj.IPMS.model.User;

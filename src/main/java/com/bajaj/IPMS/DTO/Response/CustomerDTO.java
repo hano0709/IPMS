@@ -1,7 +1,6 @@
-package com.bajaj.IPMS.DTO;
+package com.bajaj.IPMS.DTO.Response;
 
 import com.bajaj.IPMS.model.Customer;
-import jakarta.persistence.*;
 
 import java.time.LocalDate;
 

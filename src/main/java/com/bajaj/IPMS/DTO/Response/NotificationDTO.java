@@ -1,8 +1,6 @@
-package com.bajaj.IPMS.DTO;
+package com.bajaj.IPMS.DTO.Response;
 
 import com.bajaj.IPMS.model.Notification;
-import com.bajaj.IPMS.model.User;
-import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
 
