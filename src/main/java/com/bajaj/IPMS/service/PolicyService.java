@@ -44,6 +44,9 @@ public class PolicyService {
     AgentRepository agentRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     UserService userService;
 
     @Autowired
@@ -145,14 +148,24 @@ public class PolicyService {
         policyAuditLog.setNewStatus("DRAFT");
         policyAuditLog.setPreviousStatus("NULL");
 
-        Notification notification = new Notification();
-        notification.setCreatedAt(OffsetDateTime.now());
-        notification.setMessage("Policy in DRAFT state");
-        notification.setUser(user);
-        notification.setTitle("Policy State Change");
-        notification.setCreatedBy(user.getId());
+        Notification notification1 = new Notification();
+        notification1.setCreatedAt(OffsetDateTime.now());
+        notification1.setMessage("Policy in DRAFT state");
+        notification1.setUser(user);
+        notification1.setTitle("Policy State Change");
+        notification1.setCreatedBy(user.getId());
 
-        notificationRepository.save(notification);
+        User custUser = userRepository.findById(customer.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        Notification notification2 = new Notification();
+        notification2.setCreatedAt(OffsetDateTime.now());
+        notification2.setMessage("Policy in DRAFT state");
+        notification2.setUser(custUser);
+        notification2.setTitle("Policy State Change");
+        notification2.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -264,14 +277,26 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("NULL");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
-        Notification notification = new Notification();
-        notification.setCreatedAt(OffsetDateTime.now());
-        notification.setMessage("Policy Updated Successfully");
-        notification.setUser(user);
-        notification.setTitle("Policy Updated");
-        notification.setCreatedBy(user.getId());
+        Notification notification1 = new Notification();
+        notification1.setCreatedAt(OffsetDateTime.now());
+        notification1.setMessage("Policy Updated Successfully");
+        notification1.setUser(user);
+        notification1.setTitle("Policy Updated");
+        notification1.setCreatedBy(user.getId());
 
-        notificationRepository.save(notification);
+        Customer customer = customerRepository.findById(policy.getCustomer().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        User custUser = userRepository.findById(customer.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        Notification notification2 = new Notification();
+        notification2.setCreatedAt(OffsetDateTime.now());
+        notification2.setMessage("Policy Updated Successfully");
+        notification2.setUser(custUser);
+        notification2.setTitle("Policy Updated");
+        notification2.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
         PolicyDTO policyDTO = new PolicyDTO(policy);
@@ -312,14 +337,26 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("DRAFT");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
-        Notification notification = new Notification();
-        notification.setCreatedAt(OffsetDateTime.now());
-        notification.setMessage("Policy Activated");
-        notification.setUser(user);
-        notification.setTitle("Policy State Change");
-        notification.setCreatedBy(user.getId());
+        Notification notification1 = new Notification();
+        notification1.setCreatedAt(OffsetDateTime.now());
+        notification1.setMessage("Policy Activated");
+        notification1.setUser(user);
+        notification1.setTitle("Policy State Change");
+        notification1.setCreatedBy(user.getId());
 
-        notificationRepository.save(notification);
+        Customer customer = customerRepository.findById(policy.getCustomer().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        User custUser = userRepository.findById(customer.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        Notification notification2 = new Notification();
+        notification2.setCreatedAt(OffsetDateTime.now());
+        notification2.setMessage("Policy Activated");
+        notification2.setUser(custUser);
+        notification2.setTitle("Policy State Change");
+        notification2.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -360,14 +397,26 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("ACTIVE");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
-        Notification notification = new Notification();
-        notification.setCreatedAt(OffsetDateTime.now());
-        notification.setMessage("Policy Renewed");
-        notification.setUser(user);
-        notification.setTitle("Policy State Change");
-        notification.setCreatedBy(user.getId());
+        Notification notification1 = new Notification();
+        notification1.setCreatedAt(OffsetDateTime.now());
+        notification1.setMessage("Policy Renewed");
+        notification1.setUser(user);
+        notification1.setTitle("Policy State Change");
+        notification1.setCreatedBy(user.getId());
 
-        notificationRepository.save(notification);
+        Customer customer = customerRepository.findById(policy.getCustomer().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        User custUser = userRepository.findById(customer.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        Notification notification2 = new Notification();
+        notification2.setCreatedAt(OffsetDateTime.now());
+        notification2.setMessage("Policy Renewed");
+        notification2.setUser(custUser);
+        notification2.setTitle("Policy State Change");
+        notification2.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -404,14 +453,26 @@ public class PolicyService {
         policyAuditLog.setPreviousStatus("ACTIVE");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
-        Notification notification = new Notification();
-        notification.setCreatedAt(OffsetDateTime.now());
-        notification.setMessage("Policy Suspended");
-        notification.setUser(user);
-        notification.setTitle("Policy State Change");
-        notification.setCreatedBy(user.getId());
+        Notification notification1 = new Notification();
+        notification1.setCreatedAt(OffsetDateTime.now());
+        notification1.setMessage("Policy Suspended");
+        notification1.setUser(user);
+        notification1.setTitle("Policy State Change");
+        notification1.setCreatedBy(user.getId());
 
-        notificationRepository.save(notification);
+        Customer customer = customerRepository.findById(policy.getCustomer().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        User custUser = userRepository.findById(customer.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        Notification notification2 = new Notification();
+        notification2.setCreatedAt(OffsetDateTime.now());
+        notification2.setMessage("Policy Suspended");
+        notification2.setUser(custUser);
+        notification2.setTitle("Policy State Change");
+        notification2.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
@@ -448,14 +509,26 @@ public class PolicyService {
         policyAuditLog.setNewStatus("CANCELLED");
         policyAuditLog.setChangedAt(OffsetDateTime.now());
 
-        Notification notification = new Notification();
-        notification.setCreatedAt(OffsetDateTime.now());
-        notification.setMessage("Policy Cancelled");
-        notification.setUser(user);
-        notification.setTitle("Policy State Change");
-        notification.setCreatedBy(user.getId());
+        Notification notification1 = new Notification();
+        notification1.setCreatedAt(OffsetDateTime.now());
+        notification1.setMessage("Policy Cancelled");
+        notification1.setUser(user);
+        notification1.setTitle("Policy State Change");
+        notification1.setCreatedBy(user.getId());
 
-        notificationRepository.save(notification);
+        Customer customer = customerRepository.findById(policy.getCustomer().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        User custUser = userRepository.findById(customer.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Customer User Not Found"));
+        Notification notification2 = new Notification();
+        notification2.setCreatedAt(OffsetDateTime.now());
+        notification2.setMessage("Policy Cancelled");
+        notification2.setUser(custUser);
+        notification2.setTitle("Policy State Change");
+        notification2.setCreatedBy(user.getId());
+
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         policyRepository.save(policy);
         policyAuditLogRepository.save(policyAuditLog);
 
