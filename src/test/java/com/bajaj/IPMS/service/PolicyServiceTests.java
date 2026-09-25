@@ -51,6 +51,9 @@ public class PolicyServiceTests {
     AgentRepository agentRepository;
 
     @Mock
+    UserRepository userRepository;
+
+    @Mock
     NotificationRepository notificationRepository;
 
     @Test
@@ -81,15 +84,17 @@ public class PolicyServiceTests {
 
         when(policyRepository.count()).thenReturn(0L);
 
+        User user = new User();
+        user.setId(1L);
+        when(userService.getCurrUser()).thenReturn(user);
+
         Customer customer = new Customer();
         customer.setDateOfBirth(LocalDate.now());
+        customer.setUser(user);
         when(customerRepository.findByCustomerCode(request.getCustomerCode())).thenReturn(customer);
 
         Agent agent = new Agent();
         when(agentRepository.findByAgentCode(request.getAgentCode())).thenReturn(agent);
-
-        User user = new User();
-        when(userService.getCurrUser()).thenReturn(user);
 
         Policy policy = new Policy();
         policy.setStartDate(LocalDate.parse(request.getStartDate()));
@@ -98,7 +103,7 @@ public class PolicyServiceTests {
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
-
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
         assertNotNull(policyService.createPolicy(request));
 
         request.setPolicyType("HEALTH");
@@ -135,8 +140,11 @@ public class PolicyServiceTests {
     public void testUpdatePolicy(){
         Policy policy = new Policy();
         policy.setStatus("DRAFT");
+        User user = new User();
+        user.setId(0L);
         Customer customer = new Customer();
         customer.setId(1L);
+        customer.setUser(user);
         customer.setDateOfBirth(LocalDate.now());
         Agent agent = new Agent();
         agent.setId(1L);
@@ -152,15 +160,13 @@ public class PolicyServiceTests {
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
-        User user = new User();
-        user.setId(0L);
-
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
         when(customerRepository.findByCustomerCode(any())).thenReturn(customer);
         when(userService.getCurrUser()).thenReturn(user);
         when(policyRepository.save(any())).thenReturn(policy);
         when(policyAuditLogRepository.save(any())).thenReturn(policyAuditLog);
-
+        when(customerRepository.findById(any())).thenReturn(Optional.of(customer));
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
         assertNotNull(policyService.updatePolicy(any(), request));
 
         request.put("policyType", "HEALTH");
@@ -179,6 +185,14 @@ public class PolicyServiceTests {
         policy.setStatus("DRAFT");
         User user = new User();
         user.setId(1L);
+
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setUser(user);
+        when(customerRepository.findById(any())).thenReturn(Optional.of(customer));
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
+
+        policy.setCustomer(customer);
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
@@ -200,6 +214,13 @@ public class PolicyServiceTests {
         User user = new User();
         user.setId(1L);
 
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setUser(user);
+        policy.setCustomer(customer);
+        when(customerRepository.findById(any())).thenReturn(Optional.of(customer));
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
+
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
@@ -220,6 +241,13 @@ public class PolicyServiceTests {
         User user = new User();
         user.setId(1L);
 
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setUser(user);
+        policy.setCustomer(customer);
+        when(customerRepository.findById(any())).thenReturn(Optional.of(customer));
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
+
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
         when(policyRepository.findByPolicyNumber(any())).thenReturn(policy);
@@ -238,6 +266,13 @@ public class PolicyServiceTests {
         Policy policy = new Policy();
         User user = new User();
         user.setId(1L);
+
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setUser(user);
+        policy.setCustomer(customer);
+        when(customerRepository.findById(any())).thenReturn(Optional.of(customer));
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
 
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
 
