@@ -9,6 +9,7 @@ import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.*;
 import com.bajaj.IPMS.repository.*;
 import com.bajaj.IPMS.security.PolicySecurity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class PolicyService {
 
@@ -280,12 +282,22 @@ public class PolicyService {
     public ResponseEntity<?> activatePolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
         if (policy == null){
+            log.warn("Policy activation failed. Policy not found: {}", policyNumber);
             throw new ResourceNotFoundException("Policy Not Found");
         }
 
         if (policy.getStatus().equals("DRAFT")) {
             policy.setStatus("ACTIVE");
+            log.info(
+                    "Policy status changed from DRAFT to ACTIVE. Policy Number: {}",
+                    policyNumber
+            );
         } else {
+            log.warn(
+                    "Policy activation rejected. Policy {} is in {} status",
+                    policyNumber,
+                    policy.getStatus()
+            );
             throw new  InvalidRequestException("Policy can be activated only from DRAFT status");
         }
 
@@ -319,11 +331,21 @@ public class PolicyService {
     public ResponseEntity<?> renewPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
         if (policy == null){
+            log.warn("Policy renewal failed. Policy not found: {}", policyNumber);
             throw new ResourceNotFoundException("Policy Not Found");
         }
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("RENEWED");
+            log.info(
+                    "Policy state transition: ACTIVE -> RENEWED. Policy Number: {}",
+                    policyNumber
+            );
         } else {
+            log.warn(
+                    "Policy renewal rejected. Policy {} is in {} status",
+                    policyNumber,
+                    policy.getStatus()
+            );
             throw new InvalidRequestException("Policy can only be renewed from ACTIVE status");
         }
 
@@ -357,11 +379,16 @@ public class PolicyService {
     public ResponseEntity<?> suspendPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
         if (policy == null){
+            log.warn("Policy suspension failed. Policy not found: {}", policyNumber);
             throw new ResourceNotFoundException("Policy Not Found");
         }
 
         if (policy.getStatus().equals("ACTIVE")){
             policy.setStatus("SUSPENDED");
+            log.info(
+                    "Policy state transition: ACTIVE -> SUSPENDED. Policy Number: {}",
+                    policyNumber
+            );
         } else {
             throw new InvalidRequestException("Policy can only be SUSPENDED from ACTIVE status");
         }
@@ -396,13 +423,21 @@ public class PolicyService {
     public ResponseEntity<?> cancelPolicy(String policyNumber) {
         Policy policy = policyRepository.findByPolicyNumber(policyNumber);
         if (policy == null){
+            log.warn("Policy cancellation failed. Policy not found: {}", policyNumber);
             throw new ResourceNotFoundException("Policy Not Found");
         }
 
+        String previousStatus = policy.getStatus();
+
         PolicyAuditLog policyAuditLog = new PolicyAuditLog();
-        policyAuditLog.setPreviousStatus(policy.getStatus());
+        policyAuditLog.setPreviousStatus(previousStatus);
 
         policy.setStatus("CANCELLED");
+        log.info(
+                "Policy state transition: {} -> CANCELLED. Policy Number: {}",
+                previousStatus,
+                policyNumber
+        );
 
         User user = userService.getCurrUser();
 

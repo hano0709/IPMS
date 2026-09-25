@@ -11,6 +11,7 @@ import com.bajaj.IPMS.repository.RefreshTokenRepository;
 import com.bajaj.IPMS.repository.UserRepository;
 import com.bajaj.IPMS.util.JwtUtil;
 import com.bajaj.IPMS.util.PasswordValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class AuthService {
 
@@ -38,11 +40,17 @@ public class AuthService {
     PasswordValidator passwordValidator;
 
     public User register(RegisterRequest request) {
+
+        log.info("Registration attempt for email: {}", request.getEmail());
+
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
+            log.warn("Registration Failed. Email already exists: {}", request.getEmail());
+
             throw new DuplicateResourceException("Email already in use");
         }
 
         if(!PasswordValidator.isValid(request.getPassword())){
+            log.warn("Registration Failed. Invalid Password format");
             throw new InvalidRequestException("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character");
         }
 
@@ -56,23 +64,33 @@ public class AuthService {
             user.setRole("CUSTOMER");
         }
 
-        return userRepository.save(user);
+        User savedUser =  userRepository.save(user);
+
+        log.info("User registered successfully. Email: {}, Role: {}", savedUser.getEmail(), savedUser.getRole());
+
+        return savedUser;
     }
 
     public ResponseEntity<?> login(String email, String password){
-        System.out.println(email);
+        log.info("Login attempt for email: {}", email);
+
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UnauthorizedException("Invalid email or password"));
+                .orElseThrow(() -> {
+                    log.warn("Login failed. User not found for email: {}", email);
+                    return new UnauthorizedException("Invalid email or password");
+                });;
 
         int loginAttempts = user.getFailedAttempts();
 
         if(loginAttempts >= 5){
+            log.warn("Account locked for user: {}", email);
             throw new UnauthorizedException("Account is locked Out");
         }
 
         if(!passwordEncoder.matches(password, user.getPasswordHash())){
             user.setFailedAttempts(loginAttempts + 1);
             userRepository.save(user);
+            log.warn("Invalid password for user: {}. Failed attempts: {}", email, loginAttempts + 1);
             throw new UnauthorizedException("Invalid email or password");
         }
 
@@ -81,8 +99,12 @@ public class AuthService {
         user.setLastLogin(Instant.now());
         userRepository.save(user);
 
+        log.info("User logged in successfully: {}", email);
+
         String accessToken = jwtUtil.generateToken(user.getEmail(), user.getRole());
         String refreshTokenValue = jwtUtil.generateRefreshToken(user.getEmail());
+
+        log.debug("Generated JWT and refresh token for user: {}", email);
 
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUser(user);
@@ -146,8 +168,12 @@ public class AuthService {
     public ResponseEntity<?> logout (String refreshTokenValue){
         RefreshToken refreshToken = refreshTokenRepository.findByToken(refreshTokenValue);
         if (refreshToken ==null){
+            log.warn("Logout failed. Refresh token not found.");
             throw new ResourceNotFoundException("Token not Found");
         }
+
+        log.info("Logging out user");
+
         refreshToken.setRevoked(true);
         refreshTokenRepository.save(refreshToken);
 
