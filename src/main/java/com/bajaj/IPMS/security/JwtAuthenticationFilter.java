@@ -44,7 +44,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null){
             String tokenType = jwtUtil.extractTokenType(token);
             if("refresh".equals(tokenType)) {
-                System.out.println("Entered Token is not Access Type");
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -58,14 +57,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
-                System.out.println("DEBUG: Authentication set in SecurityContext -> " +
-                        SecurityContextHolder.getContext().getAuthentication());
-            } else {
-                System.out.println("DEBUG: Token validation failed for email = " + email);
             }
         }
-
-        System.out.println("DEBUG: Extracted subject: " + email);
 
         filterChain.doFilter(request, response);
     }
