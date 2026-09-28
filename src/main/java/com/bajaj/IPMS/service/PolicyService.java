@@ -193,7 +193,7 @@ public class PolicyService {
         }
 
         for (Map.Entry<String, String> entry: request.entrySet()){
-            String key = entry.getKey();;
+            String key = entry.getKey();
             String value = entry.getValue();
             boolean calculatePremium = false;
             switch (key){

@@ -1,6 +1,5 @@
 package com.bajaj.IPMS.service;
 
-import com.bajaj.IPMS.exception.ForbiddenException;
 import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.exception.UnauthorizedException;
 import com.bajaj.IPMS.model.User;

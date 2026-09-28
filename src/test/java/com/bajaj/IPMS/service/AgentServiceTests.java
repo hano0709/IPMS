@@ -3,7 +3,6 @@ package com.bajaj.IPMS.service;
 import com.bajaj.IPMS.DTO.Request.CreateAgentRequest;
 import com.bajaj.IPMS.DTO.Response.AgentDTO;
 import com.bajaj.IPMS.exception.ForbiddenException;
-import com.bajaj.IPMS.exception.ResourceNotFoundException;
 import com.bajaj.IPMS.model.Agent;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.Policy;

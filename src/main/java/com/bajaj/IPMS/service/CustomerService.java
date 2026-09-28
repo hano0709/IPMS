@@ -122,7 +122,7 @@ public class CustomerService {
         }
 
         for(Map.Entry<String, String> entry: request.entrySet()){
-            String key = entry.getKey();;
+            String key = entry.getKey();
             String value = entry.getValue();
 
             switch (key){

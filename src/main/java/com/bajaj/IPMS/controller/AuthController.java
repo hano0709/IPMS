@@ -6,7 +6,6 @@ import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

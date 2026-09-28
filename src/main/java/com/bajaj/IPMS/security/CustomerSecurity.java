@@ -3,12 +3,8 @@ package com.bajaj.IPMS.security;
 import com.bajaj.IPMS.model.Customer;
 import com.bajaj.IPMS.model.User;
 import com.bajaj.IPMS.repository.CustomerRepository;
-import com.bajaj.IPMS.repository.UserRepository;
-import com.bajaj.IPMS.service.UserService;
 import com.bajaj.IPMS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service

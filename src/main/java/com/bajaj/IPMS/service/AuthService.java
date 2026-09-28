@@ -78,7 +78,7 @@ public class AuthService {
                 .orElseThrow(() -> {
                     log.warn("Login failed. User not found for email: {}", email);
                     return new UnauthorizedException("Invalid email or password");
-                });;
+                });
 
         int loginAttempts = user.getFailedAttempts();
 

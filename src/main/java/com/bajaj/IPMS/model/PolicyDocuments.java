@@ -1,7 +1,6 @@
 package com.bajaj.IPMS.model;
 
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Entity
 @Table(name = "policy_documents")
